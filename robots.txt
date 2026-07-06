@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+Disallow: /supabase/
+Disallow: /content-templates/
+Disallow: /tracking-crm/
+Disallow: /seo-lead-generation/
+Disallow: /config.example.js
+Disallow: /README.md
+Disallow: /DEPLOYMENT_GUIDE.md
+Disallow: /DOMAIN_GUIDE.md
+Disallow: /QA_REPORT.md
+
+Sitemap: https://www.resolutemso.com/sitemap.xml
