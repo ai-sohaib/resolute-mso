@@ -1,0 +1,12 @@
+Event Name,Trigger,Priority,Notes
+book_demo_submit,Book demo form submitted,High,Primary lead event
+free_audit_submit,Free RCM audit form submitted,High,Primary lead magnet
+contact_form_submit,Contact form submitted,High,General lead event
+newsletter_signup,Bulletin sign-up submitted,Medium,Nurture lead
+whatsapp_click,WhatsApp CTA clicked,High,Hot lead intent
+phone_click,Phone link clicked,High,Hot lead intent
+email_click,Email link clicked,Medium,Contact intent
+chargepilot_demo_click,ChargePilot CTA clicked,High,Product lead
+blog_cta_click,Blog CTA clicked,Medium,Content conversion
+calendly_click,Booking link clicked,High,Call intent
+lead_magnet_download,Checklist downloaded,Medium,Nurture lead
