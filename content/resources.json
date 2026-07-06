@@ -1,0 +1,32 @@
+[
+  {
+    "tag": "RCM Insights",
+    "title": "Reducing Revenue Leakage Across the Claim Lifecycle",
+    "excerpt": "A practical look at registration, eligibility, charge capture, denial prevention, and AR prioritization for provider groups."
+  },
+  {
+    "tag": "Automation Updates",
+    "title": "Where Healthcare Automation Delivers Immediate RCM Lift",
+    "excerpt": "Use automation first in repetitive, rules-heavy workflows such as claim entry, status tracking, reporting, and task routing."
+  },
+  {
+    "tag": "Healthcare Operations",
+    "title": "Building Practice Health Dashboards Leaders Actually Use",
+    "excerpt": "Dashboards should show claim flow, AR movement, denials, productivity, and risk signals without burying teams in noise."
+  },
+  {
+    "tag": "ChargePilot",
+    "title": "OfficeAlly Claim Entry Automation for High-Volume Teams",
+    "excerpt": "ChargePilot helps billing teams reduce repetitive manual entry and monitor throughput with a desktop control center and web portal."
+  },
+  {
+    "tag": "Compliance",
+    "title": "HIPAA-Conscious Public Forms and RCM Intake",
+    "excerpt": "Public website forms should avoid PHI and route sensitive workflow discussions into appropriate secure channels."
+  },
+  {
+    "tag": "Specialties",
+    "title": "RCM Pressure Points by Specialty",
+    "excerpt": "Imaging, labs, urgent care, behavioral health, and primary care each need different denial, authorization, and reporting playbooks."
+  }
+]

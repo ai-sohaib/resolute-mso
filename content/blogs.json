@@ -1,0 +1,37 @@
+﻿[
+    {
+        "title":  "Revenue Cycle Priorities for Provider Groups in 2026",
+        "description":  "A practical view of the operating habits that help healthcare providers reduce leakage, see risk earlier, and move claims with more discipline.",
+        "url":  "blog-rcm-priorities.html"
+    },
+    {
+        "title":  "Clean Claim Playbook: Where Billing Accuracy Starts",
+        "description":  "Clean claims start before submission. This article maps the registration, eligibility, coding, and documentation steps that matter most.",
+        "url":  "blog-clean-claim-playbook.html"
+    },
+    {
+        "title":  "Denial Management Is a Prevention System, Not Just an Appeals Desk",
+        "description":  "Strong denial management combines root-cause analysis, payer patterns, appeal workflows, and corrective action planning.",
+        "url":  "blog-denial-management-guide.html"
+    },
+    {
+        "title":  "AR Follow-Up: Turning Aging Inventory Into Daily Action",
+        "description":  "AR follow-up improves when teams work from priority, payer status, escalation rules, and clean notes instead of scattered lists.",
+        "url":  "blog-ar-follow-up-action.html"
+    },
+    {
+        "title":  "How Automation Improves Medical Billing Without Removing Human Oversight",
+        "description":  "Automation works best when it handles repetitive structure while experienced billing teams control exceptions, payer nuance, and compliance-sensitive decisions.",
+        "url":  "blog-automation-in-medical-billing.html"
+    },
+    {
+        "title":  "ChargePilot: Multi-Agent Automation Across PM and Billing Software Workflows",
+        "description":  "ChargePilot is positioned for high-volume billing teams that need Excel-driven and multi-source automation with scalable agent throughput.",
+        "url":  "blog-chargepilot-pm-automation.html"
+    },
+    {
+        "title":  "Clinical Laboratory Billing: Reducing Requisition, Medical Necessity, and Denial Risk",
+        "description":  "Clinical laboratories need disciplined intake, documentation, payer rule awareness, and denial visibility to protect revenue at volume.",
+        "url":  "blog-clinical-lab-billing.html"
+    }
+]

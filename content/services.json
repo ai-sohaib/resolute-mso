@@ -1,0 +1,179 @@
+[
+  {
+    "title": "AI-Driven Revenue Cycle Management",
+    "icon": "brain",
+    "summary": "Provider-focused RCM operations strengthened by automation, analytics, and disciplined workflow visibility.",
+    "bullets": [
+      "Patient registration support",
+      "Eligibility and benefits verification",
+      "Prior authorization management",
+      "Charge entry",
+      "Claim submission",
+      "Clearinghouse management",
+      "Payment posting",
+      "AR follow-up",
+      "Denial management",
+      "Patient billing support",
+      "Revenue recovery",
+      "Financial performance reporting"
+    ]
+  },
+  {
+    "title": "Medical Billing & Coding",
+    "icon": "file",
+    "summary": "Billing and coding support designed for clean claims, accurate charge capture, and compliance-focused workflows.",
+    "bullets": [
+      "Professional billing",
+      "Institutional billing",
+      "ICD-10 coding support",
+      "CPT coding",
+      "HCPCS coding",
+      "Charge capture optimization",
+      "Claims scrubbing",
+      "Documentation review",
+      "Compliance-focused billing workflows"
+    ]
+  },
+  {
+    "title": "Accounts Receivable Management",
+    "icon": "chart",
+    "summary": "Structured follow-up programs that help teams prioritize aging inventory, payer actions, and revenue recovery.",
+    "bullets": [
+      "Insurance follow-up",
+      "Claims status investigation",
+      "Aging analysis",
+      "Underpayment identification",
+      "Escalation management",
+      "Collection optimization",
+      "AR reporting"
+    ]
+  },
+  {
+    "title": "Denial Management & Revenue Recovery",
+    "icon": "shield",
+    "summary": "Root-cause denial intelligence, appeal workflows, and preventive process improvements for healthier revenue.",
+    "bullets": [
+      "Denial analytics",
+      "Root cause identification",
+      "Appeals",
+      "Corrective action planning",
+      "Resubmissions",
+      "Preventive workflow improvements",
+      "Denial trend reporting"
+    ]
+  },
+  {
+    "title": "AI Automation & Process Optimization",
+    "icon": "pulse",
+    "summary": "Automation planning and implementation for repetitive healthcare administration and RCM production tasks.",
+    "bullets": [
+      "Workflow automation",
+      "Task automation",
+      "Intelligent process mapping",
+      "AI-assisted workflow design",
+      "Reporting automation",
+      "Productivity optimization",
+      "Operational dashboard development",
+      "Data validation workflows",
+      "SOP improvement",
+      "Turnaround time reduction"
+    ]
+  },
+  {
+    "title": "Healthcare Administrative Support",
+    "icon": "users",
+    "summary": "Back-office support for practices that need reliable administrative capacity without operational clutter.",
+    "bullets": [
+      "Scheduling support",
+      "Referral coordination",
+      "Patient communication assistance",
+      "Documentation management",
+      "Credentialing assistance",
+      "Provider enrollment support",
+      "Back-office operations management"
+    ]
+  },
+  {
+    "title": "Healthcare Technology Solutions",
+    "icon": "code",
+    "summary": "Healthcare software, portal, and platform support aligned to provider workflows and operational outcomes.",
+    "bullets": [
+      "Practice management systems",
+      "EHR/EMR support",
+      "Patient portals",
+      "Provider portals",
+      "Telehealth platforms",
+      "Healthcare CRM",
+      "Mobile healthcare applications",
+      "LIS support",
+      "Revenue cycle platforms",
+      "Custom healthcare software development"
+    ]
+  },
+  {
+    "title": "HL7, FHIR & System Integration",
+    "icon": "database",
+    "summary": "Interoperability planning and integration support for healthcare data exchange and connected operations.",
+    "bullets": [
+      "HL7 integration",
+      "FHIR integration",
+      "EHR/EMR integration",
+      "Practice management integration",
+      "Clearinghouse integration",
+      "Lab system integration",
+      "API development",
+      "Healthcare data exchange"
+    ]
+  },
+  {
+    "title": "Practice Health Dashboard & Reporting",
+    "icon": "chart",
+    "summary": "Executive and operational reporting that gives leaders a sharper view of revenue, productivity, and trends.",
+    "bullets": [
+      "Practice health dashboards",
+      "Revenue performance dashboards",
+      "AR reports",
+      "Denial trend reports",
+      "Productivity analytics",
+      "Executive KPI reporting",
+      "Predictive analytics"
+    ]
+  },
+  {
+    "title": "Healthcare Digital Solutions",
+    "icon": "globe",
+    "summary": "Digital presence and patient acquisition support for healthcare organizations that need a stronger market signal.",
+    "bullets": [
+      "Healthcare website development",
+      "Healthcare SEO",
+      "Content strategy",
+      "Reputation management",
+      "Social media management",
+      "Patient acquisition campaigns",
+      "Brand development"
+    ]
+  },
+  {
+    "title": "Staffing & Workforce Solutions",
+    "icon": "users",
+    "summary": "Specialized healthcare workforce support for RCM, administration, technology, analytics, and virtual teams.",
+    "bullets": [
+      "Medical billers",
+      "Medical coders",
+      "AR specialists",
+      "Denial specialists",
+      "Payment posting specialists",
+      "Prior authorization specialists",
+      "Credentialing specialists",
+      "Eligibility specialists",
+      "Revenue cycle managers",
+      "Virtual medical assistants",
+      "Front-office coordinators",
+      "Back-office teams",
+      "Healthcare software developers",
+      "Integration specialists",
+      "QA specialists",
+      "Data analysts"
+    ]
+  }
+]
