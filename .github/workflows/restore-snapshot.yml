@@ -1,0 +1,56 @@
+name: Restore approved production snapshot
+
+on:
+  push:
+    branches: [ops-restore-96ad8f7]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: false
+
+jobs:
+  restore-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout main with full history
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Restore exact approved snapshot tree
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm -r --ignore-unmatch .
+          git checkout 96ad8f7e36507edb8c4e17a704e0c24eb0c342d2 -- .
+          git commit -m "Restore production website to snapshot 96ad8f7"
+          git push origin HEAD:main
+
+      - name: Verify restored homepage
+        run: |
+          test -f CNAME
+          test -f index.html
+          grep -Fq 'Where Healthcare Revenue Meets Intelligent Automation' index.html
+          test ! -f .github/workflows/deploy-pages.yml
+          test ! -f assets/css/enterprise-upgrade.css
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload restored website
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy restored website
+        id: deployment
+        uses: actions/deploy-pages@v5
