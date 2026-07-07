@@ -22,6 +22,7 @@ jobs:
         run: |
           node --check assets/js/source-cleanup.js
           node --check assets/js/enterprise-upgrade.js
+          node --check assets/js/whatsapp-normalize.js
           node --check workers/lead-intake/src/index.js
       - name: Verify no plaintext secrets are committed
         run: |
