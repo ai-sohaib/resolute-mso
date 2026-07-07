@@ -66,6 +66,7 @@ python scripts/validate_site.py
 python -m unittest discover -s tests -p "test_*.py" -v
 node --check assets/js/source-cleanup.js
 node --check assets/js/enterprise-upgrade.js
+node --check assets/js/whatsapp-normalize.js
 node --check workers/lead-intake/src/index.js
 ```
 
