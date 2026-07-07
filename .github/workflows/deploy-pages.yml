@@ -43,11 +43,10 @@ jobs:
           test -f assets/css/pagespeed-home.css
           test -f assets/img/healthcare-hero-ai-420.webp
           test -f assets/img/healthcare-hero-ai-720.webp
-          test -f assets/img/platforms/officeally.webp
-          test -f assets/img/platforms/telcor.webp
           grep -Fq '/assets/img/resolute-mso-logo.webp' index.html
           grep -Fq 'platform-logo-strip' index.html
-          grep -Fq '/assets/img/platforms/eclinicalworks.webp' index.html
+          grep -Fq 'domain=eclinicalworks.com' index.html
+          grep -Fq 'domain=telcor.com' index.html
 
       - name: Stage public files
         run: |
@@ -68,8 +67,7 @@ jobs:
           test -f _site/CNAME
           test -f _site/index.html
           test -f _site/assets/css/pagespeed-home.css
-          test -f _site/assets/img/platforms/officeally.webp
-          test -f _site/assets/img/platforms/telcor.webp
+          grep -Fq 'platform-logo-strip' _site/index.html
 
       - name: Configure Pages
         id: configure
