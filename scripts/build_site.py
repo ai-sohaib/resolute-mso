@@ -825,6 +825,7 @@ def head(page: Page, faq: list[tuple[str, str]] | None = None) -> str:
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/elegant-typography.css">
+  <link rel="stylesheet" href="/assets/css/site-motion.css">
   <style>{minify_css(CSS)}</style>
   {jsonld(base_schema(page, faq))}"""
 
@@ -921,7 +922,8 @@ def footer() -> str:
     </div>
   </footer>
   {floating_tools()}
-  <script>{minify_js(JS)}</script>"""
+  <script>{minify_js(JS)}</script>
+  <script src="/assets/js/site-motion.js" defer></script>"""
 
 
 def layout(page: Page, body: str, faq: list[tuple[str, str]] | None = None) -> str:
@@ -1298,7 +1300,7 @@ def render_home(page: Page) -> str:
   <div class="container hero-grid">
     <div>
       <p class="kicker">Advance Healthcare Solutions</p>
-      <h1>{e(h1(page))}</h1>
+      <h1 class="hero-typewriter" data-typewriter-text="{e(h1(page))}"><span class="typewriter-sizer" aria-hidden="true">{e(h1(page))}</span><span class="typewriter-output" aria-hidden="true">{e(h1(page))}</span><span class="sr-only">{e(h1(page))}</span></h1>
       <p class="lead">Resolute MSO helps U.S. healthcare providers reduce revenue leakage, improve A/R movement, reduce preventable denials, automate repetitive billing workflows, and gain revenue cycle visibility.</p>
       <div class="hero-actions">
         <a class="btn" href="/free-rcm-audit.html">Book a Revenue Audit</a>
