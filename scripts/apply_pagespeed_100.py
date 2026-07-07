@@ -25,12 +25,25 @@ DESCRIPTIVE_LINKS = {
 
 HARDENING_CSS = """
 :root{--teal:#087a70;--teal-dark:#05665f;--font-ui:"Segoe UI Variable Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-.btn{background:#087a70;border-color:#087a70}
+.btn{min-height:44px;background:#087a70;border-color:#087a70}
 .btn:hover,.btn:focus-visible{background:#05665f;border-color:#05665f}
+.btn.btn-secondary{background:#fff;color:#05665f;border-color:#b9c9c5;box-shadow:none}
+.btn.btn-secondary:hover,.btn.btn-secondary:focus-visible{background:#eaf8f6;color:#05665f;border-color:#087a70}
 .btn-whatsapp,.whatsapp-launch{background:#006b3f;border-color:#006b3f;color:#fff}
 .btn-whatsapp:hover,.btn-whatsapp:focus-visible,.whatsapp-launch:hover,.whatsapp-launch:focus-visible{background:#005331;border-color:#005331;color:#fff}
 .menu-caret{width:28px;min-width:28px}
+.hero-actions{overflow:visible;gap:14px}
+.hero-actions .btn{min-height:48px}
+.card-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+.card-actions .btn{min-height:44px;padding:8px 14px}
+.site-header{backdrop-filter:none;-webkit-backdrop-filter:none}
 @media(max-width:1060px){.menu-caret{min-width:44px}}
+@media(max-width:720px){
+.site-header{box-shadow:none}
+.hero-image,.info-card,.directory-card,.related-grid a,.workflow-grid article,.answer-grid article,.dashboard-visual,.metric-panel,.trust-list a{box-shadow:none!important;filter:none!important}
+.hero-actions,.card-actions{gap:16px;overflow:visible}
+.hero-actions .btn,.card-actions .btn{min-height:48px;position:relative;z-index:1}
+}
 """
 
 
@@ -66,7 +79,7 @@ def build_images() -> dict[str, tuple[int, int]]:
             logo,
             ASSETS / "img" / "resolute-mso-logo-240.webp",
             240,
-            82,
+            78,
         )
 
     if hero.exists():
@@ -74,13 +87,13 @@ def build_images() -> dict[str, tuple[int, int]]:
             hero,
             ASSETS / "img" / "healthcare-hero-ai-480.webp",
             480,
-            76,
+            72,
         )
         dimensions["hero768"] = optimize_image(
             hero,
             ASSETS / "img" / "healthcare-hero-ai-768.webp",
             768,
-            78,
+            74,
         )
 
     return dimensions
@@ -111,16 +124,12 @@ def optimized_hero_tag(dimensions: dict[str, tuple[int, int]]) -> str:
     )
 
 
-def remove_legacy_reveal(text: str) -> str:
+def remove_legacy_enhancements(text: str) -> str:
     text = re.sub(
-        r'\s*\.reveal\{opacity:0;transform:translateY\(18px\) scale\(\.985\);transition:opacity \.6s ease,transform \.6s ease\}',
+        r'\s*<style>\s*\.home-hero \.hero-grid\{align-items:start\}.*?</style>',
         "",
         text,
-    )
-    text = re.sub(r'\s*\.reveal\.is-visible\{opacity:1;transform:none\}', "", text)
-    text = text.replace(
-        'transform:translateZ(0);will-change:transform,box-shadow,filter;backface-visibility:hidden',
-        '',
+        flags=re.S,
     )
     text = re.sub(
         r'\s*<script>\(function\(\)\{var targets=document\.querySelectorAll\("\.hero-image,.*?</script>',
@@ -143,6 +152,7 @@ def patch_html(path: Path, inline_css: str, dimensions: dict[str, tuple[int, int
         "",
         text,
     )
+    text = re.sub(r'\s*<link rel="manifest" href="/site\.webmanifest">', "", text)
 
     if 'id="resolute-critical-typography"' not in text and "</head>" in text:
         text = text.replace(
@@ -169,7 +179,7 @@ def patch_html(path: Path, inline_css: str, dimensions: dict[str, tuple[int, int
             text,
             count=1,
         )
-        text = remove_legacy_reveal(text)
+        text = remove_legacy_enhancements(text)
 
     if text == original:
         return False
