@@ -1,0 +1,44 @@
+name: Enterprise Website QA
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Generate static site
+        run: python scripts/build_site.py
+      - name: Apply enterprise upgrade layer
+        run: python scripts/apply_enterprise_upgrade.py
+      - name: Run repository validator
+        run: python scripts/validate_site.py
+      - name: Run enterprise regression tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+      - name: Check JavaScript syntax
+        run: |
+          node --check assets/js/source-cleanup.js
+          node --check assets/js/enterprise-upgrade.js
+          node --check workers/lead-intake/src/index.js
+      - name: Verify no plaintext secrets are committed
+        run: |
+          ! grep -RInE '(RESEND_API_KEY|SMTP_PASSWORD|PRIVATE_KEY)[[:space:]]*=' --exclude='*.md' --exclude='*.example' .
+      - name: Upload generated preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: resolute-mso-enterprise-preview
+          path: |
+            index.html
+            assets/
+            */index.html
+            404.html
+          retention-days: 14
