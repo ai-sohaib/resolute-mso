@@ -1,1 +1,0 @@
-Elegant typography refresh initiated on 2026-07-07. Pre-change production commit: 96ad8f7e36507edb8c4e17a704e0c24eb0c342d2
