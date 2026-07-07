@@ -16,13 +16,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Generate static site
-        run: python scripts/build_site.py
-      - name: Apply enterprise upgrade layer
-        run: python scripts/apply_enterprise_upgrade.py
-      - name: Run repository validator
-        run: python scripts/validate_site.py
-      - name: Run enterprise regression tests
+      - name: Run source regression tests
         run: python -m unittest discover -s tests -p "test_*.py" -v
       - name: Check JavaScript syntax
         run: |
@@ -32,6 +26,30 @@ jobs:
       - name: Verify no plaintext secrets are committed
         run: |
           ! grep -RInE '(RESEND_API_KEY|SMTP_PASSWORD|PRIVATE_KEY)[[:space:]]*=' --exclude='*.md' --exclude='*.example' .
+      - name: Generate static site
+        run: python scripts/build_site.py
+      - name: Apply enterprise upgrade layer
+        run: python scripts/apply_enterprise_upgrade.py
+      - name: Verify generated homepage acceptance criteria
+        run: |
+          python - <<'PY'
+          import html
+          from pathlib import Path
+          exact = "AI-Driven Medical Billing & RCM That Stops Revenue Leakage"
+          page = Path("index.html").read_text(encoding="utf-8")
+          title = html.unescape(page.split("<title>", 1)[1].split("</title>", 1)[0])
+          h1 = html.unescape(page.split("<h1>", 1)[1].split("</h1>", 1)[0])
+          assert title == exact, title
+          assert h1 == exact, h1
+          for label in ("Book a Demo", "Request a Free Audit", "Talk on WhatsApp"):
+              assert label in page, label
+          assert "/assets/css/enterprise-upgrade.css" in page
+          assert 'src="/config.js' in page
+          assert "formsubmit.co" not in page.lower()
+          print("Generated homepage acceptance checks passed.")
+          PY
+      - name: Run repository validator
+        run: python scripts/validate_site.py
       - name: Upload generated preview
         uses: actions/upload-artifact@v4
         with:
