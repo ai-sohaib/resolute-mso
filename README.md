@@ -54,6 +54,7 @@ http://127.0.0.1:8080/
 - `index.html` — approved enterprise homepage and canonical homepage source.
 - `assets/css/enterprise-upgrade.css` — design tokens, conversion, accessibility, modal, and responsive styles.
 - `assets/js/enterprise-upgrade.js` — Free Audit modal, direct WhatsApp behavior, and inline form states.
+- `assets/js/whatsapp-normalize.js` — cross-site safeguard that normalizes every WhatsApp-labeled control to the centralized direct link.
 - `config.js` — public, non-secret WhatsApp and form-endpoint configuration.
 - `scripts/build_enterprise_site.py` — controlled build entry point.
 - `scripts/apply_enterprise_upgrade.py` — generated-HTML hardening step.
