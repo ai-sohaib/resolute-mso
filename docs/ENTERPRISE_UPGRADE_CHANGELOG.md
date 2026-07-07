@@ -38,6 +38,9 @@
   - Added required form fields, PHI warning, consent, validation, loading, inline error, and inline success behavior.
   - Added direct centralized WhatsApp URLs and safe new-tab attributes.
   - Prevents legacy `mailto:` and FormSubmit forms from redirecting unexpectedly.
+- `assets/js/whatsapp-normalize.js`
+  - Added a cross-site safeguard for legacy WhatsApp-labeled anchors and buttons.
+  - Converts them to the same centralized direct `wa.me` URL with official styling, icon, accessible label, and safe new-tab attributes.
 
 ### Build and backend
 
@@ -80,6 +83,7 @@
 
 - Enterprise homepage shell and sections.
 - Centralized WhatsApp link hydrator.
+- Cross-site WhatsApp normalization safeguard.
 - Accessible Free Audit modal.
 - Shared inline form handler.
 - Enterprise design-token layer.
@@ -134,6 +138,7 @@ Homepage meta description:
 - CTA ordering.
 - Modal field and accessibility controls.
 - WhatsApp centralization, official green, safe new tab, and no homepage popup panel.
+- Cross-site normalization of legacy WhatsApp-labeled controls.
 - Absence of third-party client-side form endpoints and obvious plaintext credential assignments.
 - Worker security controls.
 - Postprocessor idempotence.
