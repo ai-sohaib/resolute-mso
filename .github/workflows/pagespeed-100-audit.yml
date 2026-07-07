@@ -1,3 +1,4 @@
+# Baseline and optimization gate for the restored production source.
 name: PageSpeed 100 Audit
 
 on:
