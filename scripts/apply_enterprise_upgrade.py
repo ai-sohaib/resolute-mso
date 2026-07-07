@@ -59,19 +59,11 @@ def process_file(path: Path, root: Path) -> bool:
     return True
 
 
-def restore_enterprise_home(root: Path) -> None:
-    template = root / "templates" / "home-enterprise.template"
-    if not template.exists():
-        return
-    (root / "index.html").write_text(template.read_text(encoding="utf-8"), encoding="utf-8")
-
-
 def main() -> int:
     parser = argparse.ArgumentParser(description="Apply enterprise website upgrades to generated HTML.")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
     root = args.root.resolve()
-    restore_enterprise_home(root)
     changed = sum(process_file(path, root) for path in root.rglob("*.html"))
     print(f"Enterprise upgrade applied to {changed} HTML files.")
     return 0
