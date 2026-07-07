@@ -56,5 +56,3 @@ http://127.0.0.1:8080/
 - `rebuild-seo-authority` is the preview branch.
 - The static site does not use runtime header/footer patching.
 - ChargePilot pricing is scoped after workflow assessment rather than presented as a guaranteed fixed result.
-
-Rollback branch prepared for merge.
