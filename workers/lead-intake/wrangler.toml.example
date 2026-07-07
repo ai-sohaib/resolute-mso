@@ -1,0 +1,22 @@
+name = "resolute-mso-lead-intake"
+main = "src/index.js"
+compatibility_date = "2026-07-01"
+workers_dev = true
+
+[vars]
+ALLOWED_ORIGINS = "https://www.resolutemso.com,https://resolutemso.com"
+LEAD_TO_EMAIL = "support@resolutemso.com"
+SEND_CONFIRMATION = "false"
+
+# Replace with a unique positive integer string for the Cloudflare account.
+[[ratelimits]]
+name = "FORM_RATE_LIMITER"
+namespace_id = "1001"
+
+  [ratelimits.simple]
+  limit = 5
+  period = 60
+
+# Store as encrypted secrets, never as plaintext:
+# npx wrangler secret put RESEND_API_KEY
+# npx wrangler secret put LEAD_FROM_EMAIL
