@@ -17,10 +17,13 @@
   - Centralized the WhatsApp number and message.
   - Removed the hard-coded third-party form endpoint.
   - Added the secure form-endpoint configuration slot.
-  - Loads the enterprise stylesheet and interaction layer.
+  - Isolates the enterprise homepage from conflicting legacy theme patches.
 - `assets/js/source-cleanup.js`
   - Removed runtime title and footer rewrites.
   - Retained only limited legacy path and go-to-top compatibility behavior.
+- `README.md`
+  - Replaced the stale preview-branch instructions.
+  - Documented the tested enterprise build, validation, form-security, and deployment workflow.
 
 ### Components and interaction
 
@@ -38,9 +41,13 @@
 
 ### Build and backend
 
+- `scripts/build_enterprise_site.py`
+  - Added the controlled production build entry point.
+  - Runs the existing route generator while preserving the approved enterprise homepage.
+  - Applies the shared generated-HTML hardening step.
 - `scripts/apply_enterprise_upgrade.py`
   - Added an idempotent post-build step for generated HTML.
-  - Injects enterprise assets, removes insecure public form actions, and enforces homepage title/H1/CTA requirements.
+  - Injects enterprise assets, removes insecure public form actions, and enforces homepage metadata requirements where needed.
 - `workers/lead-intake/src/index.js`
   - Added a serverless lead-intake reference implementation.
   - Includes origin validation, input normalization, required-field checks, email validation, rate limiting, spam checks, PHI-pattern rejection, safe logging, email delivery, and optional prospect confirmation.
@@ -49,12 +56,14 @@
 - `workers/lead-intake/README.md`
   - Added secure deployment and environment setup instructions.
 
-### Tests and CI
+### Tests, CI, and evidence
 
 - `tests/test_enterprise_upgrade.py`
   - Added regression tests for exact title/H1, meta description, CTA order, modal fields/accessibility, centralized WhatsApp, frontend secret absence, Worker controls, and postprocessor idempotence.
 - `.github/workflows/enterprise-website-qa.yml`
-  - Added build, postprocessing, repository validation, Python tests, JavaScript syntax checks, secret scanning, and preview artifact upload.
+  - Added controlled enterprise generation, repository validation, Python tests, JavaScript syntax checks, secret scanning, generated-home acceptance checks, browser setup, visual evidence, and preview artifact upload.
+- `scripts/capture_before_after.py`
+  - Added reproducible desktop and mobile screenshots of the live homepage and generated branch preview.
 
 ### Audit and architecture
 
@@ -75,9 +84,11 @@
 - Shared inline form handler.
 - Enterprise design-token layer.
 - Secure lead-intake Worker.
+- Controlled enterprise build wrapper.
 - Post-build upgrade processor.
 - Enterprise regression test suite.
 - Pull-request QA workflow.
+- Desktop and mobile before/after screenshot capture.
 
 ## Components removed or bypassed
 
@@ -87,6 +98,7 @@
 - Runtime footer replacement in the legacy cleanup script.
 - Client-side FormSubmit endpoint configuration.
 - `mailto:` submission as an accepted form-delivery path.
+- Legacy theme-patch loading on the rebuilt enterprise homepage.
 
 ## Routes changed
 
@@ -96,7 +108,7 @@
 
 ## Metadata changed
 
-Homepage title, H1, Open Graph title, Twitter title, and compatibility runtime title use:
+Homepage title, H1, Open Graph title, and Twitter title use:
 
 `AI-Driven Medical Billing & RCM That Stops Revenue Leakage`
 
@@ -127,6 +139,8 @@ Homepage meta description:
 - Postprocessor idempotence.
 - JavaScript syntax checks.
 - Existing repository validation.
+- Generated-homepage structure checks.
+- Automated desktop/mobile screenshot capture.
 
 ## Required environment configuration
 
