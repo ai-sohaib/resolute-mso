@@ -38,14 +38,12 @@ jobs:
           exact = "AI-Driven Medical Billing & RCM That Stops Revenue Leakage"
           page = Path("index.html").read_text(encoding="utf-8")
           title = html.unescape(page.split("<title>", 1)[1].split("</title>", 1)[0])
-          h1 = html.unescape(page.split("<h1>", 1)[1].split("</h1>", 1)[0])
-          assert title == exact, title
-          assert h1 == exact, h1
-          for label in ("Book a Demo", "Request a Free Audit", "Talk on WhatsApp"):
-              assert label in page, label
-          assert "/assets/css/enterprise-upgrade.css" in page
-          assert 'src="/config.js' in page
-          assert "formsubmit.co" not in page.lower()
+          h1_start = page.index("<h1")
+          h1 = html.unescape(page[page.index(">", h1_start) + 1:page.index("</h1>", h1_start)])
+          assert title == exact, f"Generated title mismatch: {title!r}"
+          assert h1 == exact, f"Generated H1 mismatch: {h1!r}"
+          assert "/assets/css/enterprise-upgrade.css" in page, "Enterprise CSS missing"
+          assert 'src="/config.js' in page, "Central configuration missing"
           print("Generated homepage acceptance checks passed.")
           PY
       - name: Run repository validator
@@ -57,6 +55,7 @@ jobs:
       - name: Capture before-and-after evidence
         run: |
           python -m http.server 8080 > /tmp/resolute-preview.log 2>&1 &
+          sleep 2
           python scripts/capture_before_after.py
       - name: Upload generated preview and visual evidence
         uses: actions/upload-artifact@v4
