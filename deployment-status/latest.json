@@ -1,8 +1,11 @@
 {
   "status": "success",
-  "source_sha": "a8cb10e8a1d3ab26aaab2fc1bb0516b5bf357a6b",
-  "workflow_run_id": "28860505952",
+  "configure_outcome": "success",
+  "upload_outcome": "success",
+  "deploy_outcome": "success",
+  "source_sha": "98211bcb62bf05bd9fd874283b3be91716f53a05",
+  "workflow_run_id": "28860596451",
   "page_url": "https://www.resolutemso.com/",
-  "deployed_at_utc": "2026-07-07T10:48:58Z",
+  "completed_at_utc": "2026-07-07T10:50:39Z",
   "restore_branch": "restore/pre-enterprise-deploy-2026-07-07"
 }
