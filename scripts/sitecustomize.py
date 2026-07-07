@@ -5,44 +5,35 @@ import re
 import sys
 from pathlib import Path
 
+ROOT = Path(__file__).resolve().parents[1]
+INDEX_PATH = ROOT / "index.html"
+_ORIGINAL_WRITE_TEXT = Path.write_text
 
-def _paths() -> tuple[Path, Path]:
-    root = Path(__file__).resolve().parents[1]
-    return root, root / "index.html"
 
-
-def _fix_home_logo() -> None:
-    if not sys.argv or not sys.argv[0].endswith("apply_pagespeed_100.py"):
-        return
-
-    _, index_path = _paths()
-    if not index_path.exists():
-        return
-
-    text = index_path.read_text(encoding="utf-8")
-    text = re.sub(
+def _high_density_logo(html: str) -> str:
+    html = re.sub(
         r"/assets/img/resolute-mso-logo(?:-\d+)?\.webp",
         "/assets/img/resolute-mso-logo.webp",
-        text,
+        html,
     )
-    text = re.sub(
+    return re.sub(
         r'(<img\b[^>]*src="/assets/img/resolute-mso-logo\.webp"[^>]*?)\swidth="\d+"\sheight="\d+"',
         r'\1 width="460" height="130"',
-        text,
+        html,
     )
-    index_path.write_text(text, encoding="utf-8")
-    print("Applied the high-density homepage logo source.")
+
+
+def _guarded_write_text(self: Path, data: str, *args, **kwargs):
+    if self.resolve() == INDEX_PATH.resolve() and isinstance(data, str):
+        data = _high_density_logo(data)
+    return _ORIGINAL_WRITE_TEXT(self, data, *args, **kwargs)
 
 
 def _externalize_home_css() -> None:
-    if not sys.argv or not sys.argv[0].endswith("apply_pagespeed_100.py"):
+    if not INDEX_PATH.exists():
         return
 
-    root, index_path = _paths()
-    if not index_path.exists():
-        return
-
-    text = index_path.read_text(encoding="utf-8")
+    text = INDEX_PATH.read_text(encoding="utf-8")
     style_blocks = re.findall(r"<style(?:\s+[^>]*)?>(.*?)</style>", text, flags=re.S)
     if not style_blocks:
         return
@@ -52,9 +43,9 @@ def _externalize_home_css() -> None:
     combined = re.sub(r"\s+", " ", combined)
     combined = re.sub(r"\s*([{}:;,])\s*", r"\1", combined).strip()
 
-    css_path = root / "assets" / "css" / "pagespeed-home.css"
+    css_path = ROOT / "assets" / "css" / "pagespeed-home.css"
     css_path.parent.mkdir(parents=True, exist_ok=True)
-    css_path.write_text(combined + "\n", encoding="utf-8")
+    _ORIGINAL_WRITE_TEXT(css_path, combined + "\n", encoding="utf-8")
 
     text = re.sub(r"\s*<style(?:\s+[^>]*)?>.*?</style>", "", text, flags=re.S)
     text = text.replace(
@@ -62,10 +53,10 @@ def _externalize_home_css() -> None:
         '<link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home.css"></head>',
         1,
     )
-    index_path.write_text(text, encoding="utf-8")
-    print("Externalized the homepage CSS.")
+    INDEX_PATH.write_text(_high_density_logo(text), encoding="utf-8")
+    print("Externalized homepage CSS and enforced the high-density logo source.")
 
 
 if sys.argv and sys.argv[0].endswith("apply_pagespeed_100.py"):
-    atexit.register(_fix_home_logo)
+    Path.write_text = _guarded_write_text
     atexit.register(_externalize_home_css)
