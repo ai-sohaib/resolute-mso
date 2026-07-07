@@ -50,7 +50,15 @@ jobs:
           PY
       - name: Run repository validator
         run: python scripts/validate_site.py
-      - name: Upload generated preview
+      - name: Install browser for visual evidence
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Capture before-and-after evidence
+        run: |
+          python -m http.server 8080 > /tmp/resolute-preview.log 2>&1 &
+          python scripts/capture_before_after.py
+      - name: Upload generated preview and visual evidence
         uses: actions/upload-artifact@v4
         with:
           name: resolute-mso-enterprise-preview
@@ -59,4 +67,5 @@ jobs:
             assets/
             */index.html
             404.html
+            artifacts/visual-evidence/
           retention-days: 14
