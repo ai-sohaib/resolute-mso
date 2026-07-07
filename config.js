@@ -42,4 +42,5 @@ window.RESOLUTE_CONFIG.formEndpoint =
 
   addStyle("/assets/css/enterprise-upgrade.css");
   addScript("/assets/js/enterprise-upgrade.js");
+  addScript("/assets/js/whatsapp-normalize.js");
 })();
