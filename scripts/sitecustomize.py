@@ -36,29 +36,19 @@ def _finalize_pagespeed_home() -> None:
         1,
     )
 
-    original_logo = root / "assets" / "img" / "resolute-mso-logo.webp"
-    optimized_logo = root / "assets" / "img" / "resolute-mso-logo-460.webp"
-    if original_logo.exists():
-        from PIL import Image
-
-        with Image.open(original_logo) as image:
-            image.load()
-            if image.mode not in {"RGB", "RGBA"}:
-                image = image.convert("RGBA" if "transparency" in image.info else "RGB")
-            image.save(optimized_logo, format="WEBP", quality=58, method=6)
-
-        text = text.replace(
-            "/assets/img/resolute-mso-logo-208.webp",
-            "/assets/img/resolute-mso-logo-460.webp",
-        )
-        text = re.sub(
-            r'(<img\b[^>]*src="/assets/img/resolute-mso-logo-460\.webp"[^>]*?)\swidth="\d+"\sheight="\d+"',
-            r'\1 width="460" height="130"',
-            text,
-        )
+    text = re.sub(
+        r"/assets/img/resolute-mso-logo(?:-\d+)?\.webp",
+        "/assets/img/resolute-mso-logo.webp",
+        text,
+    )
+    text = re.sub(
+        r'(<img\b[^>]*src="/assets/img/resolute-mso-logo\.webp"[^>]*?)\swidth="\d+"\sheight="\d+"',
+        r'\1 width="460" height="130"',
+        text,
+    )
 
     index_path.write_text(text, encoding="utf-8")
-    print("Externalized homepage CSS and supplied a high-density optimized logo.")
+    print("Externalized homepage CSS and restored a high-density logo source.")
 
 
 if sys.argv and sys.argv[0].endswith("apply_pagespeed_100.py"):
