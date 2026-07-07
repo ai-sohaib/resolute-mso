@@ -13,26 +13,33 @@ window.RESOLUTE_CONFIG.formEndpoint =
 (function () {
   "use strict";
   var version = "20260707-enterprise-upgrade";
-  function addStyle(href) {
-    if (document.querySelector('link[href="' + href + '"]')) return;
+  var enterpriseHome = Boolean(document.querySelector(".r-site-header"));
+
+  function addStyle(path) {
+    if (document.querySelector('link[href*="' + path + '"]')) return;
     var link = document.createElement("link");
     link.rel = "stylesheet";
-    link.href = href;
+    link.href = path + "?v=" + version;
     document.head.appendChild(link);
   }
-  function addScript(src) {
-    if (document.querySelector('script[src="' + src + '"]')) return;
+
+  function addScript(path) {
+    if (document.querySelector('script[src*="' + path + '"]')) return;
     var script = document.createElement("script");
-    script.src = src;
+    script.src = path + "?v=" + version;
     script.defer = true;
     document.head.appendChild(script);
   }
-  addStyle("/assets/css/final-qa-fixes.css?v=" + version);
-  addStyle("/assets/css/iso-ui-polish.css?v=" + version);
-  addStyle("/assets/css/menu-directory-fix.css?v=" + version);
-  addStyle("/assets/css/futuristic-theme.css?v=" + version);
-  addStyle("/assets/css/footer-final-dark.css?v=" + version);
-  addStyle("/assets/css/enterprise-upgrade.css?v=" + version);
-  addScript("/assets/js/source-cleanup.js?v=" + version);
-  addScript("/assets/js/enterprise-upgrade.js?v=" + version);
+
+  if (!enterpriseHome) {
+    addStyle("/assets/css/final-qa-fixes.css");
+    addStyle("/assets/css/iso-ui-polish.css");
+    addStyle("/assets/css/menu-directory-fix.css");
+    addStyle("/assets/css/futuristic-theme.css");
+    addStyle("/assets/css/footer-final-dark.css");
+    addScript("/assets/js/source-cleanup.js");
+  }
+
+  addStyle("/assets/css/enterprise-upgrade.css");
+  addScript("/assets/js/enterprise-upgrade.js");
 })();
