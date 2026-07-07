@@ -1,0 +1,57 @@
+name: Apply website motion system
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/css/site-motion.css"
+      - "assets/js/site-motion.js"
+      - "scripts/apply_site_motion.py"
+      - ".github/workflows/apply-site-motion.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: website-motion-refresh
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout production branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply motion system
+        run: python scripts/apply_site_motion.py
+
+      - name: Validate generated integration
+        run: |
+          python -m py_compile scripts/apply_site_motion.py scripts/build_site.py
+          node --check assets/js/site-motion.js
+          test -f assets/css/site-motion.css
+          grep -Fq 'class="hero-typewriter"' index.html
+          grep -Fq '/assets/css/site-motion.css' index.html
+          grep -Fq '/assets/js/site-motion.js' index.html
+          grep -Fq 'hero-typewriter' scripts/build_site.py
+
+      - name: Commit live motion integration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- '*.html' scripts/build_site.py
+          if git diff --cached --quiet; then
+            echo "Motion integration is already current."
+            exit 0
+          fi
+          git commit -m "Apply looping H1 and scroll reveal motion across the website [skip ci]"
+          git push origin HEAD:main
