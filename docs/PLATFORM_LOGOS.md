@@ -4,4 +4,4 @@ The homepage workflow-familiarity pills display branded platform icons for Offic
 
 Restore point: `restore/pre-platform-logo-deploy-2026-07-08`.
 
-Production deployment verification was refreshed after simplifying the logo delivery method.
+The live `main/index.html` now contains the logo markup directly. This commit triggers a standard Pages deployment from the materialized source.
