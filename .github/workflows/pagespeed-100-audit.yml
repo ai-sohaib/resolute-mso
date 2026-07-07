@@ -39,7 +39,7 @@ jobs:
           python3 scripts/apply_pagespeed_100.py
           grep -Fq 'resolute-critical-typography' index.html
           grep -Fq 'View All Services' index.html
-          grep -Fq 'healthcare-hero-ai-480.webp' index.html
+          grep -Fq 'healthcare-hero-ai-420.webp' index.html
           if grep -Fq 'fonts.googleapis.com' index.html; then
             echo 'Google Fonts must not block first paint.'
             exit 1
