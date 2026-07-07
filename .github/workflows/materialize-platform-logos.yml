@@ -1,0 +1,54 @@
+name: Materialize platform logos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/apply_platform_logos.py"
+      - ".github/workflows/materialize-platform-logos.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-platform-logos
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build optimized homepage and apply platform logos
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          python scripts/apply_pagespeed_100.py
+          python scripts/apply_platform_logos.py
+          grep -Fq 'platform-logo-strip' index.html
+          grep -Fq 'domain=officeally.com' index.html
+          grep -Fq 'domain=telcor.com' index.html
+          grep -Fq '.platform-logo-strip img' assets/css/pagespeed-home.css
+
+      - name: Commit generated live source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/css/pagespeed-home.css assets/img/healthcare-hero-ai-420.webp assets/img/healthcare-hero-ai-720.webp
+          if git diff --cached --quiet; then
+            echo "Live source already contains platform logos."
+            exit 0
+          fi
+          git commit -m "Materialize branded platform logos in live homepage [skip ci]"
+          git push origin HEAD:main
