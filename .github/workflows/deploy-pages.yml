@@ -3,10 +3,12 @@ name: Deploy Resolute MSO to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore:
+      - "deployment-status/**"
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -54,6 +56,7 @@ jobs:
             --exclude='docs/' \
             --exclude='data/' \
             --exclude='artifacts/' \
+            --exclude='deployment-status/' \
             --exclude='*.md' \
             --exclude='*.py' \
             --exclude='*.zip'
@@ -73,3 +76,26 @@ jobs:
       - name: Deploy production artifact
         id: deployment
         uses: actions/deploy-pages@v5
+
+      - name: Record successful production deployment
+        env:
+          PAGE_URL: ${{ steps.deployment.outputs.page_url }}
+          SOURCE_SHA: ${{ github.sha }}
+          RUN_ID: ${{ github.run_id }}
+        run: |
+          mkdir -p deployment-status
+          cat > deployment-status/latest.json <<EOF
+          {
+            "status": "success",
+            "source_sha": "${SOURCE_SHA}",
+            "workflow_run_id": "${RUN_ID}",
+            "page_url": "${PAGE_URL}",
+            "deployed_at_utc": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+            "restore_branch": "restore/pre-enterprise-deploy-2026-07-07"
+          }
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deployment-status/latest.json
+          git commit -m "Record successful production deployment [skip ci]"
+          git push origin HEAD:main
