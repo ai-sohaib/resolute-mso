@@ -66,36 +66,58 @@ jobs:
           grep -Fq 'AI-Driven Medical Billing &amp; RCM That Stops Revenue Leakage' _site/index.html
 
       - name: Configure GitHub Pages
+        id: configure
         uses: actions/configure-pages@v5
+        continue-on-error: true
 
       - name: Upload production artifact
+        id: upload
+        if: steps.configure.outcome == 'success'
         uses: actions/upload-pages-artifact@v3
         with:
           path: _site
+        continue-on-error: true
 
       - name: Deploy production artifact
         id: deployment
+        if: steps.configure.outcome == 'success' && steps.upload.outcome == 'success'
         uses: actions/deploy-pages@v5
+        continue-on-error: true
 
-      - name: Record successful production deployment
+      - name: Record production deployment result
+        if: always()
         env:
           PAGE_URL: ${{ steps.deployment.outputs.page_url }}
           SOURCE_SHA: ${{ github.sha }}
           RUN_ID: ${{ github.run_id }}
+          CONFIGURE_OUTCOME: ${{ steps.configure.outcome }}
+          UPLOAD_OUTCOME: ${{ steps.upload.outcome }}
+          DEPLOY_OUTCOME: ${{ steps.deployment.outcome }}
         run: |
           mkdir -p deployment-status
+          FINAL_STATUS="${DEPLOY_OUTCOME}"
+          if [ -z "${FINAL_STATUS}" ] || [ "${FINAL_STATUS}" = "skipped" ]; then
+            FINAL_STATUS="failure"
+          fi
           cat > deployment-status/latest.json <<EOF
           {
-            "status": "success",
+            "status": "${FINAL_STATUS}",
+            "configure_outcome": "${CONFIGURE_OUTCOME}",
+            "upload_outcome": "${UPLOAD_OUTCOME}",
+            "deploy_outcome": "${DEPLOY_OUTCOME}",
             "source_sha": "${SOURCE_SHA}",
             "workflow_run_id": "${RUN_ID}",
             "page_url": "${PAGE_URL}",
-            "deployed_at_utc": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
+            "completed_at_utc": "$(date -u +'%Y-%m-%dT%H:%M:%SZ')",
             "restore_branch": "restore/pre-enterprise-deploy-2026-07-07"
           }
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add deployment-status/latest.json
-          git commit -m "Record successful production deployment [skip ci]"
+          git commit -m "Record production deployment result [skip ci]"
           git push origin HEAD:main
+
+      - name: Fail workflow when deployment was unsuccessful
+        if: always() && steps.deployment.outcome != 'success'
+        run: exit 1
