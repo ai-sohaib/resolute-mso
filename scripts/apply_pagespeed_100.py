@@ -8,6 +8,7 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
 TYPOGRAPHY = ASSETS / "css" / "elegant-typography.css"
+HOME_CSS = ASSETS / "css" / "pagespeed-home-source.css"
 WHATSAPP_URL = (
     "https://wa.me/17015525527?text=Hello%20Resolute%20MSO%2C%20I%27d%20like%20"
     "to%20discuss%20RCM%20and%20billing%20automation."
@@ -143,7 +144,7 @@ def optimized_hero(dimensions: dict[str, tuple[int, int]]) -> str:
     )
 
 
-def optimize_homepage(dimensions: dict[str, tuple[int, int]], typography_css: str) -> None:
+def optimize_homepage(dimensions: dict[str, tuple[int, int]]) -> None:
     path = ROOT / "index.html"
     text = path.read_text(encoding="utf-8")
     text = strip_external_font_dependencies(text)
@@ -166,9 +167,7 @@ def optimize_homepage(dimensions: dict[str, tuple[int, int]], typography_css: st
             count=1,
         )
 
-    style_blocks = re.findall(r"<style(?:\s+[^>]*)?>(.*?)</style>", text, flags=re.S)
-    base_css = style_blocks[0] if style_blocks else ""
-    combined_css = minify_css(base_css + "\n" + typography_css + "\n" + HARDENING_CSS)
+    combined_css = minify_css(HOME_CSS.read_text(encoding="utf-8"))
     css_path = ASSETS / "css" / "pagespeed-home.css"
     css_path.write_text(combined_css + "\n", encoding="utf-8")
 
@@ -211,7 +210,7 @@ def main() -> None:
         '"Segoe UI Variable Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
     )
     dimensions = build_hero_images()
-    optimize_homepage(dimensions, typography_css)
+    optimize_homepage(dimensions)
     changed = optimize_other_pages(typography_css)
     print(f"PageSpeed homepage built; {changed} supporting HTML files updated.")
 
