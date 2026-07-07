@@ -58,15 +58,18 @@ Do not place email credentials or provider API keys in `config.js` or any browse
 
 ## Build and validate
 
+Use the enterprise wrapper. It runs the legacy generator for secondary routes, restores the reviewed homepage, and applies the shared hardening layer:
+
 ```bash
-python scripts/build_site.py
-python scripts/apply_enterprise_upgrade.py
+python scripts/build_enterprise_site.py
 python scripts/validate_site.py
 python -m unittest discover -s tests -p "test_*.py" -v
 node --check assets/js/source-cleanup.js
 node --check assets/js/enterprise-upgrade.js
 node --check workers/lead-intake/src/index.js
 ```
+
+Do not use `scripts/build_site.py` as the final production build command by itself because it regenerates the legacy homepage.
 
 ## Preview
 
@@ -116,7 +119,7 @@ Start CSP in report-only mode when legacy third-party scripts are still present,
 
 1. Tag or record the current production commit.
 2. Merge the approved pull request into `main`.
-3. Build and validate from the merged commit.
+3. Build with `python scripts/build_enterprise_site.py` and validate from the merged commit.
 4. Deploy the Worker and verify the endpoint.
 5. Configure the frontend endpoint.
 6. Deploy the static site through the approved GitHub Pages workflow.
