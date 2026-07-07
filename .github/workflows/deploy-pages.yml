@@ -38,11 +38,16 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check pillow
           python scripts/apply_pagespeed_100.py
+          python scripts/apply_platform_logos.py
           test -f index.html
           test -f assets/css/pagespeed-home.css
           test -f assets/img/healthcare-hero-ai-420.webp
           test -f assets/img/healthcare-hero-ai-720.webp
+          test -f assets/img/platforms/officeally.webp
+          test -f assets/img/platforms/telcor.webp
           grep -Fq '/assets/img/resolute-mso-logo.webp' index.html
+          grep -Fq 'platform-logo-strip' index.html
+          grep -Fq '/assets/img/platforms/eclinicalworks.webp' index.html
 
       - name: Stage public files
         run: |
@@ -63,6 +68,8 @@ jobs:
           test -f _site/CNAME
           test -f _site/index.html
           test -f _site/assets/css/pagespeed-home.css
+          test -f _site/assets/img/platforms/officeally.webp
+          test -f _site/assets/img/platforms/telcor.webp
 
       - name: Configure Pages
         id: configure
@@ -88,9 +95,8 @@ jobs:
             "workflow_run_id": "${GITHUB_RUN_ID}",
             "page_url": "${{ steps.deployment.outputs.page_url }}",
             "completed_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "lighthouse_mobile": {"performance":100,"accessibility":100,"best_practices":100,"seo":100},
-            "lighthouse_desktop": {"performance":100,"accessibility":100,"best_practices":100,"seo":100},
-            "restore_branch": "restore/pre-pagespeed-100-deploy-2026-07-07"
+            "change": "Official platform logos deployed in workflow familiarity section",
+            "restore_branch": "restore/pre-platform-logo-deploy-2026-07-08"
           }
           EOF
           git config user.name "github-actions[bot]"
@@ -99,5 +105,5 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Record optimized Pages deployment [skip ci]"
+          git commit -m "Record platform logo deployment [skip ci]"
           git push origin HEAD:main
