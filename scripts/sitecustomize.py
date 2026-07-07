@@ -6,12 +6,39 @@ import sys
 from pathlib import Path
 
 
-def _finalize_pagespeed_home() -> None:
+def _paths() -> tuple[Path, Path]:
+    root = Path(__file__).resolve().parents[1]
+    return root, root / "index.html"
+
+
+def _fix_home_logo() -> None:
     if not sys.argv or not sys.argv[0].endswith("apply_pagespeed_100.py"):
         return
 
-    root = Path(__file__).resolve().parents[1]
-    index_path = root / "index.html"
+    _, index_path = _paths()
+    if not index_path.exists():
+        return
+
+    text = index_path.read_text(encoding="utf-8")
+    text = re.sub(
+        r"/assets/img/resolute-mso-logo(?:-\d+)?\.webp",
+        "/assets/img/resolute-mso-logo.webp",
+        text,
+    )
+    text = re.sub(
+        r'(<img\b[^>]*src="/assets/img/resolute-mso-logo\.webp"[^>]*?)\swidth="\d+"\sheight="\d+"',
+        r'\1 width="460" height="130"',
+        text,
+    )
+    index_path.write_text(text, encoding="utf-8")
+    print("Applied the high-density homepage logo source.")
+
+
+def _externalize_home_css() -> None:
+    if not sys.argv or not sys.argv[0].endswith("apply_pagespeed_100.py"):
+        return
+
+    root, index_path = _paths()
     if not index_path.exists():
         return
 
@@ -35,21 +62,10 @@ def _finalize_pagespeed_home() -> None:
         '<link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home.css"></head>',
         1,
     )
-
-    text = re.sub(
-        r"/assets/img/resolute-mso-logo(?:-\d+)?\.webp",
-        "/assets/img/resolute-mso-logo.webp",
-        text,
-    )
-    text = re.sub(
-        r'(<img\b[^>]*src="/assets/img/resolute-mso-logo\.webp"[^>]*?)\swidth="\d+"\sheight="\d+"',
-        r'\1 width="460" height="130"',
-        text,
-    )
-
     index_path.write_text(text, encoding="utf-8")
-    print("Externalized homepage CSS and restored a high-density logo source.")
+    print("Externalized the homepage CSS.")
 
 
 if sys.argv and sys.argv[0].endswith("apply_pagespeed_100.py"):
-    atexit.register(_finalize_pagespeed_home)
+    atexit.register(_fix_home_logo)
+    atexit.register(_externalize_home_css)
