@@ -8,6 +8,10 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parents[1]
 ASSETS = ROOT / "assets"
 TYPOGRAPHY_CSS = ASSETS / "css" / "elegant-typography.css"
+WHATSAPP_URL = (
+    "https://wa.me/17015525527?text=Hello%20Resolute%20MSO%2C%20I%27d%20like%20"
+    "to%20discuss%20RCM%20and%20billing%20automation."
+)
 
 GOOGLE_FONT_PATTERNS = (
     r'\s*<link rel="preconnect" href="https://fonts\.googleapis\.com">',
@@ -25,6 +29,7 @@ DESCRIPTIVE_LINKS = {
 
 HARDENING_CSS = """
 :root{--teal:#087a70;--teal-dark:#05665f;--font-ui:"Segoe UI Variable Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+html{scroll-behavior:auto}
 .btn{min-height:44px;background:#087a70;border-color:#087a70}
 .btn:hover,.btn:focus-visible{background:#05665f;border-color:#05665f}
 .btn.btn-secondary{background:#fff;color:#05665f;border-color:#b9c9c5;box-shadow:none}
@@ -34,11 +39,16 @@ HARDENING_CSS = """
 .menu-caret{width:28px;min-width:28px}
 .hero-actions{overflow:visible;gap:14px}
 .hero-actions .btn{min-height:48px}
+.hero-image picture{display:block}
 .card-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
 .card-actions .btn{min-height:44px;padding:8px 14px}
 .site-header{backdrop-filter:none;-webkit-backdrop-filter:none}
+.section:has(.center){content-visibility:visible;contain-intrinsic-size:auto}
+.center{padding:16px 0;overflow:visible}
+.center .btn{min-height:48px;margin:8px 0}
 @media(max-width:1060px){.menu-caret{min-width:44px}}
 @media(max-width:720px){
+*{animation:none!important;transition:none!important}
 .site-header{box-shadow:none}
 .hero-image,.info-card,.directory-card,.related-grid a,.workflow-grid article,.answer-grid article,.dashboard-visual,.metric-panel,.trust-list a{box-shadow:none!important;filter:none!important}
 .hero-actions,.card-actions{gap:16px;overflow:visible}
@@ -77,23 +87,23 @@ def build_images() -> dict[str, tuple[int, int]]:
     if logo.exists():
         dimensions["logo"] = optimize_image(
             logo,
-            ASSETS / "img" / "resolute-mso-logo-240.webp",
-            240,
-            78,
+            ASSETS / "img" / "resolute-mso-logo-208.webp",
+            208,
+            56,
         )
 
     if hero.exists():
-        dimensions["hero480"] = optimize_image(
+        dimensions["hero420"] = optimize_image(
             hero,
-            ASSETS / "img" / "healthcare-hero-ai-480.webp",
-            480,
-            72,
+            ASSETS / "img" / "healthcare-hero-ai-420.webp",
+            420,
+            68,
         )
-        dimensions["hero768"] = optimize_image(
+        dimensions["hero720"] = optimize_image(
             hero,
-            ASSETS / "img" / "healthcare-hero-ai-768.webp",
-            768,
-            74,
+            ASSETS / "img" / "healthcare-hero-ai-720.webp",
+            720,
+            72,
         )
 
     return dimensions
@@ -102,7 +112,7 @@ def build_images() -> dict[str, tuple[int, int]]:
 def optimized_logo_tag(match: re.Match[str], dimensions: tuple[int, int] | None) -> str:
     tag = match.group(0).replace(
         '/assets/img/resolute-mso-logo.webp',
-        '/assets/img/resolute-mso-logo-240.webp',
+        '/assets/img/resolute-mso-logo-208.webp',
     )
     if dimensions:
         width, height = dimensions
@@ -112,15 +122,13 @@ def optimized_logo_tag(match: re.Match[str], dimensions: tuple[int, int] | None)
 
 
 def optimized_hero_tag(dimensions: dict[str, tuple[int, int]]) -> str:
-    width, height = dimensions.get("hero768", (768, 512))
+    width, height = dimensions.get("hero720", (720, 480))
     return (
-        '<img src="/assets/img/healthcare-hero-ai-768.webp" '
-        'srcset="/assets/img/healthcare-hero-ai-480.webp 480w, '
-        '/assets/img/healthcare-hero-ai-768.webp 768w" '
-        'sizes="(max-width:720px) calc(100vw - 28px), '
-        '(max-width:1060px) calc(100vw - 40px), 540px" '
+        '<picture><source media="(max-width:720px)" '
+        'srcset="/assets/img/healthcare-hero-ai-420.webp">'
+        '<img src="/assets/img/healthcare-hero-ai-720.webp" '
         'alt="Smiling healthcare professional in a modern office with revenue dashboards in the background" '
-        f'width="{width}" height="{height}" fetchpriority="high" decoding="async">'
+        f'width="{width}" height="{height}" fetchpriority="high" decoding="async"></picture>'
     )
 
 
@@ -137,6 +145,49 @@ def remove_legacy_enhancements(text: str) -> str:
         text,
         flags=re.S,
     )
+    return text
+
+
+def simplify_interactions(text: str) -> str:
+    text = text.replace(
+        '<button class="scroll-top" type="button" aria-label="Go to top">&#8593;</button>',
+        '<a class="scroll-top visible" href="#main" aria-label="Go to top">&#8593;</a>',
+    )
+
+    def whatsapp_anchor(match: re.Match[str]) -> str:
+        return (
+            f'<a class="whatsapp-launch" href="{WHATSAPP_URL}" target="_blank" '
+            'rel="noopener noreferrer" aria-label="Chat with Resolute MSO on WhatsApp">'
+            f'{match.group(1)}</a>'
+        )
+
+    text = re.sub(
+        r'<button class="whatsapp-launch"[^>]*>(.*?)</button>',
+        whatsapp_anchor,
+        text,
+        flags=re.S,
+    )
+    text = re.sub(
+        r'\s*<section class="whatsapp-panel" id="whatsapp-panel".*?</section>',
+        "",
+        text,
+        flags=re.S,
+    )
+    text = re.sub(
+        r'\s*<script>\(function \(\) \{ var toggle = document\.querySelector\("\.nav-toggle"\);.*?</script>',
+        "",
+        text,
+        flags=re.S,
+    )
+
+    if 'id="resolute-nav-script"' not in text and "</body>" in text:
+        nav_script = (
+            '<script id="resolute-nav-script">(()=>{const t=document.querySelector(".nav-toggle"),'
+            'n=document.querySelector(".main-nav");if(t&&n)t.addEventListener("click",()=>{'
+            'const o=n.classList.toggle("open");t.setAttribute("aria-expanded",String(o))})})();</script>'
+        )
+        text = text.replace("</body>", nav_script + "</body>", 1)
+
     return text
 
 
@@ -172,7 +223,7 @@ def patch_html(path: Path, inline_css: str, dimensions: dict[str, tuple[int, int
             text,
         )
 
-    if path == ROOT / "index.html" and dimensions.get("hero768"):
+    if path == ROOT / "index.html" and dimensions.get("hero720"):
         text = re.sub(
             r'<img\b[^>]*src="/assets/img/healthcare-hero-ai\.jpg"[^>]*>',
             optimized_hero_tag(dimensions),
@@ -180,6 +231,8 @@ def patch_html(path: Path, inline_css: str, dimensions: dict[str, tuple[int, int
             count=1,
         )
         text = remove_legacy_enhancements(text)
+
+    text = simplify_interactions(text)
 
     if text == original:
         return False
