@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import re
+from html import escape
 from pathlib import Path
 
 EXACT_TITLE = "AI-Driven Medical Billing & RCM That Stops Revenue Leakage"
@@ -34,7 +35,8 @@ def remove_insecure_form_actions(markup: str) -> str:
 
 
 def upgrade_home(markup: str) -> str:
-    markup = re.sub(r"<title>.*?</title>", f"<title>{EXACT_TITLE}</title>", markup, count=1, flags=re.S)
+    safe_title = escape(EXACT_TITLE)
+    markup = re.sub(r"<title>.*?</title>", f"<title>{safe_title}</title>", markup, count=1, flags=re.S)
     markup = re.sub(
         r'<meta\s+name=["\']description["\']\s+content=["\'][^"\']*["\']\s*/?>',
         f'<meta name="description" content="{META_DESCRIPTION}">',
@@ -42,7 +44,7 @@ def upgrade_home(markup: str) -> str:
         count=1,
         flags=re.I,
     )
-    markup = re.sub(r"<h1\b[^>]*>.*?</h1>", f"<h1>{EXACT_TITLE}</h1>", markup, count=1, flags=re.S)
+    markup = re.sub(r"<h1\b[^>]*>.*?</h1>", f"<h1>{safe_title}</h1>", markup, count=1, flags=re.S)
     return markup.replace(">View Automation Suite<", ">Request a Free Audit<", 1)
 
 
@@ -57,11 +59,19 @@ def process_file(path: Path, root: Path) -> bool:
     return True
 
 
+def restore_enterprise_home(root: Path) -> None:
+    template = root / "templates" / "home-enterprise.template"
+    if not template.exists():
+        return
+    (root / "index.html").write_text(template.read_text(encoding="utf-8"), encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Apply enterprise website upgrades to generated HTML.")
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     args = parser.parse_args()
     root = args.root.resolve()
+    restore_enterprise_home(root)
     changed = sum(process_file(path, root) for path in root.rglob("*.html"))
     print(f"Enterprise upgrade applied to {changed} HTML files.")
     return 0
