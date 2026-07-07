@@ -24,9 +24,10 @@ def main() -> int:
         for label, viewport in TARGETS:
             context = browser.new_context(viewport=viewport, device_scale_factor=1)
             page = context.new_page()
+            page.emulate_media(reduced_motion="reduce")
             for name, url in PAGES:
-                page.goto(url, wait_until="networkidle", timeout=90000)
-                page.emulate_media(reduced_motion="reduce")
+                page.goto(url, wait_until="domcontentloaded", timeout=90000)
+                page.wait_for_timeout(2500)
                 page.screenshot(path=OUTPUT / f"{name}-{label}.png", full_page=True)
             context.close()
         browser.close()
