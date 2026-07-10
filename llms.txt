@@ -1,172 +1,60 @@
 # Resolute MSO
 
-Resolute MSO is an AI-powered revenue cycle management, medical billing automation, and healthcare operations partner for U.S. healthcare providers.
-ChargePilot is Resolute MSO's billing software claim-entry and claim-submission automation product for medical billing teams and RCM operations. OfficeAlly automation is one supported use case where the workflow is confirmed.
-Resolute MSO helps providers reduce preventable denials, improve A/R movement, automate repetitive billing workflows, and gain revenue cycle visibility. Public website forms are for business inquiries only and must not collect PHI or patient information.
+> Resolute MSO is an AI-powered revenue cycle management, medical billing automation, and healthcare operations partner for U.S. healthcare providers. Public website forms are for business inquiries only and must not include PHI or patient information.
 
-## Key pages
-- Healthcare RCM Services: https://www.resolutemso.com/services/
-- ChargePilot Billing Software Automation: https://www.resolutemso.com/chargepilot/
-- All RCM Solutions: https://www.resolutemso.com/all-rcm-solutions/
-- Medical Billing Services: https://www.resolutemso.com/medical-billing-services/
-- Denial Management Services: https://www.resolutemso.com/denial-management-services/
-- Clinical Lab Billing Services: https://www.resolutemso.com/clinical-lab-billing-services/
-- OfficeAlly Claim Entry Automation: https://www.resolutemso.com/officeally-claim-entry-automation/
-- Free RCM Audit: https://www.resolutemso.com/free-rcm-audit/
-- Contact Resolute MSO: https://www.resolutemso.com/contact/
+## Primary resources
 
-## Page directory
-- Resolute MSO (home; Brand and core conversion): https://www.resolutemso.com/
-- About Resolute MSO (company; Trust and operations): https://www.resolutemso.com/about/
-- Why Resolute MSO (company; Buyer trust): https://www.resolutemso.com/why-resolute-mso/
-- RCM Expertise (company; RCM expertise): https://www.resolutemso.com/rcm-expertise/
-- Industries and Who We Serve (company; ICP): https://www.resolutemso.com/industries-who-we-serve/
-- Healthcare RCM Services (hub; Service hub): https://www.resolutemso.com/services/
-- Automation Suite (hub; Automation hub): https://www.resolutemso.com/automation-suite/
-- Specialty Billing Services (hub; Specialty billing hub): https://www.resolutemso.com/specialties/
-- ChargePilot Billing Software Automation (product; Product intent): https://www.resolutemso.com/chargepilot/
-- Practice Health Dashboard (automation; Product intent): https://www.resolutemso.com/practice-health-dashboard/
-- Free RCM Audit (conversion; Lead generation): https://www.resolutemso.com/free-rcm-audit/
-- Contact Resolute MSO (conversion; Lead generation): https://www.resolutemso.com/contact/
-- Compliance (company; Compliance and trust): https://www.resolutemso.com/compliance/
-- Quality Commitment (company; Quality and trust): https://www.resolutemso.com/quality-compliance/
-- Service Feedback (company; Trust): https://www.resolutemso.com/service-quality-feedback/
-- Privacy Policy (company; Trust): https://www.resolutemso.com/privacy/
-- All RCM Solutions (hub; SEO hub): https://www.resolutemso.com/all-rcm-solutions/
-- RCM Guides and Resources (hub; Educational hub): https://www.resolutemso.com/resources/
-- RCM Insights (resource; Educational intent): https://www.resolutemso.com/rcm-insights/
-- Automation Updates (automation; Educational intent): https://www.resolutemso.com/automation-updates/
-- Healthcare Operations (resource; Educational intent): https://www.resolutemso.com/healthcare-operations/
-- Site Directory (hub; Crawl support): https://www.resolutemso.com/site-directory/
-- Medical Billing Services (service; Core service intent): https://www.resolutemso.com/medical-billing-services/
-- Revenue Cycle Management Services (service; Core service intent): https://www.resolutemso.com/revenue-cycle-management-services/
-- Denial Management Services (service; Core service intent): https://www.resolutemso.com/denial-management-services/
-- AR Follow Up Services (service; Core service intent): https://www.resolutemso.com/ar-follow-up-services/
-- Eligibility Verification Services (service; Core service intent): https://www.resolutemso.com/eligibility-verification-services/
-- Prior Authorization Services (service; Core service intent): https://www.resolutemso.com/prior-authorization-services/
-- Payment Posting Services (service; Core service intent): https://www.resolutemso.com/payment-posting-services/
-- Medical Coding Services (service; Core service intent): https://www.resolutemso.com/medical-coding-services/
-- Claim Submission Services (service; Core service intent): https://www.resolutemso.com/claim-submission-services/
-- Claim Scrubbing Services (service; Core service intent): https://www.resolutemso.com/claim-scrubbing-services/
-- Credentialing Services (service; Core service intent): https://www.resolutemso.com/credentialing-services/
-- Provider Enrollment Services (service; Core service intent): https://www.resolutemso.com/provider-enrollment-services/
-- RCM Reporting Services (service; Core service intent): https://www.resolutemso.com/rcm-reporting-services/
-- Billing Audit Services (service; Core service intent): https://www.resolutemso.com/billing-audit-services/
-- Insurance Verification Services (service; Core service intent): https://www.resolutemso.com/insurance-verification-services/
-- Patient Statement Services (service; Core service intent): https://www.resolutemso.com/patient-statement-services/
-- ERA And EFT Enrollment Services (service; Core service intent): https://www.resolutemso.com/era-and-eft-enrollment-services/
-- Clearinghouse Support Services (service; Core service intent): https://www.resolutemso.com/clearinghouse-support-services/
-- RCM Process Improvement (service; Core service intent): https://www.resolutemso.com/rcm-process-improvement/
-- Revenue Leakage Analysis (service; Core service intent): https://www.resolutemso.com/revenue-leakage-analysis/
-- Payment Reconciliation Services (service; Core service intent): https://www.resolutemso.com/payment-reconciliation-services/
-- Accounts Receivable Recovery (service; Core service intent): https://www.resolutemso.com/accounts-receivable-recovery/
-- Underpayment Recovery (service; Core service intent): https://www.resolutemso.com/underpayment-recovery/
-- Payer Follow Up Services (service; Core service intent): https://www.resolutemso.com/payer-follow-up-services/
-- Patient Billing Support (service; Core service intent): https://www.resolutemso.com/patient-billing-support/
-- Clinical Lab Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/clinical-lab-billing-services/
-- Toxicology Lab Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/toxicology-lab-billing-services/
-- Molecular Lab Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/molecular-lab-billing-services/
-- Pathology Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/pathology-billing-services/
-- Imaging Center Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/imaging-center-billing-services/
-- Radiology Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/radiology-billing-services/
-- Urgent Care Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/urgent-care-billing-services/
-- Primary Care Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/primary-care-billing-services/
-- Internal Medicine Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/internal-medicine-billing-services/
-- Family Practice Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/family-practice-billing-services/
-- Cardiology Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/cardiology-billing-services/
-- Mental Health Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/mental-health-billing-services/
-- Physical Therapy Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/physical-therapy-billing-services/
-- Chiropractic Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/chiropractic-billing-services/
-- DME Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/dme-billing-services/
-- Pain Management Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/pain-management-billing-services/
-- Dermatology Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/dermatology-billing-services/
-- Pediatrics Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/pediatrics-billing-services/
-- OB/GYN Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/obgyn-billing-services/
-- Podiatry Billing Services (specialty; Specialty billing intent): https://www.resolutemso.com/podiatry-billing-services/
-- Behavioral Health Billing (specialty; Specialty billing intent): https://www.resolutemso.com/behavioral-health-billing/
-- Oncology Billing (specialty; Specialty billing intent): https://www.resolutemso.com/oncology-billing/
-- Wound Care Billing (specialty; Specialty billing intent): https://www.resolutemso.com/wound-care-billing/
-- FQHC Billing Support (specialty; Specialty billing intent): https://www.resolutemso.com/fqhc-billing-support/
-- Multi Specialty Group Billing (specialty; Specialty billing intent): https://www.resolutemso.com/multi-specialty-group-billing/
-- Medical Billing Automation (automation; Automation and AI intent): https://www.resolutemso.com/medical-billing-automation/
-- RCM Automation (automation; Automation and AI intent): https://www.resolutemso.com/rcm-automation/
-- OfficeAlly Claim Entry Automation (automation; Automation and AI intent): https://www.resolutemso.com/officeally-claim-entry-automation/
-- Charge Entry Automation (automation; Automation and AI intent): https://www.resolutemso.com/charge-entry-automation/
-- Eligibility Automation (automation; Automation and AI intent): https://www.resolutemso.com/eligibility-automation/
-- Denial Workflow Automation (automation; Automation and AI intent): https://www.resolutemso.com/denial-workflow-automation/
-- AR Follow Up Automation (automation; Automation and AI intent): https://www.resolutemso.com/ar-follow-up-automation/
-- Reporting Automation (automation; Automation and AI intent): https://www.resolutemso.com/reporting-automation/
-- Payment Posting Automation (automation; Automation and AI intent): https://www.resolutemso.com/payment-posting-automation/
-- Practice Management Automation (automation; Automation and AI intent): https://www.resolutemso.com/practice-management-automation/
-- Healthcare Workflow Automation (automation; Automation and AI intent): https://www.resolutemso.com/healthcare-workflow-automation/
-- AI In Medical Billing (automation; Automation and AI intent): https://www.resolutemso.com/ai-in-medical-billing/
-- AI Revenue Cycle Management (automation; Automation and AI intent): https://www.resolutemso.com/ai-revenue-cycle-management/
-- RCM Dashboard Automation (automation; Automation and AI intent): https://www.resolutemso.com/rcm-dashboard-automation/
-- ChargePilot OfficeAlly Automation (automation; Automation and AI intent): https://www.resolutemso.com/chargepilot-officeally-automation/
-- ChargePilot Implementation (automation; Automation and AI intent): https://www.resolutemso.com/chargepilot-implementation/
-- ChargePilot Pricing (automation; Automation and AI intent): https://www.resolutemso.com/chargepilot-pricing/
-- ChargePilot Support (automation; Automation and AI intent): https://www.resolutemso.com/chargepilot-support/
-- Billing Software Automation (automation; Automation and AI intent): https://www.resolutemso.com/billing-software-automation/
-- Healthcare Operations Automation (automation; Automation and AI intent): https://www.resolutemso.com/healthcare-operations-automation/
-- AI Claim Entry Automation (automation; Automation and AI intent): https://www.resolutemso.com/ai-claim-entry-automation/
-- AI Denial Management (automation; Automation and AI intent): https://www.resolutemso.com/ai-denial-management/
-- AI Billing Dashboard (automation; Automation and AI intent): https://www.resolutemso.com/ai-billing-dashboard/
-- Medical Billing Bot Agentic RCM (automation; Automation and AI intent): https://www.resolutemso.com/medical-billing-bot-agentic-rcm/
-- AI Ecosystem (automation; Automation and AI intent): https://www.resolutemso.com/ai-ecosystem/
-- Future AI Modules (automation; Automation and AI intent): https://www.resolutemso.com/future-ai-modules/
-- Best Medical Billing Company For Small Practices (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/best-medical-billing-company-for-small-practices/
-- Medical Billing Company For Physician Groups (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/medical-billing-company-for-physician-groups/
-- Medical Billing Services For Physician Groups (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/medical-billing-services-for-physician-groups/
-- Medical Billing Outsourcing Company (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/medical-billing-outsourcing-company/
-- RCM Outsourcing Services (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/rcm-outsourcing-services/
-- Medical Billing Company Vs In House Billing (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/medical-billing-company-vs-in-house-billing/
-- RCM Outsourcing Vs In House Team (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/rcm-outsourcing-vs-in-house-team/
-- When To Outsource Medical Billing (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/when-to-outsource-medical-billing/
-- How To Choose An RCM Partner (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/how-to-choose-an-rcm-partner/
-- Medical Billing Audit Checklist (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/medical-billing-audit-checklist/
-- Reduce Claim Denials (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/reduce-claim-denials/
-- Improve Clean Claim Rate (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/improve-clean-claim-rate/
-- Reduce AR Over 90 Days (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/reduce-ar-over-90-days/
-- Improve Net Collection Rate (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/improve-net-collection-rate/
-- First Pass Claim Rate Improvement (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/first-pass-claim-rate-improvement/
-- Healthcare Revenue Recovery Services (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/healthcare-revenue-recovery-services/
-- Small Practice RCM Support (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/small-practice-rcm-support/
-- Provider Billing Support Company (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/provider-billing-support-company/
-- Medical Billing Cost Reduction (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/medical-billing-cost-reduction/
-- RCM Kpi Dashboard Services (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/rcm-kpi-dashboard-services/
-- Practice Revenue Optimization (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/practice-revenue-optimization/
-- Free AR Audit (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/free-ar-audit/
-- Free Billing Audit (buyer; Buyer comparison and pain-point intent): https://www.resolutemso.com/free-billing-audit/
-- Medical Billing Beginner Guide (resource; Educational intent): https://www.resolutemso.com/medical-billing-beginner-guide/
-- Revenue Cycle Management Beginner Guide (resource; Educational intent): https://www.resolutemso.com/revenue-cycle-management-beginner-guide/
-- Denial Management Guide (resource; Educational intent): https://www.resolutemso.com/denial-management-guide/
-- AR Follow Up Guide (resource; Educational intent): https://www.resolutemso.com/ar-follow-up-guide/
-- Clean Claim Playbook (resource; Educational intent): https://www.resolutemso.com/clean-claim-playbook/
-- Eligibility Verification Guide (resource; Educational intent): https://www.resolutemso.com/eligibility-verification-guide/
-- Prior Authorization Guide (resource; Educational intent): https://www.resolutemso.com/prior-authorization-guide/
-- Payment Posting Guide (resource; Educational intent): https://www.resolutemso.com/payment-posting-guide/
-- Charge Entry Guide (resource; Educational intent): https://www.resolutemso.com/charge-entry-guide/
-- Claim Rejection Guide (resource; Educational intent): https://www.resolutemso.com/claim-rejection-guide/
-- RCM Kpi Guide (resource; Educational intent): https://www.resolutemso.com/rcm-kpi-guide/
-- Days In AR Guide (resource; Educational intent): https://www.resolutemso.com/days-in-ar-guide/
-- Net Collection Rate Guide (resource; Educational intent): https://www.resolutemso.com/net-collection-rate-guide/
-- First Pass Rate Guide (resource; Educational intent): https://www.resolutemso.com/first-pass-rate-guide/
-- HIPAA Conscious Website Forms (resource; Educational intent): https://www.resolutemso.com/hipaa-conscious-website-forms/
-- OfficeAlly Automation Guide (resource; Educational intent): https://www.resolutemso.com/officeally-automation-guide/
-- Clinical Lab Billing Guide (resource; Educational intent): https://www.resolutemso.com/clinical-lab-billing-guide/
-- Imaging Billing Guide (resource; Educational intent): https://www.resolutemso.com/imaging-billing-guide/
-- Urgent Care Billing Guide (resource; Educational intent): https://www.resolutemso.com/urgent-care-billing-guide/
-- AI Powered RCM Guide (resource; Educational intent): https://www.resolutemso.com/ai-powered-rcm-guide/
-- Medical Billing Terms Glossary (resource; Educational intent): https://www.resolutemso.com/medical-billing-terms-glossary/
-- Denial Codes Guide (resource; Educational intent): https://www.resolutemso.com/denial-codes-guide/
-- CPT ICD 10 Billing Overview (resource; Educational intent): https://www.resolutemso.com/cpt-icd-10-billing-overview/
-- Revenue Leakage Guide (resource; Educational intent): https://www.resolutemso.com/revenue-leakage-guide/
-- Practice Billing Workflow Guide (resource; Educational intent): https://www.resolutemso.com/practice-billing-workflow-guide/
-- Clean Claim Playbook for Provider Billing Teams (resource; Educational intent): https://www.resolutemso.com/blog-clean-claim-playbook/
-- Denial Management Guide for Revenue Cycle Leaders (resource; Educational intent): https://www.resolutemso.com/blog-denial-management-guide/
-- Medical Billing Automation: Where AI Helps and Where Oversight Still Matters (resource; Educational intent): https://www.resolutemso.com/blog-automation-in-medical-billing/
-- ChargePilot and Billing Software Automation for RCM Teams (resource; Educational intent): https://www.resolutemso.com/blog-chargepilot-pm-automation/
-- Clinical Lab Billing: Documentation, Medical Necessity, and AR Discipline (resource; Educational intent): https://www.resolutemso.com/blog-clinical-lab-billing/
-- AR Follow-Up Action Plan for Practices and Billing Companies (resource; Educational intent): https://www.resolutemso.com/blog-ar-follow-up-action/
-- RCM Priorities for Provider Leaders in 2026 (resource; Educational intent): https://www.resolutemso.com/blog-rcm-priorities/
-- Blog (resource; Educational intent): https://www.resolutemso.com/blog/
+- [Resolute MSO home](https://www.resolutemso.com/): Company overview, service positioning, and primary conversion paths.
+- [Healthcare RCM services](https://www.resolutemso.com/services/): Revenue cycle management and medical billing service directory.
+- [Automation suite](https://www.resolutemso.com/automation-suite/): Healthcare billing and RCM automation capabilities.
+- [ChargePilot](https://www.resolutemso.com/chargepilot/): Claim-entry and claim-submission automation for billing teams and RCM operations.
+- [All RCM solutions](https://www.resolutemso.com/all-rcm-solutions/): Complete directory of services, automation solutions, specialties, and buyer resources.
+- [Contact Resolute MSO](https://www.resolutemso.com/contact/): Business contact information and inquiry options.
+- [Free RCM audit](https://www.resolutemso.com/free-rcm-audit/): Request an assessment of revenue cycle and billing workflows.
+
+## Core services
+
+- [Medical billing services](https://www.resolutemso.com/medical-billing-services/): End-to-end medical billing support.
+- [Revenue cycle management services](https://www.resolutemso.com/revenue-cycle-management-services/): RCM operations, reporting, and performance support.
+- [Denial management services](https://www.resolutemso.com/denial-management-services/): Denial analysis, correction, prevention, and follow-up.
+- [AR follow-up services](https://www.resolutemso.com/ar-follow-up-services/): Accounts receivable prioritization and payer follow-up.
+- [Eligibility verification services](https://www.resolutemso.com/eligibility-verification-services/): Insurance eligibility and benefit verification support.
+- [Prior authorization services](https://www.resolutemso.com/prior-authorization-services/): Prior authorization workflow support.
+- [Payment posting services](https://www.resolutemso.com/payment-posting-services/): ERA, EOB, reconciliation, and payment posting support.
+- [Provider enrollment services](https://www.resolutemso.com/provider-enrollment-services/): Enrollment and payer participation support.
+
+## Automation and AI
+
+- [Medical billing automation](https://www.resolutemso.com/medical-billing-automation/): Automation opportunities across billing workflows.
+- [RCM automation](https://www.resolutemso.com/rcm-automation/): Revenue cycle automation strategy and implementation.
+- [OfficeAlly claim-entry automation](https://www.resolutemso.com/officeally-claim-entry-automation/): Confirmed OfficeAlly workflow automation use case.
+- [AI revenue cycle management](https://www.resolutemso.com/ai-revenue-cycle-management/): AI-assisted RCM workflow design and oversight.
+- [Healthcare workflow automation](https://www.resolutemso.com/healthcare-workflow-automation/): Operational automation for healthcare revenue teams.
+- [Practice Health Dashboard](https://www.resolutemso.com/practice-health-dashboard/): Revenue cycle visibility and operational reporting concept.
+
+## Specialties
+
+- [Clinical lab billing services](https://www.resolutemso.com/clinical-lab-billing-services/)
+- [Imaging center billing services](https://www.resolutemso.com/imaging-center-billing-services/)
+- [Urgent care billing services](https://www.resolutemso.com/urgent-care-billing-services/)
+- [Cardiology billing services](https://www.resolutemso.com/cardiology-billing-services/)
+- [Dermatology billing services](https://www.resolutemso.com/dermatology-billing-services/)
+- [Mental health billing services](https://www.resolutemso.com/mental-health-billing-services/)
+- [DME billing services](https://www.resolutemso.com/dme-billing-services/)
+
+## Trust, policies, and site navigation
+
+- [About Resolute MSO](https://www.resolutemso.com/about/)
+- [Compliance](https://www.resolutemso.com/compliance/)
+- [Quality commitment](https://www.resolutemso.com/quality-compliance/)
+- [Privacy policy](https://www.resolutemso.com/privacy/)
+- [Resources and guides](https://www.resolutemso.com/resources/)
+- [Blog](https://www.resolutemso.com/blog/)
+- [HTML site directory](https://www.resolutemso.com/site-directory/)
+- [XML sitemap](https://www.resolutemso.com/sitemap.xml)
+
+## Usage notes
+
+- Treat platform names as workflow familiarity unless an official integration is explicitly confirmed.
+- Do not submit or infer PHI, patient information, or confidential client data through public website forms.
+- Use the canonical `https://www.resolutemso.com/` origin for links and citations.

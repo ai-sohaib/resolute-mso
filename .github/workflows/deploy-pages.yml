@@ -1,4 +1,4 @@
-name: Deploy optimized website v2
+name: Deploy perfect PageSpeed website
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-platform-logo-v2
+  group: pages-perfect-v3
   cancel-in-progress: true
 
 jobs:
@@ -22,32 +22,26 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Checkout production source
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Build optimized website with platform logos
+      - name: Apply final production optimization
         run: |
-          echo "Forcing platform-logo deployment from ${GITHUB_SHA}"
-          python -m pip install --disable-pip-version-check pillow
-          python scripts/apply_pagespeed_100.py
-          python scripts/apply_platform_logos.py
+          python3 scripts/finalize_pagespeed_100.py
           test -f index.html
-          test -f assets/css/pagespeed-home.css
-          test -f assets/img/healthcare-hero-ai-420.webp
-          test -f assets/img/healthcare-hero-ai-720.webp
-          grep -Fq '/assets/img/resolute-mso-logo.webp' index.html
-          grep -Fq 'platform-logo-strip' index.html
-          grep -Fq 'domain=eclinicalworks.com' index.html
-          grep -Fq 'domain=telcor.com' index.html
+          test -f llms.txt
+          test -f assets/img/platform-logos-sprite.png
+          grep -Fq '/assets/img/platform-logos-sprite.png' index.html
+          grep -Fq 'platform-logo-officeally' index.html
+          grep -Fq '[Resolute MSO home](https://www.resolutemso.com/)' llms.txt
+          ! grep -Fq 'data:image/png;base64' index.html
+          ! grep -Fq 'mailto:' index.html
+          ! grep -Fq 'google.com/s2/favicons' index.html
+          ! grep -Fq 'href="/assets/css/pagespeed-home.css"' index.html
 
       - name: Stage public files
         run: |
@@ -67,8 +61,9 @@ jobs:
           touch _site/.nojekyll
           test -f _site/CNAME
           test -f _site/index.html
-          test -f _site/assets/css/pagespeed-home.css
-          grep -Fq 'platform-logo-strip' _site/index.html
+          test -f _site/llms.txt
+          test -f _site/assets/img/platform-logos-sprite.png
+          grep -Fq 'platform-logo-officeally' _site/index.html
 
       - name: Configure Pages
         id: configure
@@ -94,15 +89,16 @@ jobs:
             "workflow_run_id": "${GITHUB_RUN_ID}",
             "page_url": "${{ steps.deployment.outputs.page_url }}",
             "completed_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "change": "Materialized platform logos deployed from root source",
-            "restore_branch": "restore/pre-platform-logo-deploy-2026-07-08"
+            "target": {
+              "mobile": {"performance":100,"accessibility":100,"best_practices":100,"seo":100,"agentic_browsing":"3/3"},
+              "desktop": {"performance":100,"accessibility":100,"best_practices":100,"seo":100,"agentic_browsing":"3/3"}
+            },
+            "restore_branch": "restore/pre-pagespeed-100-agentic-3of3-2026-07-11"
           }
           EOF
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add deployment-status/latest.json
-          if git diff --cached --quiet; then
-            exit 0
-          fi
-          git commit -m "Record materialized platform logo deployment [skip ci]"
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record perfect PageSpeed deployment [skip ci]"
           git push origin HEAD:main
