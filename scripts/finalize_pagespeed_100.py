@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / "index.html"
 CSS = ROOT / "assets" / "css" / "pagespeed-home.css"
+PLATFORM_CSS = ROOT / "assets" / "css" / "platform-logos-inline.css"
 
 PLATFORM_MARKUP = '''<div class="platform-strip platform-logo-strip">
   <span><i class="platform-logo platform-logo-officeally" aria-hidden="true"></i><em>OfficeAlly</em></span>
@@ -17,14 +18,6 @@ PLATFORM_MARKUP = '''<div class="platform-strip platform-logo-strip">
   <span><i class="platform-logo platform-logo-modmed" aria-hidden="true"></i><em>ModMed</em></span>
   <span><i class="platform-logo platform-logo-telcor" aria-hidden="true"></i><em>Telcor LIS</em></span>
 </div>'''
-
-SPRITE_CSS = '''
-.platform-logo-strip span{padding:7px 14px 7px 8px;gap:10px;min-height:48px}
-.platform-logo-strip i{display:inline-block;width:32px;height:32px;flex:0 0 32px;background-image:url('/assets/img/platform-logos-sprite.webp');background-repeat:no-repeat;background-size:256px 32px;border-radius:50%}
-.platform-logo-officeally{background-position:0 0}.platform-logo-eclinicalworks{background-position:-32px 0}.platform-logo-carecloud{background-position:-64px 0}.platform-logo-nextgen{background-position:-96px 0}.platform-logo-athenahealth{background-position:-128px 0}.platform-logo-advancedmd{background-position:-160px 0}.platform-logo-modmed{background-position:-192px 0}.platform-logo-telcor{background-position:-224px 0}
-.platform-logo-strip em{font-style:normal}
-@media(max-width:720px){.platform-logo-strip{gap:10px}.platform-logo-strip span{min-height:46px;padding:6px 12px 6px 7px}.platform-logo-strip i{width:30px;height:30px;flex-basis:30px;background-size:240px 30px}.platform-logo-eclinicalworks{background-position:-30px 0}.platform-logo-carecloud{background-position:-60px 0}.platform-logo-nextgen{background-position:-90px 0}.platform-logo-athenahealth{background-position:-120px 0}.platform-logo-advancedmd{background-position:-150px 0}.platform-logo-modmed{background-position:-180px 0}.platform-logo-telcor{background-position:-210px 0}}
-'''
 
 
 def minify_css(css: str) -> str:
@@ -64,55 +57,46 @@ def remove_mailto(html: str) -> str:
     return html
 
 
-def optimize_logo(html: str) -> str:
-    html = re.sub(
-        r'src="/assets/img/resolute-mso-logo(?:-\d+)?\.webp"',
-        'src="/assets/img/resolute-mso-logo-320.webp"',
-        html,
-    )
-    html = re.sub(
-        r'(<img\b[^>]*src="/assets/img/resolute-mso-logo-320\.webp"[^>]*?)\swidth="\d+"\sheight="\d+"',
-        r'\1 width="320" height="90"',
-        html,
-    )
-    return html
-
-
 def inline_home_css(html: str) -> str:
-    if not CSS.exists():
-        raise RuntimeError("pagespeed-home.css is missing.")
-    css = CSS.read_text(encoding="utf-8")
-    if ".platform-logo-strip i" not in css:
-        css = css.rstrip() + "\n" + minify_css(SPRITE_CSS) + "\n"
-        CSS.write_text(css, encoding="utf-8")
-    inline = minify_css(css)
-    html = re.sub(
-        r'<link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home\.css">',
-        f'<style id="resolute-critical-typography">{inline}</style>',
-        html,
-        count=1,
+    if not CSS.exists() or not PLATFORM_CSS.exists():
+        raise RuntimeError("Required homepage CSS source is missing.")
+    css = minify_css(
+        CSS.read_text(encoding="utf-8")
+        + "\n"
+        + PLATFORM_CSS.read_text(encoding="utf-8")
     )
-    return html
+
+    style = f'<style id="resolute-critical-typography">{css}</style>'
+    linked_pattern = r'<link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home\.css">'
+    inline_pattern = r'<style id="resolute-critical-typography">.*?</style>'
+
+    if re.search(linked_pattern, html):
+        return re.sub(linked_pattern, style, html, count=1)
+    if re.search(inline_pattern, html, flags=re.S):
+        return re.sub(inline_pattern, style, html, count=1, flags=re.S)
+    raise RuntimeError("Homepage critical stylesheet marker was not found.")
 
 
 def main() -> None:
     html = INDEX.read_text(encoding="utf-8")
     html = replace_platform_strip(html)
     html = remove_mailto(html)
-    html = optimize_logo(html)
     html = inline_home_css(html)
 
-    if "mailto:" in html:
-        raise RuntimeError("Homepage still contains a mailto URL.")
-    if "google.com/s2/favicons" in html or "gstatic.com/favicon" in html:
-        raise RuntimeError("Homepage still contains a remote favicon request.")
-    if "platform-logos-sprite.webp" not in html:
-        raise RuntimeError("Platform sprite CSS was not inlined.")
-    if "/assets/css/pagespeed-home.css" in html:
-        raise RuntimeError("Render-blocking homepage stylesheet is still linked.")
+    checks = {
+        "mailto:": "Homepage still contains a mailto URL.",
+        "google.com/s2/favicons": "Homepage still contains a remote Google favicon request.",
+        "gstatic.com/favicon": "Homepage still contains a remote gstatic favicon request.",
+        "/assets/css/pagespeed-home.css": "Render-blocking homepage stylesheet is still linked.",
+    }
+    for needle, message in checks.items():
+        if needle in html:
+            raise RuntimeError(message)
+    if "data:image/png;base64" not in html or "platform-logo-officeally" not in html:
+        raise RuntimeError("Embedded platform logos were not added.")
 
     INDEX.write_text(html, encoding="utf-8")
-    print("Final PageSpeed fixes applied: local logos, no mailto, optimized logo, inline CSS.")
+    print("Final PageSpeed fixes applied: embedded logos, no mailto, inline CSS.")
 
 
 if __name__ == "__main__":
