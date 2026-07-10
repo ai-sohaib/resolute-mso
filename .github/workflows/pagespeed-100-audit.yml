@@ -7,7 +7,6 @@ on:
       - "**/*.html"
       - "assets/**"
       - "llms.txt"
-      - "scripts/apply_pagespeed_100.py"
       - "scripts/finalize_pagespeed_100.py"
       - "scripts/enforce_perfect_lighthouse.js"
       - ".github/workflows/pagespeed-100-audit.yml"
@@ -29,16 +28,12 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install current Lighthouse and image tooling
+      - name: Install current Lighthouse
         run: |
           npm install --global lighthouse@latest
-          python3 -m pip install --disable-pip-version-check pillow
           lighthouse --version
 
-      - name: Build PageSpeed base
-        run: python3 scripts/apply_pagespeed_100.py
-
-      - name: Apply final no-request optimization
+      - name: Apply final production optimization
         run: python3 scripts/finalize_pagespeed_100.py
 
       - name: Validate final production output
@@ -48,7 +43,7 @@ jobs:
           grep -Fq '[Resolute MSO home](https://www.resolutemso.com/)' llms.txt
           ! grep -Fq 'mailto:' index.html
           ! grep -Fq 'google.com/s2/favicons' index.html
-          ! grep -Fq '/assets/css/pagespeed-home.css' index.html
+          ! grep -Fq 'href="/assets/css/pagespeed-home.css"' index.html
 
       - name: Start local website
         run: |
