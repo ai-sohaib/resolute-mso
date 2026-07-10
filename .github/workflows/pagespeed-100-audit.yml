@@ -36,11 +36,17 @@ jobs:
           python3 -m pip install --disable-pip-version-check pillow
           lighthouse --version
 
-      - name: Build final production output
+      - name: Build PageSpeed base
+        run: python3 scripts/apply_pagespeed_100.py
+
+      - name: Apply platform logo markup
+        run: python3 scripts/apply_platform_logos.py
+
+      - name: Apply final no-request optimization
+        run: python3 scripts/finalize_pagespeed_100.py
+
+      - name: Validate final production output
         run: |
-          python3 scripts/apply_pagespeed_100.py
-          python3 scripts/apply_platform_logos.py
-          python3 scripts/finalize_pagespeed_100.py
           grep -Fq 'data:image/png;base64' index.html
           grep -Fq 'platform-logo-officeally' index.html
           grep -Fq '[Resolute MSO home](https://www.resolutemso.com/)' llms.txt
