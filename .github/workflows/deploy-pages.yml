@@ -38,7 +38,6 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check pillow
           python scripts/apply_pagespeed_100.py
-          python scripts/apply_platform_logos.py
           python scripts/finalize_pagespeed_100.py
           test -f index.html
           test -f llms.txt
