@@ -1,0 +1,102 @@
+=== LIGHTHOUSE AGENTIC SOURCE SEARCH ===
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:5:    let agenticBrowsingCategoryTitle: string;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:6:    let agenticBrowsingCategoryDescription: string;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:13://# sourceMappingURL=agentic-browsing-config.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:103:  /** Title of the Agentic Browsing category of audits. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:104:  agenticBrowsingCategoryTitle: 'Agentic Browsing',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:105:  /** Description of the Agentic Browsing category. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:106:  agenticBrowsingCategoryDescription: 'These checks ensure high-quality, [browsable websites for AI agents](https://goo.gle/lighthouse-agentic-web) ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:128:    {id: 'LlmsTxt', gatherer: 'agentic/llms-txt'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:300:    'agentic/agent-accessibility-tree',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:304:    'agentic/llms-txt',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:635:    'agentic-browsing': {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:636:      title: str_(UIStrings.agenticBrowsingCategoryTitle),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:637:      description: str_(UIStrings.agenticBrowsingCategoryDescription),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:11:  /** Title of the Agentic Browsing category of audits. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:12:  agenticBrowsingCategoryTitle: 'Agentic Browsing',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:13:  /** Description of the Agentic Browsing category. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:14:  agenticBrowsingCategoryDescription: 'These checks ensure high-quality, [browsable websites for AI agents](https://goo.gle/lighthouse-agentic-web) ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:34:    'agentic/agent-accessibility-tree',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:38:    'agentic/llms-txt',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:43:    {id: 'LlmsTxt', gatherer: 'agentic/llms-txt'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:56:    'agentic-browsing': {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:57:      title: str_(UIStrings.agenticBrowsingCategoryTitle),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:58:      description: str_(UIStrings.agenticBrowsingCategoryDescription),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/runner.js:501:      ...fs.readdirSync(path.join(moduleDir, './audits/agentic')).map(f => `agentic/${f}`),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/runner.js:518:      ...fs.readdirSync(path.join(moduleDir, './gather/gatherers/agentic'))
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/runner.js:519:          .map(f => `agentic/${f}`),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/agentic/agent-accessibility-tree.js:16:  description: 'A well-formed [accessibility tree](http://goo.gle/lighthouse-agentic-a11y) helps AI agents to ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:599:  "core/audits/agentic/agent-accessibility-tree.js | columnElement": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:602:  "core/audits/agentic/agent-accessibility-tree.js | columnRule": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:605:  "core/audits/agentic/agent-accessibility-tree.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:606:    "message": "[Å ŵéļļ-ƒöŕméð ᐅ[ᐊåççéššîбîļîţý ţŕééᐅ](http://goo.gle/lighthouse-agentic-a11y)ᐊ ĥéļþš ÅÎ åĝéñţš ţö ñåvîĝåţé åñð îñţéŕåçţ ŵîţĥ ţĥé þåĝé. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen]"
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:608:  "core/audits/agentic/agent-accessibility-tree.js | displayValuePassed": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:611:  "core/audits/agentic/agent-accessibility-tree.js | failedSectionTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:614:  "core/audits/agentic/agent-accessibility-tree.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:617:  "core/audits/agentic/agent-accessibility-tree.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:620:  "core/audits/agentic/llms-txt.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:623:  "core/audits/agentic/llms-txt.js | displayValueHttpBadCode": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:626:  "core/audits/agentic/llms-txt.js | explanation": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:629:  "core/audits/agentic/llms-txt.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:632:  "core/audits/agentic/llms-txt.js | missingH1": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:635:  "core/audits/agentic/llms-txt.js | missingLinks": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:638:  "core/audits/agentic/llms-txt.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:641:  "core/audits/agentic/llms-txt.js | tooShort": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1418:  "core/config/agentic-browsing-config.js | agentAccessibilityGroupDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1421:  "core/config/agentic-browsing-config.js | agentAccessibilityGroupTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1424:  "core/config/agentic-browsing-config.js | agenticBrowsingCategoryDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1425:    "message": "[Ţĥéšé çĥéçķš éñšûŕé ĥîĝĥ-qûåļîţý, ᐅ[ᐊбŕöŵšåбļé ŵéбšîţéš ƒöŕ ÅÎ åĝéñţšᐅ](https://goo.gle/lighthouse-agentic-web)ᐊ åñð våļîðåţé ţĥé çöŕŕéçţñéšš öƒ ŴéбMÇÞ îñţéĝŕåţîöñš. Ţĥîš çåţéĝöŕý îš šţîļļ ûñðéŕ ðévéļöþméñţ åñð šûбĵéçţ ţö çĥåñĝé. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix]"
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1427:  "core/config/agentic-browsing-config.js | agenticBrowsingCategoryTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1430:  "core/config/agentic-browsing-config.js | webmcpGroupDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1433:  "core/config/agentic-browsing-config.js | webmcpGroupTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1499:  "core/config/default-config.js | agenticBrowsingCategoryDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1500:    "message": "[Ţĥéšé çĥéçķš éñšûŕé ĥîĝĥ-qûåļîţý, ᐅ[ᐊбŕöŵšåбļé ŵéбšîţéš ƒöŕ ÅÎ åĝéñţšᐅ](https://goo.gle/lighthouse-agentic-web)ᐊ åñð våļîðåţé ţĥé çöŕŕéçţñéšš öƒ ŴéбMÇÞ îñţéĝŕåţîöñš. Ţĥîš çåţéĝöŕý îš šţîļļ ûñðéŕ ðévéļöþméñţ åñð šûбĵéçţ ţö çĥåñĝé. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone twentytwo twentythree twentyfour twentyfive twentysix]"
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1502:  "core/config/default-config.js | agenticBrowsingCategoryTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:599:  "core/audits/agentic/agent-accessibility-tree.js | columnElement": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:602:  "core/audits/agentic/agent-accessibility-tree.js | columnRule": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:605:  "core/audits/agentic/agent-accessibility-tree.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:606:    "message": "Dobro oblikovano [stablo pristupačnosti](http://goo.gle/lighthouse-agentic-a11y) pomaže AI agentima da se kreću po stranici i komuniciraju s njom."
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:608:  "core/audits/agentic/agent-accessibility-tree.js | displayValuePassed": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:611:  "core/audits/agentic/agent-accessibility-tree.js | failedSectionTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:614:  "core/audits/agentic/agent-accessibility-tree.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:617:  "core/audits/agentic/agent-accessibility-tree.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:620:  "core/audits/agentic/llms-txt.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:623:  "core/audits/agentic/llms-txt.js | displayValueHttpBadCode": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:626:  "core/audits/agentic/llms-txt.js | explanation": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:629:  "core/audits/agentic/llms-txt.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:632:  "core/audits/agentic/llms-txt.js | missingH1": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:635:  "core/audits/agentic/llms-txt.js | missingLinks": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:638:  "core/audits/agentic/llms-txt.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:641:  "core/audits/agentic/llms-txt.js | tooShort": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1418:  "core/config/agentic-browsing-config.js | agentAccessibilityGroupDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1421:  "core/config/agentic-browsing-config.js | agentAccessibilityGroupTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1424:  "core/config/agentic-browsing-config.js | agenticBrowsingCategoryDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1425:    "message": "Ove provjere osiguravaju kvalitetne [web-lokacije koje se mogu pregledavati za AI agente](https://goo.gle/lighthouse-agentic-web) i potvrđuju ispravnost integracija WebMCP-a. Ova je kategorija još u razvoju i podložna je promjenama."
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1427:  "core/config/agentic-browsing-config.js | agenticBrowsingCategoryTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1430:  "core/config/agentic-browsing-config.js | webmcpGroupDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1433:  "core/config/agentic-browsing-config.js | webmcpGroupTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1499:  "core/config/default-config.js | agenticBrowsingCategoryDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1500:    "message": "Ove provjere osiguravaju kvalitetne [web-lokacije koje se mogu pregledavati za AI agente](https://goo.gle/lighthouse-agentic-web) i potvrđuju ispravnost integracija WebMCP-a. Ova je kategorija još u razvoju i podložna je promjenama."
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/hr.json:1502:  "core/config/default-config.js | agenticBrowsingCategoryTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:599:  "core/audits/agentic/agent-accessibility-tree.js | columnElement": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:602:  "core/audits/agentic/agent-accessibility-tree.js | columnRule": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:605:  "core/audits/agentic/agent-accessibility-tree.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:606:    "message": "Prawidłowe [drzewo ułatwień dostępu](http://goo.gle/lighthouse-agentic-a11y) pomaga agentom AI poruszać się po stronie i wchodzić z nią w interakcje."
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:608:  "core/audits/agentic/agent-accessibility-tree.js | displayValuePassed": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:611:  "core/audits/agentic/agent-accessibility-tree.js | failedSectionTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:614:  "core/audits/agentic/agent-accessibility-tree.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:617:  "core/audits/agentic/agent-accessibility-tree.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:620:  "core/audits/agentic/llms-txt.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:623:  "core/audits/agentic/llms-txt.js | displayValueHttpBadCode": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:626:  "core/audits/agentic/llms-txt.js | explanation": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:629:  "core/audits/agentic/llms-txt.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:632:  "core/audits/agentic/llms-txt.js | missingH1": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:635:  "core/audits/agentic/llms-txt.js | missingLinks": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:638:  "core/audits/agentic/llms-txt.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:641:  "core/audits/agentic/llms-txt.js | tooShort": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:1418:  "core/config/agentic-browsing-config.js | agentAccessibilityGroupDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:1421:  "core/config/agentic-browsing-config.js | agentAccessibilityGroupTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:1424:  "core/config/agentic-browsing-config.js | agenticBrowsingCategoryDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:1425:    "message": "Te kontrole zapewniają wysoką jakość [witryn, które mogą przeglądać agenty AI](https://goo.gle/lighthouse-agentic-web), i potwierdzają poprawność integracji WebMCP. Ta kategoria jest nadal w trakcie opracowywania i może ulec zmianie."
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/pl.json:1427:  "core/config/agentic-browsing-config.js | agenticBrowsingCategoryTitle": {
