@@ -79,13 +79,14 @@ def validate(html: str) -> None:
         "google.com/s2/favicons": "remote Google favicon",
         "gstatic.com/favicon": "remote gstatic favicon",
         'href="/assets/css/pagespeed-home.css"': "render-blocking stylesheet link",
+        "data:image/png;base64": "large inline platform sprite",
     }
     for needle, label in forbidden.items():
         if needle.lower() in html.lower():
             raise RuntimeError(f"Final homepage still contains a {label}.")
 
     required = [
-        "data:image/png;base64",
+        "/assets/img/platform-logos-sprite.png",
         "platform-logo-officeally",
         "platform-logo-telcor",
         '<style id="resolute-critical-typography">',
@@ -93,6 +94,9 @@ def validate(html: str) -> None:
     for needle in required:
         if needle not in html:
             raise RuntimeError(f"Final homepage is missing required marker: {needle}")
+
+    if not (ROOT / "assets" / "img" / "platform-logos-sprite.png").exists():
+        raise RuntimeError("Local platform logo sprite file is missing.")
 
 
 def main() -> None:
@@ -102,7 +106,7 @@ def main() -> None:
     html = inline_critical_css(html)
     validate(html)
     INDEX.write_text(html, encoding="utf-8")
-    print("Final PageSpeed output created: embedded logos, no mailto requests, inline critical CSS.")
+    print("Final PageSpeed output created: local logo sprite, no mailto requests, inline critical CSS.")
 
 
 if __name__ == "__main__":
