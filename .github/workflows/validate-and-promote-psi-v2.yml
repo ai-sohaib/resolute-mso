@@ -1,0 +1,139 @@
+name: Validate and Promote PSI 100 v2
+
+on:
+  push:
+    branches: [psi-live-audit-2026-07-11]
+    paths:
+      - "scripts/apply_platform_logos.py"
+      - "scripts/apply_agentic_readiness.py"
+      - "assets/js/agentic-readiness.js"
+      - "llms.txt"
+      - ".github/workflows/validate-and-promote-psi-v2.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate-and-promote:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: psi-live-audit-2026-07-11
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install build and audit tools
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          npm install --global lighthouse@latest
+
+      - name: Build corrected website
+        run: |
+          python scripts/apply_pagespeed_100.py
+          python scripts/apply_platform_logos.py
+          python scripts/apply_agentic_readiness.py
+          python -m py_compile scripts/apply_platform_logos.py scripts/apply_agentic_readiness.py
+          node --check assets/js/agentic-readiness.js
+          grep -Fq '/assets/img/platforms/officeally.webp' index.html
+          grep -Fq '/assets/img/platforms/telcor.webp' index.html
+          grep -Fq '/assets/js/agentic-readiness.js' index.html
+          grep -Fq 'resolute-agent-schema' index.html
+          grep -Fq '/llms.txt' index.html
+          ! grep -Fq 'www.google.com/s2/favicons' index.html
+          test -s robots.txt
+          test -s llms.txt
+          for logo in officeally eclinicalworks carecloud nextgen athenahealth advancedmd modmed telcor; do
+            test -s "assets/img/platforms/${logo}.webp"
+          done
+
+      - name: Serve corrected site
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 >/tmp/resolute-psi-v2.log 2>&1 &
+          for attempt in {1..30}; do
+            curl --fail --silent http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/resolute-psi-v2.log
+          exit 1
+
+      - name: Lighthouse mobile
+        run: |
+          lighthouse http://127.0.0.1:4173/ \
+            --output=json --output-path=validated-mobile.json \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
+
+      - name: Lighthouse desktop
+        run: |
+          lighthouse http://127.0.0.1:4173/ \
+            --preset=desktop \
+            --output=json --output-path=validated-desktop.json \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
+
+      - name: Enforce 100 in all standard categories
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const expected = ['performance','accessibility','best-practices','seo'];
+          const lines = [];
+          let failed = false;
+          for (const device of ['mobile','desktop']) {
+            const report = JSON.parse(fs.readFileSync(`validated-${device}.json`, 'utf8'));
+            lines.push(`=== ${device.toUpperCase()} ===`);
+            for (const id of expected) {
+              const category = report.categories[id];
+              const score = Math.round((category.score || 0) * 100);
+              lines.push(`${id}: ${score}`);
+              if (score !== 100) failed = true;
+              for (const ref of category.auditRefs || []) {
+                const audit = report.audits[ref.id];
+                if (!audit || ref.weight <= 0 || audit.score === 1 || audit.scoreDisplayMode === 'notApplicable') continue;
+                lines.push(`FAIL id=${ref.id} score=${audit.score} title=${audit.title} display=${audit.displayValue || ''}`);
+              }
+            }
+          }
+          fs.mkdirSync('diagnostics', {recursive:true});
+          fs.writeFileSync('diagnostics/validated-psi-v2.txt', lines.join('\n'));
+          console.log(lines.join('\n'));
+          if (failed) process.exit(1);
+          NODE
+
+      - name: Prepare production files
+        run: |
+          mkdir -p /tmp/resolute-production/assets/img/platforms /tmp/resolute-production/assets/js /tmp/resolute-production/assets/css /tmp/resolute-production/scripts
+          cp index.html robots.txt llms.txt /tmp/resolute-production/
+          cp assets/css/pagespeed-home.css /tmp/resolute-production/assets/css/
+          cp assets/js/agentic-readiness.js /tmp/resolute-production/assets/js/
+          cp assets/img/platforms/*.webp /tmp/resolute-production/assets/img/platforms/
+          cp scripts/apply_platform_logos.py scripts/apply_agentic_readiness.py /tmp/resolute-production/scripts/
+          cp diagnostics/validated-psi-v2.txt /tmp/resolute-production/
+
+      - name: Promote validated files to main
+        run: |
+          git fetch origin main
+          git checkout main
+          cp /tmp/resolute-production/index.html ./index.html
+          cp /tmp/resolute-production/robots.txt ./robots.txt
+          cp /tmp/resolute-production/llms.txt ./llms.txt
+          cp /tmp/resolute-production/assets/css/pagespeed-home.css ./assets/css/pagespeed-home.css
+          cp /tmp/resolute-production/assets/js/agentic-readiness.js ./assets/js/agentic-readiness.js
+          mkdir -p assets/img/platforms scripts diagnostics
+          cp /tmp/resolute-production/assets/img/platforms/*.webp ./assets/img/platforms/
+          cp /tmp/resolute-production/scripts/*.py ./scripts/
+          cp /tmp/resolute-production/validated-psi-v2.txt ./diagnostics/validated-psi-v2.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html robots.txt llms.txt assets/css/pagespeed-home.css assets/js/agentic-readiness.js assets/img/platforms/ scripts/apply_platform_logos.py scripts/apply_agentic_readiness.py diagnostics/validated-psi-v2.txt
+          git commit -m "Deploy validated PSI 100 and agentic-readiness fixes"
+          git push origin HEAD:main
