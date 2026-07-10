@@ -1,0 +1,208 @@
+Lighthouse version: 13.4.0
+Category keys in default report:
+performance
+accessibility
+best-practices
+seo
+agentic-browsing
+Source matches:
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:1:export default WebMCP;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:2:export type WebMCPTool = {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:12: * @typedef {Object} WebMCPTool
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:21:declare class WebMCP extends BaseGatherer {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:22:    /** @type {WebMCPTool[]} */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:23:    _tools: WebMCPTool[];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:26:        tools: WebMCPTool[];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:29:        tools: WebMCPTool[];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:32:     * @param {{tools: WebMCPTool[]}} event
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:35:        tools: WebMCPTool[];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:38:     * @param {{tools: WebMCPTool[]}} event
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:41:        tools: WebMCPTool[];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:53:     * @param {WebMCPTool} tool
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:55:    _tryResolveToolNodeDetails(context: LH.Gatherer.Context, tool: WebMCPTool): Promise<void>;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:58:     * @return {Promise<LH.Artifacts['WebMCP']>}
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:60:    getArtifact(context: LH.Gatherer.Context): Promise<LH.Artifacts["WebMCP"]>;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.d.ts:63://# sourceMappingURL=webmcp.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:1:export default WebMcpSchemaIssues;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:2:declare class WebMcpSchemaIssues extends BaseGatherer {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:3:    /** @type {LH.Artifacts.WebMcpSchemaIssue[]} */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:4:    _issues: LH.Artifacts.WebMcpSchemaIssue[];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:20:     * @return {Promise<LH.Artifacts.WebMcpSchemaIssue[]>}
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:22:    getArtifact(context: LH.Gatherer.Context): Promise<LH.Artifacts.WebMcpSchemaIssue[]>;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.d.ts:25://# sourceMappingURL=webmcp-schema.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.js:11:class WebMcpSchemaIssues extends BaseGatherer {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.js:19:    /** @type {LH.Artifacts.WebMcpSchemaIssue[]} */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.js:65:   * @return {Promise<LH.Artifacts.WebMcpSchemaIssue[]>}
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp-schema.js:98:export default WebMcpSchemaIssues;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/inputs.js:36:      webMcpToolname: formEl.getAttribute('toolname'),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/inputs.js:37:      webMcpTooldescription: formEl.getAttribute('tooldescription'),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:8: * @fileoverview Capture WebMCP data
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:16: * @typedef {Object} WebMCPTool
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:25:class WebMCP extends BaseGatherer {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:33:    /** @type {WebMCPTool[]} */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:41:   * @param {{tools: WebMCPTool[]}} event
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:43:  // TODO: Handle WebMCP tools per frame.
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:45:    // Note that as of M148, there is a bug in WebMCP CDP.
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:46:    // While WebMCP is enabled, any newly registered tool will
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:54:   * @param {{tools: WebMCPTool[]}} event
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:69:    // @ts-expect-error - WebMCP domain might not be in types yet.
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:70:    session.on('WebMCP.toolsAdded', this._onToolsAdded);
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:72:    session.on('WebMCP.toolsRemoved', this._onToolsRemoved);
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:75:      await session.sendCommand('WebMCP.enable');
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:77:      if (err.message.includes('\'WebMCP.enable\' wasn\'t found')) {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:91:    session.off('WebMCP.toolsAdded', this._onToolsAdded);
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:93:    session.off('WebMCP.toolsRemoved', this._onToolsRemoved);
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:95:      await session.sendCommand('WebMCP.disable');
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:103:   * @param {WebMCPTool} tool
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:134:   * @return {Promise<LH.Artifacts['WebMCP']>}
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:147:    /** @type {Map<string, WebMCPTool>} */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/gather/gatherers/webmcp.js:166:export default WebMCP;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/lib/baseline/web-features-data.json:850:    "declarative-webmcp",
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:5:    let agenticBrowsingCategoryTitle: string;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:6:    let agenticBrowsingCategoryDescription: string;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:7:    let webmcpGroupTitle: string;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:8:    let webmcpGroupDescription: string;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.d.ts:13://# sourceMappingURL=agentic-browsing-config.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:103:  /** Title of the Agentic Browsing category of audits. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:104:  agenticBrowsingCategoryTitle: 'Agentic Browsing',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:105:  /** Description of the Agentic Browsing category. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:106:  agenticBrowsingCategoryDescription: 'These checks ensure high-quality, [browsable websites for AI agents](https://goo.gle/lighthouse-agentic-web) ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:107:  'and validate the correctness of WebMCP integrations. ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:109:  /** Title of the WebMCP group of audits. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:110:  webmcpGroupTitle: 'WebMCP',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:111:  /** Description of the WebMCP group. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:112:  webmcpGroupDescription: 'Audits validating WebMCP integration.',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:126:    {id: 'WebMCP', gatherer: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:127:    {id: 'WebMcpSchemaIssues', gatherer: 'webmcp-schema'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:128:    {id: 'LlmsTxt', gatherer: 'agentic/llms-txt'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:300:    'agentic/agent-accessibility-tree',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:301:    'webmcp-registered-tools',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:302:    'webmcp-form-coverage',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:303:    'webmcp-schema-validity',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:304:    'agentic/llms-txt',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:392:    'webmcp': {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:393:      title: str_(UIStrings.webmcpGroupTitle),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:394:      description: str_(UIStrings.webmcpGroupDescription),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:635:    'agentic-browsing': {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:636:      title: str_(UIStrings.agenticBrowsingCategoryTitle),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:637:      description: str_(UIStrings.agenticBrowsingCategoryDescription),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:642:        {id: 'webmcp-form-coverage', weight: 1, group: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:643:        {id: 'webmcp-registered-tools', weight: 1, group: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/default-config.js:644:        {id: 'webmcp-schema-validity', weight: 1, group: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:11:  /** Title of the Agentic Browsing category of audits. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:12:  agenticBrowsingCategoryTitle: 'Agentic Browsing',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:13:  /** Description of the Agentic Browsing category. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:14:  agenticBrowsingCategoryDescription: 'These checks ensure high-quality, [browsable websites for AI agents](https://goo.gle/lighthouse-agentic-web) ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:15:  'and validate the correctness of WebMCP integrations. ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:17:  /** Title of the WebMCP group of audits. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:18:  webmcpGroupTitle: 'WebMCP',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:19:  /** Description of the WebMCP group. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:20:  webmcpGroupDescription: 'Audits validating WebMCP integration.',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:34:    'agentic/agent-accessibility-tree',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:35:    'webmcp-registered-tools',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:36:    'webmcp-form-coverage',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:37:    'webmcp-schema-validity',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:38:    'agentic/llms-txt',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:41:    {id: 'WebMCP', gatherer: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:42:    {id: 'WebMcpSchemaIssues', gatherer: 'webmcp-schema'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:43:    {id: 'LlmsTxt', gatherer: 'agentic/llms-txt'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:46:    'webmcp': {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:47:      title: str_(UIStrings.webmcpGroupTitle),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:48:      description: str_(UIStrings.webmcpGroupDescription),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:56:    'agentic-browsing': {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:57:      title: str_(UIStrings.agenticBrowsingCategoryTitle),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:58:      description: str_(UIStrings.agenticBrowsingCategoryDescription),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:63:        {id: 'webmcp-form-coverage', weight: 1, group: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:64:        {id: 'webmcp-registered-tools', weight: 1, group: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/config/agentic-browsing-config.js:65:        {id: 'webmcp-schema-validity', weight: 1, group: 'webmcp'},
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/runner.js:501:      ...fs.readdirSync(path.join(moduleDir, './audits/agentic')).map(f => `agentic/${f}`),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/runner.js:518:      ...fs.readdirSync(path.join(moduleDir, './gather/gatherers/agentic'))
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/runner.js:519:          .map(f => `agentic/${f}`),
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:11:  /** Title of a Lighthouse audit that evaluates WebMCP schema validity. This descriptive title is shown to users when there are no schema validity issues. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:12:  title: 'WebMCP schemas are valid',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:13:  /** Title of a Lighthouse audit that provides detail on WebMCP schema validity. This descriptive title is shown to users when there are schema validity issues. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:14:  failureTitle: 'WebMCP schemas are invalid',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:15:  /** Description of a Lighthouse audit that tells the user why they should ensure WebMCP schemas are valid. This is displayed after a user expands the section to see more. No character length limits. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:16:  description: 'Valid [WebMCP schemas](http://goo.gle/webmcp-docs) are required for AI agents to ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:23:  /** Descriptive reason for why a form fails WebMCP validation due to missing `toolname` attribute. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:25:  /** Descriptive reason for why a form fails WebMCP validation due to missing `tooldescription` attribute. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:28:  /** Descriptive reason for why a form field fails WebMCP validation due to missing `name` attribute for a required field. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:31:  /** Descriptive reason for why a form field fails WebMCP validation due to missing `name` attribute for an optional field. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:34:  /** Descriptive reason for why a form field fails WebMCP validation due to missing description. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:40:class WebMcpSchemaValidity extends Audit {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:46:      id: 'webmcp-schema-validity',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:50:      requiredArtifacts: ['WebMCP', 'WebMcpSchemaIssues'],
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:60:    if (!artifacts.WebMCP.isSupported) {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:97:    const rawIssues = artifacts.WebMcpSchemaIssues;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:126:    if ((artifacts.WebMCP.tools?.length || 0) === 0 && rawIssues.length === 0) {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.js:140:export default WebMcpSchemaValidity;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/agentic/agent-accessibility-tree.js:16:  description: 'A well-formed [accessibility tree](http://goo.gle/lighthouse-agentic-a11y) helps AI agents to ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:11:  /** Title of a Lighthouse audit that lists forms found in the page for WebMCP coverage. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:12:  title: 'WebMCP form coverage',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:13:  /** Description of a Lighthouse audit that lists forms found in the page and indicates whether they have WebMCP declarative tool annotations. This is displayed after a user expands the section to see more. No character length limits. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:14:  description: 'Consider adding [WebMCP](http://goo.gle/webmcp-docs) annotations to the forms listed below. This helps AI ' +
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:16:  /** [ICU Syntax] Label for the audit identifying the number of forms missing annotations. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:27:class WebMcpFormCoverage extends Audit {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:33:      id: 'webmcp-form-coverage',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:37:      requiredArtifacts: ['Inputs', 'WebMCP'],
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:48:    if (forms.length === 0 || !artifacts.WebMCP.isSupported) {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:57:      const hasToolName = !!form.webMcpToolname;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:58:      const hasToolDescription = !!form.webMcpTooldescription;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.js:89:export default WebMcpFormCoverage;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.d.ts:1:export default WebMcpSchemaValidity;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.d.ts:2:declare class WebMcpSchemaValidity extends Audit {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-schema-validity.d.ts:22://# sourceMappingURL=webmcp-schema-validity.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:8: * @fileoverview Audit that lists registered WebMCP tools.
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:15:  /** Title of a Lighthouse audit that lists registered WebMCP tools. "WebMCP" stands for "Web Model Context Protocol" and should not be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:16:  title: 'WebMCP tools registered',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:17:  /** Description of a Lighthouse audit that lists registered WebMCP tools. This is displayed after a user expands the section to see more. No character length limits. "WebMCP" stands for "Web Model Context Protocol", neither should be translated. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:18:  description: 'Lists the [WebMCP tools](http://goo.gle/webmcp-docs) registered at the time of analysis.',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:19:  /** Label for a column in a data table; entries will be the name of a WebMCP tool. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:21:  /** Label for a column in a data table; entries will be the description of a WebMCP tool. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:23:  /** Label for a column in a data table; entries will be the source location where an imperative WebMCP tool was registered. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:25:  /** Label for a column in a data table; entries will be the DOM element associated with a declarative WebMCP tool. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:27:  /** Label for a column in a data table; entries will be the input schema of a WebMCP tool. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:29:  /** Title for the table listing imperative WebMCP tools. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:31:  /** Title for the table listing declarative WebMCP tools. */
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:37:class WebMCPRegisteredTools extends Audit {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:43:      id: 'webmcp-registered-tools',
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:47:      requiredArtifacts: ['WebMCP'],
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:57:    if (!artifacts.WebMCP.isSupported) {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:64:    const tools = artifacts.WebMCP.tools || [];
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.js:148:export default WebMCPRegisteredTools;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.d.ts:1:export default WebMCPRegisteredTools;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.d.ts:2:declare class WebMCPRegisteredTools extends Audit {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-registered-tools.d.ts:21://# sourceMappingURL=webmcp-registered-tools.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.d.ts:1:export default WebMcpFormCoverage;
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.d.ts:2:declare class WebMcpFormCoverage extends Audit {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/core/audits/webmcp-form-coverage.d.ts:16://# sourceMappingURL=webmcp-form-coverage.d.ts.map
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:599:  "core/audits/agentic/agent-accessibility-tree.js | columnElement": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:602:  "core/audits/agentic/agent-accessibility-tree.js | columnRule": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:605:  "core/audits/agentic/agent-accessibility-tree.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:606:    "message": "[Å ŵéļļ-ƒöŕméð ᐅ[ᐊåççéššîбîļîţý ţŕééᐅ](http://goo.gle/lighthouse-agentic-a11y)ᐊ ĥéļþš ÅÎ åĝéñţš ţö ñåvîĝåţé åñð îñţéŕåçţ ŵîţĥ ţĥé þåĝé. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen]"
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:608:  "core/audits/agentic/agent-accessibility-tree.js | displayValuePassed": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:611:  "core/audits/agentic/agent-accessibility-tree.js | failedSectionTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:614:  "core/audits/agentic/agent-accessibility-tree.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:617:  "core/audits/agentic/agent-accessibility-tree.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:620:  "core/audits/agentic/llms-txt.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:623:  "core/audits/agentic/llms-txt.js | displayValueHttpBadCode": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:626:  "core/audits/agentic/llms-txt.js | explanation": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:629:  "core/audits/agentic/llms-txt.js | failureTitle": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:632:  "core/audits/agentic/llms-txt.js | missingH1": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:635:  "core/audits/agentic/llms-txt.js | missingLinks": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:638:  "core/audits/agentic/llms-txt.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:641:  "core/audits/agentic/llms-txt.js | tooShort": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1349:  "core/audits/webmcp-form-coverage.js | columnForm": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1352:  "core/audits/webmcp-form-coverage.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1353:    "message": "[Çöñšîðéŕ åððîñĝ ᐅ[ᐊŴéбMÇÞᐅ](http://goo.gle/webmcp-docs)ᐊ åññöţåţîöñš ţö ţĥé ƒöŕmš ļîšţéð бéļöŵ. Ţĥîš ĥéļþš ÅÎ åĝéñţš îðéñţîƒý åñð îñţéŕåçţ ŵîţĥ ţĥéšé ƒöŕmš möŕé ŕéļîåбļý. one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty twentyone]"
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1355:  "core/audits/webmcp-form-coverage.js | displayValue": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1358:  "core/audits/webmcp-form-coverage.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1361:  "core/audits/webmcp-registered-tools.js | columnDeclarativeElement": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1364:  "core/audits/webmcp-registered-tools.js | columnDescription": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1367:  "core/audits/webmcp-registered-tools.js | columnImperativeLocation": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1370:  "core/audits/webmcp-registered-tools.js | columnInputSchema": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1373:  "core/audits/webmcp-registered-tools.js | columnTool": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1376:  "core/audits/webmcp-registered-tools.js | description": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1377:    "message": "[Ļîšţš ţĥé ᐅ[ᐊŴéбMÇÞ ţööļšᐅ](http://goo.gle/webmcp-docs)ᐊ ŕéĝîšţéŕéð åţ ţĥé ţîmé öƒ åñåļýšîš. one two three four five six seven eight nine ten eleven twelve thirteen]"
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1379:  "core/audits/webmcp-registered-tools.js | title": {
+/opt/hostedtoolcache/node/22.23.1/x64/lib/node_modules/lighthouse/shared/localization/locales/en-XA.json:1382:  "core/audits/webmcp-registered-tools.js | titleDeclarativeTools": {
