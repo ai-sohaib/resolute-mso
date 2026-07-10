@@ -1,0 +1,103 @@
+name: Verify Live Agentic Score
+
+on:
+  push:
+    branches: [psi-live-audit-2026-07-11]
+    paths:
+      - ".github/workflows/verify-live-agentic-score.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: psi-live-audit-2026-07-11
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Wait for agentic files on production
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent --show-error https://www.resolutemso.com/llms.txt | grep -Fq 'Resolute MSO' \
+              && curl --fail --silent --show-error https://www.resolutemso.com/assets/js/agentic-readiness.js | grep -Fq 'find_resolute_mso_service'; then
+              echo "Agentic production files are live."
+              exit 0
+            fi
+            echo "Waiting for production deployment ($attempt/30)..."
+            sleep 20
+          done
+          echo "Agentic production files did not become public within the verification window."
+          exit 1
+
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
+
+      - name: Capture PageSpeed Agentic Browsing results
+        run: |
+          mkdir -p diagnostics/psi-agentic
+          cat > /tmp/capture-agentic.mjs <<'NODE'
+          import { chromium } from 'playwright';
+          import fs from 'node:fs';
+
+          const browser = await chromium.launch({headless: true});
+          const results = [];
+
+          for (const factor of ['mobile', 'desktop']) {
+            const page = await browser.newPage({
+              viewport: factor === 'mobile' ? {width: 412, height: 915} : {width: 1440, height: 1000},
+              userAgent: factor === 'mobile'
+                ? 'Mozilla/5.0 (Linux; Android 12; Pixel 5) AppleWebKit/537.36 Chrome/140.0.0.0 Mobile Safari/537.36'
+                : undefined,
+            });
+            const url = `https://pagespeed.web.dev/analysis?url=${encodeURIComponent('https://www.resolutemso.com/')}&form_factor=${factor}`;
+            await page.goto(url, {waitUntil: 'domcontentloaded', timeout: 120000});
+            await page.waitForFunction(() => document.body?.innerText?.includes('Agentic Browsing'), null, {timeout: 240000});
+            await page.waitForTimeout(5000);
+
+            const agentText = await page.evaluate(() => {
+              const bodyText = document.body.innerText || '';
+              const index = bodyText.indexOf('Agentic Browsing');
+              return index >= 0 ? bodyText.slice(Math.max(0, index - 500), index + 5000) : bodyText.slice(0, 5000);
+            });
+
+            const bodyText = await page.locator('body').innerText();
+            const scores = [...bodyText.matchAll(/Agentic Browsing\s*(\d\s*\/\s*3)/gi)].map(m => m[1].replace(/\s+/g, ''));
+            results.push({factor, url: page.url(), scores, agentText});
+            fs.writeFileSync(`diagnostics/psi-agentic/${factor}-body.txt`, bodyText);
+            fs.writeFileSync(`diagnostics/psi-agentic/${factor}-agentic-section.txt`, agentText);
+            await page.screenshot({path: `diagnostics/psi-agentic/${factor}.png`, fullPage: true});
+            await page.close();
+          }
+
+          await browser.close();
+          fs.writeFileSync('diagnostics/psi-agentic/summary.json', JSON.stringify(results, null, 2));
+          const allThree = results.every(result => result.scores.includes('3/3'));
+          fs.writeFileSync(
+            allThree ? 'diagnostics/psi-agentic/AGENTIC_3_OF_3.txt' : 'diagnostics/psi-agentic/AGENTIC_NOT_3_OF_3.txt',
+            allThree ? 'PageSpeed Agentic Browsing is 3/3 on mobile and desktop.\n' : 'PageSpeed Agentic Browsing is not yet 3/3 on both profiles. See captured sections.\n'
+          );
+          if (!allThree) process.exitCode = 2;
+          NODE
+          node /tmp/capture-agentic.mjs
+
+      - name: Commit PageSpeed capture
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diagnostics/psi-agentic/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Record live PageSpeed Agentic Browsing verification [skip ci]"
+          git push origin HEAD:psi-live-audit-2026-07-11
