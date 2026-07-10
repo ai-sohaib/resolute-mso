@@ -38,9 +38,11 @@ jobs:
 
       - name: Validate final production output
         run: |
-          grep -Fq 'data:image/png;base64' index.html
+          test -f assets/img/platform-logos-sprite.png
+          grep -Fq '/assets/img/platform-logos-sprite.png' index.html
           grep -Fq 'platform-logo-officeally' index.html
           grep -Fq '[Resolute MSO home](https://www.resolutemso.com/)' llms.txt
+          ! grep -Fq 'data:image/png;base64' index.html
           ! grep -Fq 'mailto:' index.html
           ! grep -Fq 'google.com/s2/favicons' index.html
           ! grep -Fq 'href="/assets/css/pagespeed-home.css"' index.html
