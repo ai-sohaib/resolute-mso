@@ -27,76 +27,82 @@ def minify_css(css: str) -> str:
 
 
 def replace_platform_strip(html: str) -> str:
-    patterns = [
-        r'<div class="platform-strip platform-logo-strip">.*?</div>',
-        r'<div class="platform-strip">(?=.*?OfficeAlly)(?=.*?Telcor LIS).*?</div>',
-    ]
-    for pattern in patterns:
-        updated, count = re.subn(pattern, PLATFORM_MARKUP, html, count=1, flags=re.S)
-        if count:
-            return updated
-    raise RuntimeError("Workflow-familiarity platform strip was not found.")
+    pattern = re.compile(
+        r'<div class="platform-strip(?: platform-logo-strip)?">(?:(?!</div>).)*?(?:OfficeAlly)(?:(?!</div>).)*?(?:Telcor LIS)(?:(?!</div>).)*?</div>',
+        re.S,
+    )
+    updated, count = pattern.subn(PLATFORM_MARKUP, html, count=1)
+    if count != 1:
+        raise RuntimeError("Could not locate the workflow-familiarity platform strip.")
+    return updated
 
 
 def remove_mailto(html: str) -> str:
-    html = re.sub(
-        r'<a href="mailto:support@resolutemso\.com">support@resolutemso\.com</a>',
-        '<a href="/contact/" aria-label="Contact Resolute MSO">support@resolutemso.com</a>',
-        html,
-    )
-    html = re.sub(
-        r'<a href="mailto:support@resolutemso\.com" aria-label="Email Resolute MSO">',
-        '<a href="/contact/" aria-label="Contact Resolute MSO">',
-        html,
-    )
-    html = re.sub(
-        r'<form action="mailto:support@resolutemso\.com" method="POST" enctype="text/plain">',
-        '<form action="/contact/" method="GET">',
-        html,
-    )
+    html = re.sub(r'href="mailto:[^"]+"', 'href="/contact/"', html, flags=re.I)
+    html = re.sub(r'action="mailto:[^"]+"', 'action="/contact/"', html, flags=re.I)
+    html = re.sub(r'\s+enctype="text/plain"', "", html, flags=re.I)
+    html = re.sub(r'method="POST"(?=[^>]*action="/contact/")', 'method="GET"', html, flags=re.I)
     return html
 
 
-def inline_home_css(html: str) -> str:
+def inline_critical_css(html: str) -> str:
     if not CSS.exists() or not PLATFORM_CSS.exists():
         raise RuntimeError("Required homepage CSS source is missing.")
+
     css = minify_css(
         CSS.read_text(encoding="utf-8")
         + "\n"
         + PLATFORM_CSS.read_text(encoding="utf-8")
     )
-
     style = f'<style id="resolute-critical-typography">{css}</style>'
-    linked_pattern = r'<link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home\.css">'
-    inline_pattern = r'<style id="resolute-critical-typography">.*?</style>'
 
-    if re.search(linked_pattern, html):
-        return re.sub(linked_pattern, style, html, count=1)
-    if re.search(inline_pattern, html, flags=re.S):
-        return re.sub(inline_pattern, style, html, count=1, flags=re.S)
-    raise RuntimeError("Homepage critical stylesheet marker was not found.")
+    html = re.sub(
+        r'\s*<link id="resolute-critical-typography"[^>]*>',
+        "",
+        html,
+        flags=re.I,
+    )
+    html = re.sub(
+        r'\s*<style id="resolute-critical-typography">.*?</style>',
+        "",
+        html,
+        flags=re.S | re.I,
+    )
+    if "</head>" not in html:
+        raise RuntimeError("Homepage closing head tag is missing.")
+    return html.replace("</head>", style + "</head>", 1)
+
+
+def validate(html: str) -> None:
+    forbidden = {
+        "mailto:": "mailto URL",
+        "google.com/s2/favicons": "remote Google favicon",
+        "gstatic.com/favicon": "remote gstatic favicon",
+        'href="/assets/css/pagespeed-home.css"': "render-blocking stylesheet link",
+    }
+    for needle, label in forbidden.items():
+        if needle.lower() in html.lower():
+            raise RuntimeError(f"Final homepage still contains a {label}.")
+
+    required = [
+        "data:image/png;base64",
+        "platform-logo-officeally",
+        "platform-logo-telcor",
+        '<style id="resolute-critical-typography">',
+    ]
+    for needle in required:
+        if needle not in html:
+            raise RuntimeError(f"Final homepage is missing required marker: {needle}")
 
 
 def main() -> None:
     html = INDEX.read_text(encoding="utf-8")
     html = replace_platform_strip(html)
     html = remove_mailto(html)
-    html = inline_home_css(html)
-
-    checks = {
-        "mailto:": "Homepage still contains a mailto URL.",
-        "google.com/s2/favicons": "Homepage still contains a remote Google favicon request.",
-        "gstatic.com/favicon": "Homepage still contains a remote gstatic favicon request.",
-        "/assets/css/pagespeed-home.css": "Render-blocking homepage stylesheet is still linked.",
-    }
-    for needle, message in checks.items():
-        if needle in html:
-            raise RuntimeError(message)
-    if "data:image/png;base64" not in html or "platform-logo-officeally" not in html:
-        raise RuntimeError("Embedded platform logos were not added.")
-
+    html = inline_critical_css(html)
+    validate(html)
     INDEX.write_text(html, encoding="utf-8")
-    print("Final PageSpeed fixes applied: embedded logos, no mailto, inline CSS.")
+    print("Final PageSpeed output created: embedded logos, no mailto requests, inline critical CSS.")
 
 
 if __name__ == "__main__":
