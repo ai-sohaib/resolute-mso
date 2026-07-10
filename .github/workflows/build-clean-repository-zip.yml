@@ -1,0 +1,170 @@
+name: Build Clean Replacement Repository ZIP
+
+on:
+  push:
+    branches: [clean-repository-package-2026-07-11]
+    paths:
+      - ".github/workflows/build-clean-repository-zip.yml"
+      - "package-trigger.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PACKAGE_NAME: resolute-mso-clean-repository
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout latest production source
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: source
+          fetch-depth: 1
+
+      - name: Checkout package control branch
+        uses: actions/checkout@v4
+        with:
+          ref: clean-repository-package-2026-07-11
+          path: control
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install build dependency
+        run: python -m pip install --disable-pip-version-check pillow
+
+      - name: Materialize final optimized website
+        working-directory: source
+        run: |
+          python scripts/apply_pagespeed_100.py
+          python scripts/apply_platform_logos.py
+          python scripts/apply_agentic_readiness.py
+          python -m py_compile \
+            scripts/apply_pagespeed_100.py \
+            scripts/apply_platform_logos.py \
+            scripts/apply_agentic_readiness.py
+          node --check assets/js/agentic-readiness.js
+
+      - name: Assemble clean replacement repository
+        run: |
+          mkdir -p package-root
+          rsync -a source/ package-root/ \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '_site/' \
+            --exclude 'scripts/' \
+            --exclude 'docs/' \
+            --exclude 'tests/' \
+            --exclude 'workers/' \
+            --exclude 'content-templates/' \
+            --exclude 'diagnostics/' \
+            --exclude 'deployment-status/' \
+            --exclude 'node_modules/' \
+            --exclude '*.py' \
+            --exclude '*.pyc' \
+            --exclude '__pycache__/' \
+            --exclude '*.log' \
+            --exclude '*.zip' \
+            --exclude '*.md'
+
+          mkdir -p package-root/.github/workflows package-root/scripts
+          cp source/.github/workflows/deploy-pages.yml package-root/.github/workflows/deploy-pages.yml
+          cp source/scripts/apply_pagespeed_100.py package-root/scripts/
+          cp source/scripts/apply_platform_logos.py package-root/scripts/
+          cp source/scripts/apply_agentic_readiness.py package-root/scripts/
+
+          cat > package-root/README.md <<'EOF'
+          # Resolute MSO — Clean Replacement Repository
+
+          This package contains the final static website, all public pages and assets, the optimized PageSpeed build scripts, the agentic-readiness layer, and one production GitHub Pages deployment workflow.
+
+          ## Replace the repository
+
+          1. Keep the existing restore branch: `restore/pre-psi-agentic-100-2026-07-11`.
+          2. Delete the current files from the repository `main` branch.
+          3. Extract this ZIP locally.
+          4. Upload **the extracted contents**, including the hidden `.github` folder, directly to the root of `main`.
+          5. Commit the replacement. The workflow `.github/workflows/deploy-pages.yml` will validate and deploy the website.
+
+          Do not upload the outer ZIP as a file inside the repository. Upload its extracted contents.
+          EOF
+
+          cat > package-root/PACKAGE-MANIFEST.md <<EOF
+          # Package Manifest
+
+          Generated from production branch: main
+          Source commit: ${GITHUB_SHA}
+          Generated UTC: $(date -u +%Y-%m-%dT%H:%M:%SZ)
+
+          Excluded intentionally: old workflows, diagnostics, deployment receipts, internal documentation, tests, worker source, content templates, caches, logs, and obsolete development scripts.
+
+          Included deployment workflow: .github/workflows/deploy-pages.yml
+          Included build scripts:
+          - scripts/apply_pagespeed_100.py
+          - scripts/apply_platform_logos.py
+          - scripts/apply_agentic_readiness.py
+          EOF
+
+          find package-root -type f -print | sed 's#^package-root/##' | sort >> package-root/PACKAGE-MANIFEST.md
+
+      - name: Validate replacement package
+        run: |
+          test -s package-root/index.html
+          test -s package-root/CNAME
+          test -s package-root/robots.txt
+          test -s package-root/sitemap.xml
+          test -s package-root/llms.txt
+          test -s package-root/.github/workflows/deploy-pages.yml
+          test -s package-root/scripts/apply_pagespeed_100.py
+          test -s package-root/scripts/apply_platform_logos.py
+          test -s package-root/scripts/apply_agentic_readiness.py
+          test -s package-root/assets/js/agentic-readiness.js
+          test -s package-root/assets/img/platforms/officeally.webp
+          grep -Fq '/assets/img/platforms/officeally.webp' package-root/index.html
+          grep -Fq '/assets/js/agentic-readiness.js' package-root/index.html
+          ! grep -R -Fq 'www.google.com/s2/favicons' package-root/index.html package-root/assets || false
+          test ! -d package-root/docs
+          test ! -d package-root/tests
+          test ! -d package-root/workers
+          test ! -d package-root/diagnostics
+          test ! -d package-root/deployment-status
+          find package-root -name '*.zip' -o -name '*.log' -o -name '*.pyc' | tee /tmp/unwanted-files.txt
+          test ! -s /tmp/unwanted-files.txt
+
+      - name: Upload clean replacement repository ZIP
+        id: upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.PACKAGE_NAME }}
+          path: package-root/
+          include-hidden-files: true
+          if-no-files-found: error
+          compression-level: 9
+          retention-days: 14
+
+      - name: Record package artifact details
+        run: |
+          cat > control/package-status.json <<EOF
+          {
+            "status": "success",
+            "artifact_name": "${PACKAGE_NAME}",
+            "artifact_id": ${{ steps.upload.outputs.artifact-id }},
+            "workflow_run_id": ${GITHUB_RUN_ID},
+            "source_branch": "main",
+            "source_sha": "${GITHUB_SHA}",
+            "generated_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          }
+          EOF
+          git -C control config user.name "github-actions[bot]"
+          git -C control config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C control add package-status.json
+          git -C control commit -m "Record clean replacement repository package [skip ci]"
+          git -C control push origin HEAD:clean-repository-package-2026-07-11
