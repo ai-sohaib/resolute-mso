@@ -34,9 +34,11 @@ jobs:
           python3 scripts/finalize_pagespeed_100.py
           test -f index.html
           test -f llms.txt
-          grep -Fq 'data:image/png;base64' index.html
+          test -f assets/img/platform-logos-sprite.png
+          grep -Fq '/assets/img/platform-logos-sprite.png' index.html
           grep -Fq 'platform-logo-officeally' index.html
           grep -Fq '[Resolute MSO home](https://www.resolutemso.com/)' llms.txt
+          ! grep -Fq 'data:image/png;base64' index.html
           ! grep -Fq 'mailto:' index.html
           ! grep -Fq 'google.com/s2/favicons' index.html
           ! grep -Fq 'href="/assets/css/pagespeed-home.css"' index.html
@@ -60,6 +62,7 @@ jobs:
           test -f _site/CNAME
           test -f _site/index.html
           test -f _site/llms.txt
+          test -f _site/assets/img/platform-logos-sprite.png
           grep -Fq 'platform-logo-officeally' _site/index.html
 
       - name: Configure Pages
