@@ -8,7 +8,6 @@ on:
       - "assets/**"
       - "llms.txt"
       - "scripts/apply_pagespeed_100.py"
-      - "scripts/apply_platform_logos.py"
       - "scripts/finalize_pagespeed_100.py"
       - "scripts/enforce_perfect_lighthouse.js"
       - ".github/workflows/pagespeed-100-audit.yml"
@@ -38,9 +37,6 @@ jobs:
 
       - name: Build PageSpeed base
         run: python3 scripts/apply_pagespeed_100.py
-
-      - name: Apply platform logo markup
-        run: python3 scripts/apply_platform_logos.py
 
       - name: Apply final no-request optimization
         run: python3 scripts/finalize_pagespeed_100.py
