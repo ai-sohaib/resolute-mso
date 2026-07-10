@@ -1,0 +1,109 @@
+name: Live PSI Diagnostics
+
+on:
+  push:
+    branches: [psi-live-audit-2026-07-11]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: psi-live-audit-2026-07-11
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install Lighthouse
+        run: npm install --global lighthouse@latest
+
+      - name: Audit public mobile
+        run: |
+          lighthouse https://www.resolutemso.com/ \
+            --output=json \
+            --output-path=live-mobile.json \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --quiet
+
+      - name: Audit public desktop
+        run: |
+          lighthouse https://www.resolutemso.com/ \
+            --preset=desktop \
+            --output=json \
+            --output-path=live-desktop.json \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --quiet
+
+      - name: Create readable diagnostic report
+        run: |
+          mkdir -p diagnostics
+          node <<'NODE'
+          const fs = require('fs');
+          const out = [];
+          for (const device of ['mobile', 'desktop']) {
+            const report = JSON.parse(fs.readFileSync(`live-${device}.json`, 'utf8'));
+            out.push(`=== ${device.toUpperCase()} ===`);
+            out.push(`requestedUrl: ${report.requestedUrl || ''}`);
+            out.push(`finalUrl: ${report.finalUrl || ''}`);
+            out.push(`fetchTime: ${report.fetchTime || ''}`);
+            for (const [categoryId, category] of Object.entries(report.categories || {})) {
+              out.push(`CATEGORY ${categoryId}: ${Math.round((category.score || 0) * 100)}`);
+              for (const ref of category.auditRefs || []) {
+                const audit = report.audits[ref.id];
+                if (!audit || audit.scoreDisplayMode === 'notApplicable') continue;
+                if (audit.score === 1) continue;
+                out.push(`FAIL category=${categoryId} weight=${ref.weight} id=${ref.id} score=${audit.score} title=${audit.title}`);
+                if (audit.displayValue) out.push(`  display=${audit.displayValue}`);
+                if (audit.explanation) out.push(`  explanation=${audit.explanation.replace(/\s+/g, ' ')}`);
+                const items = audit.details && Array.isArray(audit.details.items) ? audit.details.items : [];
+                for (const item of items.slice(0, 20)) {
+                  const node = item.node || {};
+                  const fields = [
+                    node.selector && `selector=${node.selector}`,
+                    node.snippet && `snippet=${node.snippet}`,
+                    item.url && `url=${item.url}`,
+                    item.source && `source=${item.source}`,
+                    item.failureSummary && `failure=${item.failureSummary}`,
+                    item.wastedBytes != null && `wastedBytes=${item.wastedBytes}`,
+                    item.wastedMs != null && `wastedMs=${item.wastedMs}`,
+                    item.totalBytes != null && `totalBytes=${item.totalBytes}`,
+                  ].filter(Boolean);
+                  if (fields.length) out.push(`  ITEM ${fields.join(' | ').replace(/\s+/g, ' ')}`);
+                }
+              }
+            }
+            out.push('');
+          }
+          fs.writeFileSync('diagnostics/live-lighthouse-summary.txt', out.join('\n'));
+          NODE
+
+      - name: Inspect Lighthouse package for agentic audits
+        run: |
+          {
+            echo "=== LIGHTHOUSE AGENTIC SOURCE SEARCH ==="
+            npm root -g
+            grep -Rin --exclude='*.map' -E 'agentic|agent.?brows' "$(npm root -g)/lighthouse" 2>/dev/null | head -100 || true
+          } > diagnostics/lighthouse-agentic-search.txt
+
+      - name: Save raw report excerpts
+        run: |
+          cp live-mobile.json diagnostics/live-mobile.json
+          cp live-desktop.json diagnostics/live-desktop.json
+
+      - name: Commit diagnostics
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add diagnostics/
+          git commit -m "Record live PageSpeed diagnostics [skip ci]"
+          git push origin HEAD:psi-live-audit-2026-07-11
