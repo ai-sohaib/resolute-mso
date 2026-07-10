@@ -1,0 +1,133 @@
+name: Validate PSI and Agentic Fixes
+
+on:
+  push:
+    branches: [psi-live-audit-2026-07-11]
+    paths:
+      - "scripts/apply_platform_logos.py"
+      - "scripts/apply_pagespeed_100.py"
+      - "assets/css/**"
+      - "index.html"
+      - ".github/workflows/validate-psi-agentic-fixes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: psi-live-audit-2026-07-11
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install tooling
+        run: |
+          python -m pip install --disable-pip-version-check pillow
+          npm install --global lighthouse@latest
+
+      - name: Build corrected website
+        run: |
+          python scripts/apply_pagespeed_100.py
+          python scripts/apply_platform_logos.py
+          grep -Fq '/assets/img/platforms/officeally.webp' index.html
+          grep -Fq '/assets/img/platforms/telcor.webp' index.html
+          ! grep -Fq 'www.google.com/s2/favicons' index.html
+          for logo in officeally eclinicalworks carecloud nextgen athenahealth advancedmd modmed telcor; do
+            test -s "assets/img/platforms/${logo}.webp"
+          done
+
+      - name: Serve corrected website
+        run: |
+          python -m http.server 4173 --bind 127.0.0.1 >/tmp/psi-fix-server.log 2>&1 &
+          for attempt in {1..30}; do
+            curl --fail --silent http://127.0.0.1:4173/ >/dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/psi-fix-server.log
+          exit 1
+
+      - name: Lighthouse corrected mobile
+        run: |
+          lighthouse http://127.0.0.1:4173/ \
+            --output=json \
+            --output-path=fixed-mobile.json \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --quiet
+
+      - name: Lighthouse corrected desktop
+        run: |
+          lighthouse http://127.0.0.1:4173/ \
+            --preset=desktop \
+            --output=json \
+            --output-path=fixed-desktop.json \
+            --only-categories=performance,accessibility,best-practices,seo \
+            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
+            --quiet
+
+      - name: Write validation report
+        run: |
+          mkdir -p diagnostics
+          node <<'NODE'
+          const fs = require('fs');
+          const lines = [];
+          let failed = false;
+          for (const device of ['mobile', 'desktop']) {
+            const report = JSON.parse(fs.readFileSync(`fixed-${device}.json`, 'utf8'));
+            lines.push(`=== FIXED ${device.toUpperCase()} ===`);
+            for (const [id, category] of Object.entries(report.categories || {})) {
+              const score = Math.round((category.score || 0) * 100);
+              lines.push(`CATEGORY ${id}: ${score}`);
+              if (score < 100) failed = true;
+              for (const ref of category.auditRefs || []) {
+                const audit = report.audits[ref.id];
+                if (!audit || ref.weight <= 0 || audit.score === 1 || audit.scoreDisplayMode === 'notApplicable') continue;
+                lines.push(`FAIL category=${id} weight=${ref.weight} id=${ref.id} score=${audit.score} title=${audit.title}`);
+                if (audit.displayValue) lines.push(`  display=${audit.displayValue}`);
+                const items = audit.details && Array.isArray(audit.details.items) ? audit.details.items : [];
+                for (const item of items.slice(0, 20)) {
+                  const node = item.node || {};
+                  const fields = [node.selector, node.snippet, item.url, item.source, item.failureSummary].filter(Boolean);
+                  if (fields.length) lines.push(`  ITEM ${fields.join(' | ').replace(/\s+/g, ' ')}`);
+                }
+              }
+            }
+            lines.push('');
+          }
+          fs.writeFileSync('diagnostics/fixed-lighthouse-summary.txt', lines.join('\n'));
+          if (failed) process.exitCode = 2;
+          NODE
+
+      - name: Inspect available agentic audits
+        if: always()
+        run: |
+          {
+            echo "Lighthouse version: $(lighthouse --version)"
+            echo "Category keys in default report:"
+            lighthouse http://127.0.0.1:4173/ --output=json --output-path=all-categories.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet || true
+            node -e "const r=require('./all-categories.json'); console.log(Object.keys(r.categories||{}).join('\n'))" || true
+            echo "Source matches:"
+            grep -Rin --exclude='*.map' -E 'agentic|agent.?brows|webmcp' "$(npm root -g)/lighthouse" 2>/dev/null | head -200 || true
+          } > diagnostics/agentic-audit-discovery.txt
+
+      - name: Commit corrected assets and diagnostics
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/css/pagespeed-home.css assets/img/platforms/ diagnostics/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Materialize local platform logos and PSI validation [skip ci]"
+          git push origin HEAD:psi-live-audit-2026-07-11
