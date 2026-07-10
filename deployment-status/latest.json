@@ -1,9 +1,10 @@
 {
   "status": "success",
-  "source_sha": "dacea31011f2f18fa71fc58e84b65de48e2b002b",
-  "workflow_run_id": "28900932138",
+  "source_sha": "1abae33790d44d094d1f21a37daf04e910f68931",
+  "workflow_run_id": "29131028549",
   "page_url": "https://www.resolutemso.com/",
-  "completed_at_utc": "2026-07-07T21:46:55Z",
-  "change": "Official platform logos deployed in workflow familiarity section",
-  "restore_branch": "restore/pre-platform-logo-deploy-2026-07-08"
+  "completed_at_utc": "2026-07-10T23:44:48Z",
+  "validated_lighthouse": {"mobile":{"performance":100,"accessibility":100,"best-practices":100,"seo":100},"desktop":{"performance":100,"accessibility":100,"best-practices":100,"seo":100}},
+  "agentic_readiness": ["llms.txt", "robots.txt", "structured-data", "WebMCP"],
+  "restore_branch": "restore/pre-psi-agentic-100-2026-07-11"
 }
