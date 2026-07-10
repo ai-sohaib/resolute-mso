@@ -1,5 +1,4 @@
-# Baseline and optimization gate for the restored production source.
-name: PageSpeed 100 Audit
+name: Perfect PageSpeed Gate
 
 on:
   pull_request:
@@ -7,9 +6,11 @@ on:
     paths:
       - "**/*.html"
       - "assets/**"
+      - "llms.txt"
       - "scripts/apply_pagespeed_100.py"
-      - "config.js"
-      - "site.webmanifest"
+      - "scripts/apply_platform_logos.py"
+      - "scripts/finalize_pagespeed_100.py"
+      - "scripts/enforce_perfect_lighthouse.js"
       - ".github/workflows/pagespeed-100-audit.yml"
   workflow_dispatch:
 
@@ -19,7 +20,7 @@ permissions:
 jobs:
   lighthouse:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - name: Checkout proposed website
         uses: actions/checkout@v4
@@ -29,96 +30,48 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Install audit and image tooling
+      - name: Install current Lighthouse and image tooling
         run: |
-          npm install --global lighthouse@12
+          npm install --global lighthouse@latest
           python3 -m pip install --disable-pip-version-check pillow
+          lighthouse --version
 
-      - name: Apply deterministic PageSpeed fixes
+      - name: Build final production output
         run: |
           python3 scripts/apply_pagespeed_100.py
-          grep -Fq 'resolute-critical-typography' index.html
-          grep -Fq 'View All Services' index.html
-          grep -Fq 'healthcare-hero-ai-420.webp' index.html
-          if grep -Fq 'fonts.googleapis.com' index.html; then
-            echo 'Google Fonts must not block first paint.'
-            exit 1
-          fi
+          python3 scripts/apply_platform_logos.py
+          python3 scripts/finalize_pagespeed_100.py
+          grep -Fq 'data:image/png;base64' index.html
+          grep -Fq 'platform-logo-officeally' index.html
+          grep -Fq '[Resolute MSO home](https://www.resolutemso.com/)' llms.txt
+          ! grep -Fq 'mailto:' index.html
+          ! grep -Fq 'google.com/s2/favicons' index.html
+          ! grep -Fq '/assets/css/pagespeed-home.css' index.html
 
       - name: Start local website
         run: |
-          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/resolute-http.log 2>&1 &
-          echo $! > /tmp/resolute-http.pid
+          python3 -m http.server 4173 --bind 127.0.0.1 >/tmp/resolute-http.log 2>&1 &
           for attempt in {1..30}; do
-            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
-              exit 0
-            fi
+            curl --fail --silent http://127.0.0.1:4173/ >/dev/null && exit 0
             sleep 1
           done
           cat /tmp/resolute-http.log
           exit 1
 
       - name: Run mobile Lighthouse
-        run: |
-          lighthouse http://127.0.0.1:4173/ \
-            --output=json \
-            --output-path=./lighthouse-mobile.json \
-            --only-categories=performance,accessibility,best-practices,seo \
-            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
-            --quiet
+        run: lighthouse http://127.0.0.1:4173/ --output=json --output-path=lighthouse-mobile.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
 
       - name: Run desktop Lighthouse
-        run: |
-          lighthouse http://127.0.0.1:4173/ \
-            --preset=desktop \
-            --output=json \
-            --output-path=./lighthouse-desktop.json \
-            --only-categories=performance,accessibility,best-practices,seo \
-            --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" \
-            --quiet
+        run: lighthouse http://127.0.0.1:4173/ --preset=desktop --output=json --output-path=lighthouse-desktop.json --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --quiet
 
-      - name: Print scores and every failing weighted audit
-        run: |
-          node <<'NODE'
-          const fs = require('fs');
-          const reports = [
-            ['MOBILE', JSON.parse(fs.readFileSync('lighthouse-mobile.json', 'utf8'))],
-            ['DESKTOP', JSON.parse(fs.readFileSync('lighthouse-desktop.json', 'utf8'))],
-          ];
-          let failed = false;
-          for (const [label, report] of reports) {
-            console.log(`\n========== ${label} ==========`);
-            for (const [id, category] of Object.entries(report.categories)) {
-              const score = Math.round((category.score || 0) * 100);
-              console.log(`${id}: ${score}`);
-              if (score < 100) failed = true;
-              const refs = category.auditRefs.filter(ref => ref.weight > 0);
-              for (const ref of refs) {
-                const audit = report.audits[ref.id];
-                if (!audit || audit.score === 1 || audit.scoreDisplayMode === 'notApplicable') continue;
-                console.log(`FAIL [${id}] ${ref.id}: ${audit.title}`);
-                if (audit.displayValue) console.log(`  ${audit.displayValue}`);
-                if (audit.description) console.log(`  ${audit.description.replace(/\s+/g, ' ')}`);
-                const items = audit.details && Array.isArray(audit.details.items) ? audit.details.items.slice(0, 12) : [];
-                for (const item of items) {
-                  const summary = [item.node && item.node.selector, item.node && item.node.snippet, item.url, item.source, item.failureSummary]
-                    .filter(Boolean).join(' | ').replace(/\s+/g, ' ');
-                  if (summary) console.log(`  ITEM ${summary}`);
-                }
-              }
-            }
-          }
-          if (failed) {
-            console.error('\nOne or more Lighthouse categories are below 100.');
-            process.exit(1);
-          }
-          NODE
+      - name: Enforce 100 scores and Agentic Browsing 3/3
+        run: node scripts/enforce_perfect_lighthouse.js
 
-      - name: Upload Lighthouse reports
+      - name: Upload Lighthouse evidence
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: lighthouse-reports
+          name: perfect-pagespeed-reports
           path: |
             lighthouse-mobile.json
             lighthouse-desktop.json
