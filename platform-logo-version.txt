@@ -1,4 +1,0 @@
-Resolute MSO platform logo deployment
-version: platform-logos-materialized-v2
-source: main/index.html
-commit-base: 52d1a1d8aa13d4ec6354ed58e4f3046adfd9ebee
