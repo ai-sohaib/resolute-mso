@@ -1,0 +1,192 @@
+/* Resolute MSO futuristic technology theme polish */
+:root {
+  --futuristic-radius: 20px;
+  --futuristic-border: rgba(126, 210, 231, .32);
+  --futuristic-glass: rgba(255, 255, 255, .78);
+  --futuristic-glow: 0 22px 55px rgba(18, 214, 197, .18), 0 10px 34px rgba(43, 124, 255, .12);
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(18, 214, 197, .08), transparent 26%),
+    radial-gradient(circle at 88% 18%, rgba(43, 124, 255, .07), transparent 28%),
+    #ffffff !important;
+}
+
+.site-header {
+  background: rgba(255, 255, 255, .82) !important;
+  backdrop-filter: blur(22px) saturate(1.25) !important;
+  border-bottom: 1px solid rgba(126, 210, 231, .32) !important;
+  box-shadow: 0 10px 30px rgba(3, 24, 39, .06) !important;
+}
+
+.nav-shell {
+  min-height: 76px !important;
+}
+
+.main-nav a,
+.nav-caret {
+  border-radius: 14px !important;
+  font-weight: 800 !important;
+}
+
+.main-nav a:hover,
+.main-nav a:focus-visible,
+.main-nav a.active,
+.nav-caret:hover {
+  background: linear-gradient(135deg, rgba(18, 214, 197, .13), rgba(43, 124, 255, .10)) !important;
+  color: #053760 !important;
+}
+
+.dropdown {
+  border-radius: 18px !important;
+  border: 1px solid rgba(126, 210, 231, .45) !important;
+  box-shadow: 0 22px 52px rgba(3, 24, 39, .18) !important;
+}
+
+.section {
+  padding: 76px 0 !important;
+}
+
+.section-soft {
+  background:
+    radial-gradient(circle at 88% 8%, rgba(18, 214, 197, .10), transparent 28%),
+    linear-gradient(180deg, #f4fbff, #ffffff) !important;
+}
+
+.section-dark {
+  background:
+    radial-gradient(circle at 15% 12%, rgba(18, 214, 197, .20), transparent 30%),
+    radial-gradient(circle at 85% 0%, rgba(43, 124, 255, .18), transparent 28%),
+    linear-gradient(135deg, #031827, #071b33 54%, #05243f) !important;
+}
+
+.hero h1,
+.sub-hero h1 {
+  letter-spacing: -0.026em !important;
+}
+
+.home-hero h1,
+.home-hook h1,
+.section-dark h1 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background: none !important;
+  background-clip: border-box !important;
+  -webkit-background-clip: border-box !important;
+  filter: none !important;
+  text-shadow: 0 2px 0 rgba(0,0,0,.05), 0 12px 28px rgba(0,0,0,.18) !important;
+  opacity: 1 !important;
+}
+
+.home-hero .lead,
+.home-hook .lead,
+.section-dark .lead {
+  color: rgba(237, 252, 255, .92) !important;
+  filter: none !important;
+  text-shadow: none !important;
+}
+
+.kicker {
+  letter-spacing: .045em !important;
+}
+
+.card,
+.visual-panel,
+.demo-form,
+.contact-form,
+.price-card,
+.metric-card,
+.stat,
+.line-card,
+.snapshot-item,
+.contact-card,
+.portal-topbar,
+.table-card {
+  border-radius: var(--futuristic-radius) !important;
+  border-color: var(--futuristic-border) !important;
+  box-shadow: 0 12px 36px rgba(7, 27, 51, .08) !important;
+}
+
+.visual-panel,
+.card,
+.demo-form,
+.contact-form {
+  background: linear-gradient(145deg, rgba(255,255,255,.94), rgba(239,250,255,.86)) !important;
+}
+
+.card:hover,
+.card:focus-within,
+.visual-panel:hover,
+.contact-card:hover,
+.price-card:hover,
+.metric-card:hover,
+.line-card:hover,
+.snapshot-item:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(18, 214, 197, .8) !important;
+  box-shadow: var(--futuristic-glow) !important;
+}
+
+.btn {
+  border-radius: 15px !important;
+  font-weight: 850 !important;
+  box-shadow: 0 16px 38px rgba(18, 214, 197, .22) !important;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 22px 60px rgba(18, 214, 197, .27), 0 8px 30px rgba(43, 124, 255, .16) !important;
+}
+
+input,
+select,
+textarea {
+  border-radius: 15px !important;
+  border-color: rgba(126, 210, 231, .72) !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #12d6c5 !important;
+  box-shadow: 0 0 0 4px rgba(18, 214, 197, .16) !important;
+}
+
+.footer-newsletter {
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .16), inset 0 0 0 1px rgba(255,255,255,.05) !important;
+}
+
+.footer-newsletter h2 {
+  font-size: clamp(1.55rem, 2.2vw, 2.1rem) !important;
+}
+
+.footer-grid a {
+  display: block !important;
+  margin: 7px 0 !important;
+  color: rgba(255,255,255,.78) !important;
+}
+
+.site-footer .footer-bottom {
+  background: rgba(255,255,255,.025) !important;
+}
+
+.go-up-button {
+  background: linear-gradient(135deg, #12d6c5, #2b7cff) !important;
+}
+
+@media (max-width: 760px) {
+  .section {
+    padding: 58px 0 !important;
+  }
+  .nav-shell {
+    min-height: 70px !important;
+  }
+  .home-hero h1,
+  .home-hook h1,
+  .section-dark h1 {
+    letter-spacing: -0.018em !important;
+    text-shadow: 0 8px 20px rgba(0,0,0,.16) !important;
+  }
+}
