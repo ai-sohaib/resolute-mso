@@ -1,0 +1,42 @@
+{
+  "company": "Resolute MSO",
+  "customDomain": "www.resolutemso.com",
+  "primaryEmail": "support@resolutemso.com",
+  "phone": "+1 701 552 5527",
+  "whatsapp": "https://wa.me/17015525527",
+  "linkedin": "https://www.linkedin.com/company/resolutemso",
+  "social": {
+    "facebook": "#",
+    "instagram": "#",
+    "twitter": "#",
+    "youtube": "#"
+  },
+  "colors": {
+    "deepNavy": "#031827",
+    "midnightBlue": "#071B33",
+    "healthcareTeal": "#12D6C5",
+    "electricBlue": "#2B7CFF",
+    "softBackground": "#F5FAFF",
+    "goldAccent": "#F6C453"
+  },
+  "hero": {
+    "headline": "Where Healthcare Revenue Meets Intelligent Automation",
+    "highlights": [
+      "Revenue Cycle Management",
+      "Medical Billing & Coding",
+      "Denial Management",
+      "AR Follow-Up",
+      "AI Automation",
+      "ChargePilot",
+      "Practice Health Dashboards",
+      "Healthcare Technology Solutions"
+    ]
+  },
+  "seo": {
+    "googleSiteVerification": "PASTE_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE_HERE",
+    "bingSiteVerification": "PASTE_BING_WEBMASTER_VERIFICATION_CODE_HERE",
+    "googleAnalyticsId": "G-PASTE_ID_HERE",
+    "defaultTitle": "Resolute MSO | AI-Driven RCM, Medical Billing & Healthcare Automation",
+    "defaultDescription": "Resolute MSO helps U.S. healthcare providers improve revenue cycle performance through medical billing, coding, denial management, AR follow-up, ChargePilot automation, practice dashboards, and healthcare technology solutions."
+  }
+}
