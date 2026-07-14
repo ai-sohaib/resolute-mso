@@ -1,0 +1,51 @@
+name: Materialize Free RCM Audit modal
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/css/free-audit-modal.css"
+      - "assets/js/free-audit-modal.js"
+      - "scripts/apply_free_audit_modal.py"
+      - ".github/workflows/materialize-free-audit-modal.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-free-audit-modal
+  cancel-in-progress: true
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Apply homepage audit modal
+        run: |
+          python3 scripts/apply_free_audit_modal.py
+          grep -Fq 'Get Free RCM Audit' index.html
+          grep -Fq 'id="free-audit-modal"' index.html
+          grep -Fq 'name="phone"' index.html
+          grep -Fq 'name="email"' index.html
+          grep -Fq '/assets/js/free-audit-modal.js' index.html
+          grep -Fq '/config.js' index.html
+
+      - name: Commit live homepage source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if git diff --cached --quiet; then
+            echo "Free RCM Audit modal is already materialized."
+            exit 0
+          fi
+          git commit -m "Add Free RCM Audit popup to homepage"
+          git push origin HEAD:main
