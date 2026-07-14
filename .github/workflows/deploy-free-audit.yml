@@ -1,0 +1,69 @@
+name: Deploy homepage Free RCM Audit
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "deployment-status/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages-free-audit
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout production source
+        uses: actions/checkout@v4
+
+      - name: Validate Free RCM Audit implementation
+        run: |
+          test -f index.html
+          test -f config.js
+          test -f assets/css/free-audit-modal.css
+          test -f assets/js/free-audit-modal.js
+          grep -Fq 'Get Free RCM Audit' index.html
+          grep -Fq 'id="free-audit-modal"' index.html
+          grep -Fq 'support@resolutemso.com' config.js
+
+      - name: Stage public site
+        run: |
+          mkdir -p _site
+          rsync -a ./ _site/ \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '_site/' \
+            --exclude 'scripts/' \
+            --exclude 'docs/' \
+            --exclude 'tests/' \
+            --exclude 'workers/' \
+            --exclude 'content-templates/' \
+            --exclude 'deployment-status/' \
+            --exclude '*.md'
+          touch _site/.nojekyll
+          test -f _site/CNAME
+          test -f _site/index.html
+          test -f _site/assets/js/free-audit-modal.js
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
