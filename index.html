@@ -25,6 +25,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What does Resolute MSO do?","acceptedAnswer":{"@type":"Answer","text":"Resolute MSO provides AI-powered revenue cycle management, medical billing services, healthcare operations support, automation assessment, and ChargePilot billing software automation for U.S. healthcare providers."}},{"@type":"Question","name":"Who does Resolute MSO serve?","acceptedAnswer":{"@type":"Answer","text":"Resolute MSO serves physician practices, groups, specialty clinics, laboratories, imaging centers, urgent care centers, RCM companies, and healthcare revenue leaders."}},{"@type":"Question","name":"What is ChargePilot?","acceptedAnswer":{"@type":"Answer","text":"ChargePilot is Resolute MSO's billing software claim-entry and claim-submission automation product for billing teams and RCM operations."}},{"@type":"Question","name":"Can website forms include patient information?","acceptedAnswer":{"@type":"Answer","text":"No. Public forms are for business inquiries only. Do not submit PHI or patient information."}}]}</script>
 <link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home.css"><link id="resolute-critical-typography" rel="stylesheet" href="/assets/css/pagespeed-home.css">  <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-readable Resolute MSO site guide">
   <script id="resolute-agent-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.resolutemso.com/#organization","name":"Resolute MSO","url":"https://www.resolutemso.com/","email":"support@resolutemso.com","telephone":"+1-701-552-5527","description":"Revenue cycle management, medical billing, healthcare workflow automation, and operational support for U.S. healthcare providers.","contactPoint":{"@type":"ContactPoint","contactType":"sales and business inquiries","telephone":"+1-701-552-5527","email":"support@resolutemso.com","availableLanguage":["English"]}},{"@type":"WebSite","@id":"https://www.resolutemso.com/#website","url":"https://www.resolutemso.com/","name":"Resolute MSO","publisher":{"@id":"https://www.resolutemso.com/#organization"},"inLanguage":"en-US"},{"@type":"Service","@id":"https://www.resolutemso.com/#rcm-service","name":"Revenue Cycle Management and Medical Billing Services","provider":{"@id":"https://www.resolutemso.com/#organization"},"areaServed":{"@type":"Country","name":"United States"},"serviceType":["Revenue Cycle Management","Medical Billing","Denial Management","Accounts Receivable Follow-Up","Provider Enrollment","Healthcare Workflow Automation"],"url":"https://www.resolutemso.com/services/"}]}</script>
+  <link rel="stylesheet" href="/assets/css/free-audit-modal.css">
 </head>
 <body data-page="index">
 
@@ -76,7 +77,7 @@
       <p class="lead">Resolute MSO helps U.S. healthcare providers reduce revenue leakage, improve A/R movement, reduce preventable denials, automate repetitive billing workflows, and gain revenue cycle visibility.</p>
       <div class="hero-actions">
         <a class="btn" href="/free-rcm-audit/">Book a Demo</a>
-        <a class="btn btn-secondary" href="/automation-suite/">View Automation Suite</a>
+        <button class="btn btn-secondary" type="button" data-open-free-audit>Get Free RCM Audit</button>
         <a class="btn btn-whatsapp" href="https://wa.me/17015525527?text=Hello%20Resolute%20MSO%2C%20I%27d%20like%20to%20discuss%20RCM%20and%20billing%20automation.">Talk on WhatsApp</a>
       </div>
       <p class="phi-note">Public forms are for business inquiries only. Do not submit PHI or patient information.</p>
@@ -208,11 +209,37 @@
     </div>
   </footer>
   
+
+  <section class="audit-modal" id="free-audit-modal" role="dialog" aria-modal="true" aria-labelledby="free-audit-title" hidden>
+    <button class="audit-modal__backdrop" type="button" data-close-free-audit aria-label="Close Free RCM Audit form"></button>
+    <div class="audit-modal__dialog">
+      <button class="audit-modal__close" type="button" data-close-free-audit aria-label="Close dialog">&times;</button>
+      <p class="audit-modal__kicker">Free RCM Audit</p>
+      <h2 id="free-audit-title">Request your free RCM audit</h2>
+      <p class="audit-modal__intro">Share your contact details and a Resolute MSO specialist will follow up about your revenue cycle audit.</p>
+      <form class="audit-form" id="free-audit-form" novalidate>
+        <input type="hidden" name="_subject" value="New Free RCM Audit Request — Resolute MSO">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="source" value="Homepage Free RCM Audit Popup">
+        <label class="audit-honeypot" aria-hidden="true">Leave this field empty<input name="_honey" type="text" tabindex="-1" autocomplete="off"></label>
+        <label>Name<input name="name" type="text" autocomplete="name" required maxlength="100"></label>
+        <label>Phone<input name="phone" type="tel" autocomplete="tel" required maxlength="30" inputmode="tel"></label>
+        <label>Email<input name="email" type="email" autocomplete="email" required maxlength="160"></label>
+        <button class="btn" type="submit">Send Request</button>
+        <p class="audit-form__status" role="status" aria-live="polite"></p>
+      </form>
+      <p class="audit-modal__privacy">Business inquiries only. Do not submit PHI or patient information.</p>
+    </div>
+  </section>
+
   <div class="floating-tools" role="group" aria-label="Quick contact tools">
     <a class="scroll-top visible" href="#main" aria-label="Go to top">&#8593;</a>
     <a class="whatsapp-launch" href="https://wa.me/17015525527?text=Hello%20Resolute%20MSO%2C%20I%27d%20like%20to%20discuss%20RCM%20and%20billing%20automation." target="_blank" rel="noopener noreferrer" aria-label="Chat with Resolute MSO on WhatsApp">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2C6.52 2 2.03 6.45 2.03 11.93c0 1.75.46 3.46 1.33 4.96L2 22l5.25-1.35a10.1 10.1 0 0 0 4.79 1.22c5.52 0 10.01-4.45 10.01-9.94S17.56 2 12.04 2Zm0 18.18c-1.52 0-3-.41-4.3-1.18l-.31-.18-3.11.8.83-3.01-.2-.31a8.16 8.16 0 0 1-1.25-4.37c0-4.55 3.74-8.25 8.34-8.25s8.34 3.7 8.34 8.25-3.74 8.25-8.34 8.25Zm4.57-6.18c-.25-.12-1.48-.73-1.71-.81-.23-.08-.4-.12-.57.12-.17.25-.65.81-.8.98-.15.17-.3.19-.55.06-.25-.12-1.06-.39-2.02-1.24-.75-.66-1.25-1.48-1.4-1.73-.15-.25-.02-.38.11-.51.11-.11.25-.3.37-.45.12-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.12-.57-1.36-.78-1.86-.21-.5-.41-.43-.57-.44h-.49c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.65 4.25 3.72.59.25 1.06.4 1.42.51.6.19 1.14.16 1.57.1.48-.07 1.48-.6 1.69-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.28Z"/></svg>
     </a>
   </div><script id="resolute-nav-script">(()=>{const t=document.querySelector(".nav-toggle"),n=document.querySelector(".main-nav");if(t&&n)t.addEventListener("click",()=>{const o=n.classList.toggle("open");t.setAttribute("aria-expanded",String(o))})})();</script>  <script src="/assets/js/agentic-readiness.js" defer></script>
+  <script src="/config.js"></script>
+  <script src="/assets/js/free-audit-modal.js" defer></script>
 </body>
 </html>
