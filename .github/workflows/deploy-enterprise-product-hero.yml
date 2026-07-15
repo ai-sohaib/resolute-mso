@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-enterprise-dashboard-logo-v5
+  group: pages-enterprise-dashboard-alignment-v6
   cancel-in-progress: true
 
 jobs:
@@ -29,7 +29,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate product hero and Resolute logo
+      - name: Validate aligned product hero and controls
         run: |
           test -f index.html
           test -f CNAME
@@ -41,6 +41,11 @@ jobs:
           grep -Fq 'rcm-dashboard__brand-mark' index.html
           grep -Fq 'resolute-dashboard-mark.svg' assets/css/enterprise-product-hero.css
           grep -Fq "aria-label', 'Resolute MSO'" assets/js/enterprise-product-hero.js
+          test "$(grep -Fc '<section class="product-hero"' index.html)" -eq 1
+          test "$(grep -Fc 'aria-label="Claims processing status"' index.html)" -eq 1
+          test "$(grep -Fc 'class="rcm-dashboard__lower"' index.html)" -eq 1
+          test "$(grep -Fc 'class="rcm-dashboard__footer"' index.html)" -eq 1
+          ! grep -Fq 'class="scroll-top' index.html
           ! grep -Fq 'healthcare-hero-ai' index.html
 
       - name: Stage public site
@@ -63,7 +68,8 @@ jobs:
           test -f _site/assets/css/enterprise-product-hero.css
           test -f _site/assets/js/enterprise-product-hero.js
           test -f _site/assets/img/resolute-dashboard-mark.svg
-          grep -Fq 'resolute-dashboard-mark.svg' _site/assets/css/enterprise-product-hero.css
+          test "$(grep -Fc 'aria-label="Claims processing status"' _site/index.html)" -eq 1
+          ! grep -Fq 'class="scroll-top' _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -87,8 +93,8 @@ jobs:
             "workflow_run_id": "${GITHUB_RUN_ID}",
             "page_url": "${{ steps.deployment.outputs.page_url }}",
             "completed_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "change": "Resolute dashboard logo deployed in enterprise product hero",
-            "restore_branch": "restore/pre-dashboard-logo-2026-07-15"
+            "change": "Dashboard alignment fixed and duplicate white scroll control removed",
+            "restore_branch": "restore/pre-dashboard-alignment-fix-2026-07-15"
           }
           EOF
           git config user.name "github-actions[bot]"
@@ -97,5 +103,5 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Record dashboard logo deployment [skip ci]"
+          git commit -m "Record dashboard alignment deployment [skip ci]"
           git push origin HEAD:main
