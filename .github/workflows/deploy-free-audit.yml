@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: github-pages-enterprise-homepage-v2
+  group: github-pages-enterprise-product-hero
   cancel-in-progress: true
 
 jobs:
@@ -34,17 +34,25 @@ jobs:
           test -f index.html
           test -f config.js
           test -f assets/css/pagespeed-home.css
+          test -f assets/css/enterprise-product-hero.css
           test -f assets/css/free-audit-modal.css
+          test -f assets/js/enterprise-product-hero.js
           test -f assets/js/free-audit-modal.js
+          grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' index.html
+          grep -Fq 'Book a Live Demo' index.html
+          grep -Fq 'Explore the Platform' index.html
+          grep -Fq 'data-rcm-dashboard' index.html
+          grep -Fq 'AI Recommendations' index.html
+          grep -Fq 'enterprise-product-hero.css' index.html
+          grep -Fq 'enterprise-product-hero.js' index.html
+          ! grep -Fq 'healthcare-hero-ai' index.html
           grep -Fq 'Get Free RCM Audit' index.html
           grep -Fq 'id="free-audit-modal"' index.html
           grep -Fq 'support@resolutemso.com' config.js
           grep -Fq 'class="section revenue-intelligence"' index.html
-          grep -Fq 'AI-Driven Revenue Cycle Management' index.html
           grep -Fq '98.7% Claim Accuracy' index.html
           grep -Fq '42% Fewer Denials' index.html
           grep -Fq '75% Faster Processing' index.html
-          grep -Fq 'revenue-intelligence-section' assets/css/pagespeed-home.css
 
       - name: Stage public site
         run: |
@@ -63,9 +71,11 @@ jobs:
           touch _site/.nojekyll
           test -f _site/CNAME
           test -f _site/index.html
-          test -f _site/assets/css/pagespeed-home.css
-          test -f _site/assets/js/free-audit-modal.js
-          grep -Fq 'class="section revenue-intelligence"' _site/index.html
+          test -f _site/assets/css/enterprise-product-hero.css
+          test -f _site/assets/js/enterprise-product-hero.js
+          grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' _site/index.html
+          grep -Fq 'data-rcm-dashboard' _site/index.html
+          ! grep -Fq 'healthcare-hero-ai' _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -89,8 +99,8 @@ jobs:
             "workflow_run_id": "${GITHUB_RUN_ID}",
             "page_url": "${{ steps.deployment.outputs.page_url }}",
             "completed_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "change": "Enterprise AI-driven revenue cycle management dashboard section deployed",
-            "restore_branch": "restore/pre-revenue-intelligence-section-2026-07-15"
+            "change": "Enterprise healthcare SaaS product hero deployed",
+            "restore_branch": "restore/pre-enterprise-product-hero-2026-07-15"
           }
           EOF
           git config user.name "github-actions[bot]"
@@ -99,5 +109,5 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Record enterprise dashboard deployment [skip ci]"
+          git commit -m "Record enterprise product hero deployment [skip ci]"
           git push origin HEAD:main
