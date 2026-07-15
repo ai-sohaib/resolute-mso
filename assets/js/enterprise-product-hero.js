@@ -2,6 +2,13 @@
   const dashboard = document.querySelector('[data-rcm-dashboard]');
   if (!dashboard) return;
 
+  const brandMark = dashboard.querySelector('.rcm-dashboard__brand-mark');
+  if (brandMark) {
+    brandMark.textContent = '';
+    brandMark.setAttribute('role', 'img');
+    brandMark.setAttribute('aria-label', 'Resolute MSO');
+  }
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const counters = Array.from(dashboard.querySelectorAll('[data-kpi-value]'));
 
