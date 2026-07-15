@@ -1,9 +1,9 @@
 {
   "status": "success",
-  "source_sha": "15dc84fb92e14da9c128a55e7dfc71261d4a7dba",
-  "workflow_run_id": "29428310845",
+  "source_sha": "a41e12f68fc9b298fd553bd2117a79640c2f6718",
+  "workflow_run_id": "29429227375",
   "page_url": "https://www.resolutemso.com/",
-  "completed_at_utc": "2026-07-15T15:29:56Z",
-  "change": "Enterprise AI-driven revenue cycle management dashboard section deployed",
-  "restore_branch": "restore/pre-revenue-intelligence-section-2026-07-15"
+  "completed_at_utc": "2026-07-15T15:42:10Z",
+  "change": "Enterprise healthcare SaaS product hero deployed",
+  "restore_branch": "restore/pre-enterprise-product-hero-2026-07-15"
 }
