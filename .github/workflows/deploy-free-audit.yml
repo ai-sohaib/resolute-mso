@@ -1,4 +1,4 @@
-name: Deploy homepage Free RCM Audit
+name: Deploy enterprise homepage
 
 on:
   push:
@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: github-pages-free-audit
+  group: github-pages-enterprise-homepage
   cancel-in-progress: true
 
 jobs:
@@ -27,15 +27,22 @@ jobs:
       - name: Checkout production source
         uses: actions/checkout@v4
 
-      - name: Validate Free RCM Audit implementation
+      - name: Validate enterprise homepage
         run: |
           test -f index.html
           test -f config.js
+          test -f assets/css/pagespeed-home.css
           test -f assets/css/free-audit-modal.css
           test -f assets/js/free-audit-modal.js
           grep -Fq 'Get Free RCM Audit' index.html
           grep -Fq 'id="free-audit-modal"' index.html
           grep -Fq 'support@resolutemso.com' config.js
+          grep -Fq 'class="section revenue-intelligence"' index.html
+          grep -Fq 'AI-Driven Revenue Cycle Management' index.html
+          grep -Fq '98.7% Claim Accuracy' index.html
+          grep -Fq '42% Fewer Denials' index.html
+          grep -Fq '75% Faster Processing' index.html
+          grep -Fq 'revenue-intelligence-section' assets/css/pagespeed-home.css
 
       - name: Stage public site
         run: |
@@ -54,7 +61,9 @@ jobs:
           touch _site/.nojekyll
           test -f _site/CNAME
           test -f _site/index.html
+          test -f _site/assets/css/pagespeed-home.css
           test -f _site/assets/js/free-audit-modal.js
+          grep -Fq 'class="section revenue-intelligence"' _site/index.html
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
