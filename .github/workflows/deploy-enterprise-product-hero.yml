@@ -1,0 +1,101 @@
+name: Deploy enterprise product hero
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "deployment-status/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-enterprise-product-hero-v3
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout production source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate product hero source
+        run: |
+          test -f index.html
+          test -f CNAME
+          test -f assets/css/enterprise-product-hero.css
+          test -f assets/js/enterprise-product-hero.js
+          grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' index.html
+          grep -Fq 'Book a Live Demo' index.html
+          grep -Fq 'Explore the Platform' index.html
+          grep -Fq 'data-rcm-dashboard' index.html
+          grep -Fq 'AI Recommendations' index.html
+          grep -Fq 'enterprise-product-hero.css' index.html
+          grep -Fq 'enterprise-product-hero.js' index.html
+          ! grep -Fq 'healthcare-hero-ai' index.html
+
+      - name: Stage public site
+        run: |
+          mkdir -p _site
+          rsync -a ./ _site/ \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude '_site/' \
+            --exclude 'scripts/' \
+            --exclude 'docs/' \
+            --exclude 'tests/' \
+            --exclude 'workers/' \
+            --exclude 'content-templates/' \
+            --exclude 'deployment-status/' \
+            --exclude '*.md'
+          touch _site/.nojekyll
+          test -f _site/index.html
+          test -f _site/CNAME
+          test -f _site/assets/css/enterprise-product-hero.css
+          test -f _site/assets/js/enterprise-product-hero.js
+          grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' _site/index.html
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy Pages artifact
+        id: deployment
+        uses: actions/deploy-pages@v5
+
+      - name: Record deployment receipt
+        run: |
+          mkdir -p deployment-status
+          cat > deployment-status/latest.json <<EOF
+          {
+            "status": "success",
+            "source_sha": "${GITHUB_SHA}",
+            "workflow_run_id": "${GITHUB_RUN_ID}",
+            "page_url": "${{ steps.deployment.outputs.page_url }}",
+            "completed_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
+            "change": "Enterprise healthcare SaaS product hero deployed",
+            "restore_branch": "restore/pre-enterprise-product-hero-2026-07-15"
+          }
+          EOF
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add deployment-status/latest.json
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "Record enterprise product hero deployment [skip ci]"
+          git push origin HEAD:main
