@@ -8,6 +8,7 @@ INDEX = ROOT / "index.html"
 
 CSS_LINK = '<link rel="stylesheet" href="/assets/css/enterprise-product-hero.css?v=20260715">'
 JS_LINK = '<script src="/assets/js/enterprise-product-hero.js?v=20260715" defer></script>'
+NEXT_SECTION = '<section class="section revenue-intelligence"'
 
 HERO = r'''<section class="product-hero" aria-labelledby="product-hero-title">
   <div class="container product-hero__grid">
@@ -32,7 +33,7 @@ HERO = r'''<section class="product-hero" aria-labelledby="product-hero-title">
 
     <div class="rcm-dashboard" data-rcm-dashboard aria-label="Illustrative Resolute MSO revenue cycle dashboard">
       <div class="rcm-dashboard__topbar">
-        <div class="rcm-dashboard__brand"><span class="rcm-dashboard__brand-mark">RMSO</span><span>Revenue Intelligence</span></div>
+        <div class="rcm-dashboard__brand"><span class="rcm-dashboard__brand-mark" role="img" aria-label="Resolute MSO"></span><span>Revenue Intelligence</span></div>
         <div class="rcm-dashboard__status">Illustrative product view</div>
       </div>
       <div class="rcm-dashboard__body">
@@ -90,21 +91,31 @@ HERO = r'''<section class="product-hero" aria-labelledby="product-hero-title">
 
 
 def replace_hero(html: str) -> str:
-    patterns = (
-        r'<section class="hero home-hero">.*?</section>',
-        r'<section class="r-hero home-hero">.*?</section>',
-        r'<section class="product-hero".*?</section>',
+    starts = (
+        '<section class="product-hero"',
+        '<section class="hero home-hero"',
+        '<section class="r-hero home-hero"',
     )
-    for pattern in patterns:
-        updated, count = re.subn(pattern, HERO, html, count=1, flags=re.S)
-        if count:
-            return updated
-    raise RuntimeError("Could not locate a supported homepage hero section.")
+    start = next((html.find(token) for token in starts if html.find(token) >= 0), -1)
+    if start < 0:
+        raise RuntimeError("Could not locate a supported homepage hero section.")
+
+    end = html.find(NEXT_SECTION, start)
+    if end < 0:
+        raise RuntimeError("Could not locate the revenue intelligence section after the homepage hero.")
+
+    return html[:start] + HERO + "\n" + html[end:]
+
+
+def remove_legacy_scroll_control(html: str) -> str:
+    pattern = r'\s*<(?:a|button)\b[^>]*class="[^"]*\bscroll-top\b[^"]*"[^>]*>.*?</(?:a|button)>'
+    return re.sub(pattern, "", html, flags=re.S)
 
 
 def main() -> None:
     html = INDEX.read_text(encoding="utf-8")
     html = replace_hero(html)
+    html = remove_legacy_scroll_control(html)
 
     html = re.sub(r'\s*<link rel="stylesheet" href="/assets/css/enterprise-product-hero\.css[^\"]*">', "", html)
     html = re.sub(r'\s*<script src="/assets/js/enterprise-product-hero\.js[^\"]*" defer></script>', "", html)
@@ -118,12 +129,14 @@ def main() -> None:
         raise RuntimeError("Legacy doctor-image hero references remain in index.html.")
     if html.count('href="/assets/css/pagespeed-home.css"') > 1:
         first = True
+
         def dedupe(match: re.Match[str]) -> str:
             nonlocal first
             if first:
                 first = False
                 return match.group(0)
             return ""
+
         html = re.sub(r'<link[^>]+href="/assets/css/pagespeed-home\.css"[^>]*>', dedupe, html)
 
     required = (
@@ -133,13 +146,26 @@ def main() -> None:
         "data-rcm-dashboard",
         "AI Recommendations",
         "Accounts receivable aging",
+        "/assets/img/resolute-dashboard-mark.svg",
     )
-    missing = [value for value in required if value not in html]
+    missing = [value for value in required if value not in html and value not in (ROOT / "assets/css/enterprise-product-hero.css").read_text(encoding="utf-8")]
     if missing:
         raise RuntimeError(f"Hero validation failed: {missing}")
 
+    exact_counts = {
+        '<section class="product-hero"': 1,
+        'aria-label="Claims processing status"': 1,
+        'class="rcm-dashboard__lower"': 1,
+        'class="rcm-dashboard__footer"': 1,
+    }
+    incorrect = {token: html.count(token) for token, expected in exact_counts.items() if html.count(token) != expected}
+    if incorrect:
+        raise RuntimeError(f"Duplicate or missing dashboard markup remains: {incorrect}")
+    if 'class="scroll-top' in html:
+        raise RuntimeError("Legacy white scroll-to-top control remains in index.html.")
+
     INDEX.write_text(html, encoding="utf-8")
-    print("Enterprise product hero applied to index.html.")
+    print("Enterprise product hero normalized and aligned in index.html.")
 
 
 if __name__ == "__main__":
