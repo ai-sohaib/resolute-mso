@@ -1,9 +1,9 @@
 {
   "status": "success",
-  "source_sha": "3be27f169c1af8b4153bfc484b948b99f66ad4f7",
-  "workflow_run_id": "29430976290",
+  "source_sha": "36364f18a940f853ea9ace183e2dbf3724167481",
+  "workflow_run_id": "29431210910",
   "page_url": "https://www.resolutemso.com/",
-  "completed_at_utc": "2026-07-15T16:06:04Z",
-  "change": "Enterprise healthcare SaaS product hero deployed",
-  "restore_branch": "restore/pre-enterprise-product-hero-2026-07-15"
+  "completed_at_utc": "2026-07-15T16:09:30Z",
+  "change": "Resolute dashboard logo deployed in enterprise product hero",
+  "restore_branch": "restore/pre-dashboard-logo-2026-07-15"
 }
