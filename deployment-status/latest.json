@@ -1,9 +1,9 @@
 {
   "status": "success",
-  "source_sha": "208fa85d1409e9fc4147780eaf04b2b423f4dc52",
-  "workflow_run_id": "29436641836",
+  "source_sha": "459d8ee85015fc375474df8e62e723a23edbe60d",
+  "workflow_run_id": "29436666214",
   "page_url": "https://www.resolutemso.com/",
-  "completed_at_utc": "2026-07-15T17:28:53Z",
-  "change": "Resolute dashboard logo deployed in enterprise product hero",
-  "restore_branch": "restore/pre-dashboard-logo-2026-07-15"
+  "completed_at_utc": "2026-07-15T17:29:16Z",
+  "change": "Dashboard alignment fixed and duplicate white scroll control removed",
+  "restore_branch": "restore/pre-dashboard-alignment-fix-2026-07-15"
 }
