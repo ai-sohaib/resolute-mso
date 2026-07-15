@@ -160,7 +160,7 @@
 
 .automation-detail-card:nth-child(1) .automation-visual { background-image: url('../img/chargepilot-desktop-control.jpg'); }
 .automation-detail-card:nth-child(1) .automation-visual::after { content: "Claim Entry"; }
-.automation-detail-card:nth-child(2) .automation-visual { background-image: url('../img/healthcare-hero-ai.jpg'); }
+.automation-detail-card:nth-child(2) .automation-visual { background-image: url('../img/rcm-operations-ai.jpg'); }
 .automation-detail-card:nth-child(2) .automation-visual::after { content: "Eligibility"; }
 .automation-detail-card:nth-child(3) .automation-visual { background-image: url('../img/rcm-operations-ai.jpg'); }
 .automation-detail-card:nth-child(3) .automation-visual::after { content: "Denials"; }
