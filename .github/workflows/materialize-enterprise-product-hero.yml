@@ -28,13 +28,18 @@ jobs:
           ref: main
           fetch-depth: 0
 
-      - name: Apply enterprise product hero
+      - name: Apply and validate enterprise product hero
         run: |
           python3 scripts/apply_enterprise_product_hero.py
           grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' index.html
           grep -Fq 'data-rcm-dashboard' index.html
           grep -Fq 'enterprise-product-hero.css' index.html
           grep -Fq 'enterprise-product-hero.js' index.html
+          test "$(grep -Fc '<section class="product-hero"' index.html)" -eq 1
+          test "$(grep -Fc 'aria-label="Claims processing status"' index.html)" -eq 1
+          test "$(grep -Fc 'class="rcm-dashboard__lower"' index.html)" -eq 1
+          test "$(grep -Fc 'class="rcm-dashboard__footer"' index.html)" -eq 1
+          ! grep -Fq 'class="scroll-top' index.html
           ! grep -Fq 'healthcare-hero-ai' index.html
 
       - name: Commit live homepage source
@@ -43,8 +48,8 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
           if git diff --cached --quiet; then
-            echo "Enterprise product hero is already materialized."
+            echo "Enterprise product hero is already normalized."
             exit 0
           fi
-          git commit -m "Materialize enterprise healthcare SaaS hero"
+          git commit -m "Materialize aligned enterprise healthcare SaaS hero"
           git push origin HEAD:main
