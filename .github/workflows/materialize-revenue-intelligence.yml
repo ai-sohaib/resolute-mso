@@ -1,0 +1,53 @@
+name: Materialize revenue intelligence section
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/apply_revenue_intelligence_section.py"
+      - ".github/workflows/materialize-revenue-intelligence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: materialize-revenue-intelligence
+  cancel-in-progress: false
+
+jobs:
+  materialize:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Apply enterprise dashboard section
+        run: |
+          python scripts/apply_revenue_intelligence_section.py
+          grep -Fq 'class="section revenue-intelligence"' index.html
+          grep -Fq 'AI-Driven Revenue Cycle Management' index.html
+          grep -Fq '98.7% Claim Accuracy' index.html
+          grep -Fq '75% Faster Processing' index.html
+          grep -Fq 'revenue-intelligence-section' assets/css/pagespeed-home.css
+
+      - name: Commit materialized homepage
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html assets/css/pagespeed-home.css assets/css/pagespeed-home-source.css
+          if git diff --cached --quiet; then
+            echo "Revenue intelligence section is already materialized."
+            exit 0
+          fi
+          git commit -m "Replace simple outcome cards with enterprise revenue dashboard"
+          git push origin HEAD:main
