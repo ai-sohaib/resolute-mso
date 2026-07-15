@@ -13,7 +13,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-enterprise-product-hero-v3
+  group: pages-enterprise-dashboard-logo-v5
   cancel-in-progress: true
 
 jobs:
@@ -29,19 +29,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Validate product hero source
+      - name: Validate product hero and Resolute logo
         run: |
           test -f index.html
           test -f CNAME
           test -f assets/css/enterprise-product-hero.css
           test -f assets/js/enterprise-product-hero.js
+          test -f assets/img/resolute-dashboard-mark.svg
           grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' index.html
-          grep -Fq 'Book a Live Demo' index.html
-          grep -Fq 'Explore the Platform' index.html
           grep -Fq 'data-rcm-dashboard' index.html
-          grep -Fq 'AI Recommendations' index.html
-          grep -Fq 'enterprise-product-hero.css' index.html
-          grep -Fq 'enterprise-product-hero.js' index.html
+          grep -Fq 'rcm-dashboard__brand-mark' index.html
+          grep -Fq 'resolute-dashboard-mark.svg' assets/css/enterprise-product-hero.css
+          grep -Fq "aria-label', 'Resolute MSO'" assets/js/enterprise-product-hero.js
           ! grep -Fq 'healthcare-hero-ai' index.html
 
       - name: Stage public site
@@ -63,7 +62,8 @@ jobs:
           test -f _site/CNAME
           test -f _site/assets/css/enterprise-product-hero.css
           test -f _site/assets/js/enterprise-product-hero.js
-          grep -Fq 'Revenue Cycle Intelligence Built for Modern Healthcare' _site/index.html
+          test -f _site/assets/img/resolute-dashboard-mark.svg
+          grep -Fq 'resolute-dashboard-mark.svg' _site/assets/css/enterprise-product-hero.css
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -87,8 +87,8 @@ jobs:
             "workflow_run_id": "${GITHUB_RUN_ID}",
             "page_url": "${{ steps.deployment.outputs.page_url }}",
             "completed_at_utc": "$(date -u +%Y-%m-%dT%H:%M:%SZ)",
-            "change": "Enterprise healthcare SaaS product hero deployed",
-            "restore_branch": "restore/pre-enterprise-product-hero-2026-07-15"
+            "change": "Resolute dashboard logo deployed in enterprise product hero",
+            "restore_branch": "restore/pre-dashboard-logo-2026-07-15"
           }
           EOF
           git config user.name "github-actions[bot]"
@@ -97,5 +97,5 @@ jobs:
           if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "Record enterprise product hero deployment [skip ci]"
+          git commit -m "Record dashboard logo deployment [skip ci]"
           git push origin HEAD:main
