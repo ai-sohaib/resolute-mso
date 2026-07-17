@@ -1,0 +1,674 @@
+/* Enterprise Workflow Familiarity Section - Complete Redesign */
+
+/* Enterprise Container */
+.enterprise-workflow {
+  background: linear-gradient(135deg, #f7fdff 0%, #effff8 48%, #f7fdff 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 88px 0;
+}
+
+.enterprise-workflow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 168, 132, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(24, 119, 242, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.enterprise-workflow .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Section Header */
+.enterprise-header {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.enterprise-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid #d8edf5;
+  border-radius: 999px;
+  padding: 10px 16px;
+  margin-bottom: 24px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #00a884;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(7, 52, 86, 0.08);
+}
+
+.enterprise-label::before {
+  content: "◆";
+  font-size: 0.75rem;
+}
+
+.enterprise-headline {
+  font-size: 2.5rem;
+  line-height: 1.2;
+  margin: 0 0 18px;
+  color: #073456;
+  font-weight: 900;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.enterprise-description {
+  font-size: 1.1rem;
+  color: #527086;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Workflow Diagram Section */
+.workflow-diagram-wrapper {
+  margin: 72px 0;
+  position: relative;
+}
+
+.workflow-diagram {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 32px;
+  align-items: center;
+  position: relative;
+  padding: 48px 0;
+}
+
+/* Connecting lines between nodes */
+.workflow-diagram::before,
+.workflow-diagram::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  background: linear-gradient(90deg, #00a884, #1877f2, #11c5d3);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+.workflow-diagram::before {
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, 
+    #00a884 0%, 
+    #00a884 14%,
+    #1877f2 28%,
+    #1877f2 42%,
+    #11c5d3 56%,
+    #11c5d3 70%,
+    #00a884 84%,
+    #00a884 100%);
+}
+
+/* Workflow Node */
+.workflow-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  opacity: 0;
+  animation: nodeSlideIn 0.6s ease-out forwards;
+}
+
+.workflow-node:nth-child(1) { animation-delay: 0.1s; }
+.workflow-node:nth-child(2) { animation-delay: 0.2s; }
+.workflow-node:nth-child(3) { animation-delay: 0.3s; }
+.workflow-node:nth-child(4) { animation-delay: 0.4s; }
+.workflow-node:nth-child(5) { animation-delay: 0.5s; }
+.workflow-node:nth-child(6) { animation-delay: 0.6s; }
+.workflow-node:nth-child(7) { animation-delay: 0.7s; }
+
+@keyframes nodeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.workflow-icon-container {
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  background: #fff;
+  border: 2px solid #d8edf5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: all 0.3s ease;
+  box-shadow: 0 12px 32px rgba(7, 52, 86, 0.12);
+}
+
+.workflow-node:hover .workflow-icon-container {
+  transform: translateY(-8px);
+  border-color: #00a884;
+  box-shadow: 0 18px 48px rgba(0, 168, 132, 0.22);
+  background: linear-gradient(135deg, #ecfff9 0%, #fff 100%);
+}
+
+.workflow-icon-container svg {
+  width: 36px;
+  height: 36px;
+  stroke-width: 1.5;
+  color: #00a884;
+}
+
+.workflow-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #073456;
+}
+
+.workflow-sublabel {
+  font-size: 0.8rem;
+  color: #527086;
+  margin-top: 4px;
+}
+
+/* Trust Indicators */
+.trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 64px 0;
+  padding: 48px;
+  background: #fff;
+  border: 1px solid #d8edf5;
+  border-radius: 24px;
+  box-shadow: 0 16px 48px rgba(7, 52, 86, 0.08);
+}
+
+.trust-indicator {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px;
+  opacity: 0;
+  animation: indicatorFadeIn 0.5s ease-out forwards;
+}
+
+.trust-indicator:nth-child(1) { animation-delay: 0.8s; }
+.trust-indicator:nth-child(2) { animation-delay: 0.9s; }
+.trust-indicator:nth-child(3) { animation-delay: 1s; }
+.trust-indicator:nth-child(4) { animation-delay: 1.1s; }
+
+@keyframes indicatorFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.trust-indicator::before {
+  content: "✓";
+  color: #00a884;
+  font-weight: 900;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+}
+
+.trust-indicator-text {
+  font-size: 0.95rem;
+  color: #073456;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Compatibility Cards Section */
+.compatibility-section {
+  margin: 72px 0 0;
+}
+
+.compatibility-section-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #073456;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #d8edf5;
+}
+
+/* EHR Compatibility Cards */
+.ehr-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  margin-bottom: 56px;
+}
+
+.ehr-card {
+  background: #fff;
+  border: 1px solid #d8edf5;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 12px 32px rgba(7, 52, 86, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ehr-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #00a884, #1877f2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.ehr-card:hover {
+  transform: translateY(-8px);
+  border-color: #00a884;
+  box-shadow: 0 20px 56px rgba(0, 168, 132, 0.18);
+}
+
+.ehr-card:hover::before {
+  transform: scaleX(1);
+}
+
+.ehr-card-name {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #073456;
+}
+
+.ehr-card-category {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #00a884;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ehr-card-description {
+  font-size: 0.95rem;
+  color: #527086;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.ehr-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #ecfff9, #e8f7ff);
+  border: 1px solid #bdeee3;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #00a884;
+  width: fit-content;
+}
+
+.ehr-card-status::before {
+  content: "●";
+  font-size: 0.6rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* LIS Section */
+.lis-section {
+  margin-top: 56px;
+  padding-top: 56px;
+  border-top: 2px solid #d8edf5;
+}
+
+.lis-section-title {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #073456;
+  margin-bottom: 32px;
+}
+
+.lis-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.lis-card {
+  background: linear-gradient(135deg, #fff 0%, #f9fefb 100%);
+  border: 1px solid #d8edf5;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 12px 32px rgba(7, 52, 86, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+}
+
+.lis-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1877f2, #11c5d3);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.lis-card:hover {
+  transform: translateY(-8px);
+  border-color: #1877f2;
+  box-shadow: 0 20px 56px rgba(24, 119, 242, 0.18);
+}
+
+.lis-card:hover::before {
+  transform: scaleX(1);
+}
+
+.lis-card-name {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #073456;
+}
+
+.lis-card-category {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1877f2;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lis-card-description {
+  font-size: 0.95rem;
+  color: #527086;
+  line-height: 1.6;
+  flex-grow: 1;
+}
+
+.lis-card-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: linear-gradient(135deg, #e8f7ff, #f0f4ff);
+  border: 1px solid #a9d6f2;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #1877f2;
+  width: fit-content;
+}
+
+.lis-card-status::before {
+  content: "●";
+  font-size: 0.6rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* KPI Trust Bar */
+.kpi-trust-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 72px;
+  padding: 48px;
+  background: linear-gradient(135deg, #073456 0%, #0b4c6f 100%);
+  border-radius: 24px;
+  box-shadow: 0 24px 64px rgba(7, 52, 86, 0.24);
+  position: relative;
+  overflow: hidden;
+}
+
+.kpi-trust-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 20% 50%, rgba(0, 168, 132, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(24, 119, 242, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.kpi-item {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  opacity: 0;
+  animation: kpiSlideUp 0.6s ease-out forwards;
+}
+
+.kpi-item:nth-child(1) { animation-delay: 0.2s; }
+.kpi-item:nth-child(2) { animation-delay: 0.4s; }
+.kpi-item:nth-child(3) { animation-delay: 0.6s; }
+.kpi-item:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes kpiSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.kpi-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: #00a884;
+  margin-bottom: 8px;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-label {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .workflow-diagram {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+
+  .trust-indicators {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .ehr-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  }
+
+  .kpi-trust-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .enterprise-workflow {
+    padding: 64px 0;
+  }
+
+  .enterprise-headline {
+    font-size: 1.8rem;
+  }
+
+  .enterprise-description {
+    font-size: 1rem;
+  }
+
+  .workflow-diagram {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 32px 0;
+  }
+
+  .workflow-icon-container {
+    width: 60px;
+    height: 60px;
+  }
+
+  .workflow-icon-container svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .workflow-label {
+    font-size: 0.85rem;
+  }
+
+  .trust-indicators {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 32px;
+    margin: 48px 0;
+  }
+
+  .ehr-cards-grid,
+  .lis-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .kpi-trust-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 32px;
+    margin-top: 48px;
+  }
+
+  .kpi-number {
+    font-size: 1.8rem;
+  }
+
+  .kpi-label {
+    font-size: 0.85rem;
+  }
+
+  .enterprise-header {
+    margin-bottom: 48px;
+  }
+
+  .workflow-diagram-wrapper {
+    margin: 48px 0;
+  }
+
+  .compatibility-section-title,
+  .lis-section-title {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .enterprise-workflow {
+    padding: 48px 0;
+  }
+
+  .enterprise-headline {
+    font-size: 1.4rem;
+  }
+
+  .enterprise-description {
+    font-size: 0.95rem;
+  }
+
+  .workflow-diagram {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .trust-indicators {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px;
+    margin: 32px 0;
+  }
+
+  .kpi-trust-bar {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .kpi-number {
+    font-size: 1.5rem;
+  }
+
+  .workflow-icon-container {
+    width: 54px;
+    height: 54px;
+  }
+
+  .ehr-card,
+  .lis-card {
+    padding: 20px;
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  .workflow-node,
+  .trust-indicator,
+  .kpi-item,
+  .ehr-card,
+  .lis-card {
+    animation: none;
+    opacity: 1;
+  }
+
+  .ehr-card:hover,
+  .lis-card:hover {
+    transform: none;
+  }
+
+  .workflow-node:hover .workflow-icon-container {
+    transform: none;
+  }
+
+  .ehr-card::before,
+  .lis-card::before,
+  .ehr-card-status::before,
+  .lis-card-status::before {
+    animation: none;
+  }
+}
