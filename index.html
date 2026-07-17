@@ -27,6 +27,7 @@
   <script id="resolute-agent-schema" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.resolutemso.com/#organization","name":"Resolute MSO","url":"https://www.resolutemso.com/","email":"support@resolutemso.com","telephone":"+1-701-552-5527","description":"Revenue cycle management, medical billing, healthcare workflow automation, and operational support for U.S. healthcare providers.","contactPoint":{"@type":"ContactPoint","contactType":"sales and business inquiries","telephone":"+1-701-552-5527","email":"support@resolutemso.com","availableLanguage":["English"]}},{"@type":"WebSite","@id":"https://www.resolutemso.com/#website","url":"https://www.resolutemso.com/","name":"Resolute MSO","publisher":{"@id":"https://www.resolutemso.com/#organization"},"inLanguage":"en-US"},{"@type":"Service","@id":"https://www.resolutemso.com/#rcm-service","name":"Revenue Cycle Management and Medical Billing Services","provider":{"@id":"https://www.resolutemso.com/#organization"},"areaServed":{"@type":"Country","name":"United States"},"serviceType":["Revenue Cycle Management","Medical Billing","Denial Management","Accounts Receivable Follow-Up","Provider Enrollment","Healthcare Workflow Automation"],"url":"https://www.resolutemso.com/services/"}]}</script>
   <link rel="stylesheet" href="/assets/css/free-audit-modal.css">
   <link rel="stylesheet" href="/assets/css/enterprise-product-hero.css?v=20260715">
+  <link rel="stylesheet" href="/assets/css/enterprise-workflow.css?v=20260716">
 </head>
 <body data-page="index">
 
@@ -238,10 +239,197 @@
     </div>
   </div>
 </section>
-<section class="section">
+<!-- Enterprise Workflow Familiarity Section -->
+<section class="enterprise-workflow" aria-label="Enterprise workflow compatibility">
   <div class="container">
-    <div class="section-head"><p class="kicker">Workflow Familiarity</p><h2>Support for the systems revenue teams already work around.</h2><p>Resolute MSO supports billing workflows around common practice management, clearinghouse, EHR, and LIS environments. Platform names describe workflow familiarity and support, not official integration unless separately confirmed.</p></div>
-    <div class="platform-strip platform-logo-strip"><span><img src="/assets/img/platforms/officeally.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>OfficeAlly</em></span><span><img src="/assets/img/platforms/eclinicalworks.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>eClinicalWorks</em></span><span><img src="/assets/img/platforms/carecloud.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>CareCloud</em></span><span><img src="/assets/img/platforms/nextgen.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>NextGen</em></span><span><img src="/assets/img/platforms/athenahealth.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>Athenahealth</em></span><span><img src="/assets/img/platforms/advancedmd.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>AdvancedMD</em></span><span><img src="/assets/img/platforms/modmed.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>ModMed</em></span><span><img src="/assets/img/platforms/telcor.webp" width="96" height="96" alt="" aria-hidden="true" loading="lazy" decoding="async"><em>Telcor LIS</em></span></div>
+    <!-- Section Header -->
+    <div class="enterprise-header">
+      <span class="enterprise-label">Workflow Familiarity</span>
+      <h2 class="enterprise-headline">Implementation Confidence Through Familiar Systems</h2>
+      <p class="enterprise-description">Resolute MSO integrates seamlessly with the practice management, EHR, and laboratory systems your teams already work around daily. Our enterprise compatibility approach removes switching friction and maintains workflow continuity.</p>
+    </div>
+
+    <!-- Workflow Diagram -->
+    <div class="workflow-diagram-wrapper">
+      <h3 style="font-size: 0; visibility: hidden;">Enterprise Workflow Architecture</h3>
+      <div class="workflow-diagram" role="img" aria-label="Enterprise workflow showing integration from Practice Management through to Payments and Reconciliation">
+        <!-- Practice Management -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9h18v12c0 1-1 2-2 2H5c-1 0-2-1-2-2V9z"/><path d="M3 9V7c0-1 1-2 2-2h14c1 0 2 1 2 2v2M8 13h8M8 17h8"/></svg>
+          </div>
+          <span class="workflow-label">Practice Management</span>
+          <span class="workflow-sublabel">Entry Point</span>
+        </div>
+
+        <!-- EHR -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M16 21H8c-1 0-2-1-2-2V5c0-1 1-2 2-2h8m-8 6h8M8 13h8M8 17h8"/><path d="M12 3v2M12 19v2"/></svg>
+          </div>
+          <span class="workflow-label">EHR System</span>
+          <span class="workflow-sublabel">Clinical Data</span>
+        </div>
+
+        <!-- Resolute MSO Platform -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l4 2"/><path d="M16 3c2-1 4 0 5 2M8 3c-2-1-4 0-5 2M19 12c1 2 0 4-2 5M5 12c-1 2 0 4 2 5"/></svg>
+          </div>
+          <span class="workflow-label">Resolute MSO</span>
+          <span class="workflow-sublabel">Platform Core</span>
+        </div>
+
+        <!-- LIS -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h10M7 13h10M7 17h6M3 5h18v0"/></svg>
+          </div>
+          <span class="workflow-label">Laboratory System</span>
+          <span class="workflow-sublabel">Lab Management</span>
+        </div>
+
+        <!-- Clearinghouse -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 12l4-4M3 12l4 4M21 12l-4-4M21 12l-4 4M12 3v18M12 3l-3 3M12 3l3 3M12 21l-3-3M12 21l3-3"/></svg>
+          </div>
+          <span class="workflow-label">Clearinghouse</span>
+          <span class="workflow-sublabel">Claim Routing</span>
+        </div>
+
+        <!-- Payers -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 8h18c1 0 2 1 2 2v10c0 1-1 2-2 2H3c-1 0-2-1-2-2V10c0-1 1-2 2-2z"/><circle cx="12" cy="15" r="2"/><path d="M6 9v2M18 9v2"/></svg>
+          </div>
+          <span class="workflow-label">Insurance Payers</span>
+          <span class="workflow-sublabel">Claims Processing</span>
+        </div>
+
+        <!-- Payments & Reconciliation -->
+        <div class="workflow-node">
+          <div class="workflow-icon-container">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 6h18v12c0 1-1 2-2 2H5c-1 0-2-1-2-2V6z"/><path d="M3 6V4c0-1 1-2 2-2h14c1 0 2 1 2 2v2M9 12h6M9 15h3"/></svg>
+          </div>
+          <span class="workflow-label">Payments & Reconciliation</span>
+          <span class="workflow-sublabel">Financial Completion</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trust Indicators -->
+    <div class="trust-indicators">
+      <div class="trust-indicator">
+        <span class="trust-indicator-text">Seamless System Connectivity</span>
+      </div>
+      <div class="trust-indicator">
+        <span class="trust-indicator-text">Zero Workflow Disruption</span>
+      </div>
+      <div class="trust-indicator">
+        <span class="trust-indicator-text">Enterprise Security Standards</span>
+      </div>
+      <div class="trust-indicator">
+        <span class="trust-indicator-text">Real-Time Visibility & Control</span>
+      </div>
+    </div>
+
+    <!-- Compatibility Section -->
+    <div class="compatibility-section">
+      <!-- EHR & Practice Management Cards -->
+      <h3 class="compatibility-section-title">Supported Practice Management & EHR Systems</h3>
+      <div class="ehr-cards-grid">
+        <!-- OfficeAlly -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Practice Management</div>
+          <div class="ehr-card-name">OfficeAlly</div>
+          <p class="ehr-card-description">Familiar billing workflow supported without replacing existing processes. Resolute works alongside OfficeAlly billing.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+
+        <!-- eClinicalWorks -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Electronic Health Record</div>
+          <div class="ehr-card-name">eClinicalWorks</div>
+          <p class="ehr-card-description">Integrated clinical-to-billing workflow. Clinical data flows through to revenue cycle operations seamlessly.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+
+        <!-- NextGen -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Practice Management</div>
+          <div class="ehr-card-name">NextGen Healthcare</div>
+          <p class="ehr-card-description">Integrated practice management environment. Resolute integrates into NextGen billing workflows and automation.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+
+        <!-- Athenahealth -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Cloud-Based EHR</div>
+          <div class="ehr-card-name">Athenahealth</div>
+          <p class="ehr-card-description">Cloud-native integration supporting Athena's billing and clinical workflows. Real-time data exchange.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+
+        <!-- CareCloud -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Medical Billing Platform</div>
+          <div class="ehr-card-name">CareCloud</div>
+          <p class="ehr-card-description">Integrated billing platform. Resolute supports CareCloud users through API and workflow automation.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+
+        <!-- AdvancedMD -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Practice Management</div>
+          <div class="ehr-card-name">AdvancedMD</div>
+          <p class="ehr-card-description">Integrated PM and EHR environment. Resolute enhances AdvancedMD billing automation and workflows.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+
+        <!-- ModMed -->
+        <div class="ehr-card">
+          <div class="ehr-card-category">Medical Practice Platform</div>
+          <div class="ehr-card-name">ModMed</div>
+          <p class="ehr-card-description">Integrated practice management platform. Resolute supports billing and claim workflows within ModMed.</p>
+          <div class="ehr-card-status">Supported</div>
+        </div>
+      </div>
+
+      <!-- LIS Cards Section -->
+      <div class="lis-section">
+        <h3 class="lis-section-title">Supported Laboratory Information Systems</h3>
+        <div class="lis-cards-grid">
+          <!-- Telcor LIS -->
+          <div class="lis-card">
+            <div class="lis-card-category">Laboratory System</div>
+            <div class="lis-card-name">Telcor LIS</div>
+            <p class="lis-card-description">Laboratory Information System integration with order management and result reporting. Resolute supports lab billing workflows through Telcor connectivity.</p>
+            <div class="lis-card-status">Supported</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI Trust Bar -->
+    <div class="kpi-trust-bar" aria-label="Enterprise implementation metrics">
+      <div class="kpi-item">
+        <div class="kpi-number">99.8%</div>
+        <div class="kpi-label">Platform Availability</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-number">48</div>
+        <div class="kpi-label">Hours to Deployment</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-number">100+</div>
+        <div class="kpi-label">Supported Workflows</div>
+      </div>
+      <div class="kpi-item">
+        <div class="kpi-number">24/7</div>
+        <div class="kpi-label">RCM Monitoring</div>
+      </div>
+    </div>
   </div>
 </section>
 <section class="section section-soft">
@@ -384,5 +572,6 @@
   <script src="/config.js"></script>
   <script src="/assets/js/free-audit-modal.js" defer></script>
   <script src="/assets/js/enterprise-product-hero.js?v=20260715" defer></script>
+  <script src="/assets/js/enterprise-workflow.js?v=20260716" defer></script>
 </body>
 </html>
